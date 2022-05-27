@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Ancient Chang An City in Tang Dynasty</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+
+
+  <script charset="utf-8" src="https://d3js.org/d3.v4.min.js"></script>
+  <script charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/dimple/2.3.0/dimple.latest.min.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"></script>
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+  <style>
+
+    button {
+      color: rgb(253, 253, 253, 0.7);
+      background: transparent;
+      border: 1.5px solid rgb(255, 255, 255, 0.7);
+      border-radius: 6px;
+      padding: 3px;
+    }
+    button:hover {
+      color: rgb(83, 83, 76);
+      background: rgba(255, 255, 255, 0.7);
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      border-radius: 6px;
+      padding: 3px;
+    }
+
+    @font-face {
+      font-family: "Kangxi Dict";
+      src: url("../font/康熙字典体.ttf");
+    }
+
+    #name {
+      font-family: "Kangxi Dict";
+      text-align: center;
+      color: #f5f0f0a4;
+      font-size: 28px;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Manrope';
+      overflow: hidden;
+    }
+
+    #map {
+      font: 14px/20px "Courier New", monospace;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+
+    .map-overlay {
+      font: 14px/20px "Courier New", monospace;
+      position: absolute;
+      width: 30%;
+      height: 30%;
+      top: 10px;
+      right: 0;
+      padding: 100px;
+    }
+
+    .map-overlay .map-overlay-inner {
+      background-color: #a5a58d23;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.20);
+      border-radius: 3px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .map-overlay table {
+      border: none;
+      width: 100%;
+    }
+
+    .map-overlay h2 {
+      font-family: "Courier New", monospace;
+      text-align: center;
+      color: #f5f0f0a4;
+      font-size: 28px;
+      line-height: 24px;
+      display: block;
+      margin: 0 0 10px;
+    }
+
+    .text-intro{
+        box-shadow:0 1px 2px rgba(0, 0, 0, 0.20);
+        position: fixed;	        
+        top: 10vh;		
+        right: 1vw;		
+        width: 500px;
+        height: 840px;
+        opacity: 1;
+        border-radius: 3px;
+        padding: 10px;
+        margin-bottom: 10px;
+        z-index: 4;
+        visibility: visible;
+    }
+
+    @keyframes fadein-out {
+    0% {opacity: 0;}
+    50% {opacity: 1;}
+    100% {opacity: 0;}
+  }
+
+    #clickme {
+      position: relative;
+      top: 450px;
+      text-align: center;
+      animation: fadein-out 2s ease infinite;
+      
+    };
+
+    .map-overlay h3 {
+      font-family: "Courier New", monospace;
+      text-align: center;
+      color: #f5f0f0a4;
+      font-size: 20px;
+      line-height: 24px;
+      display: block;
+      margin: 0 0 10px;
+    }
+
+    .map-overlay h4 {
+      font-family: "Courier New", monospace;
+      text-align: center;
+      font-style: oblique;
+      color: #f5f0f0a4;
+      font-size: 18px;
+      line-height: 22px;
+      display: block;
+      margin: 0 0 10px;
+    }
+
+    .map-overlay p {
+      font-family: "Courier New", monospace;
+      font-size: 16px;
+      color: #f5f0f0a4;
+      line-height: 20px;
+      display: block;
+      margin: 0 0 10px;
+    }
+
+    .map-overlay svg {
+      font-family: "Courier New", monospace;
+      font-size: 16px;
+      color: #f5f0f0a4;
+      line-height: 20px;
+      display: block;
+      margin: 0 0 10px;
+    }
+
+    .insert-map {
+      position: relative;
+      text-align:center
+    }
+
+    .ca_point {
+      position: absolute;
+
+    }
+
+    .mask {
+      position: absolute;
+      top: -4vh;
+      /* left: -200px;
+      top: -120px; */
+      /* text-align: center; */
+      /* left: -200px; */
+      width: 100%;
+      height: 130%;
+      z-index: 3;
+    }
+
+    #cover_img {
+      /* left: 0px;
+      top: 0px; */
+      text-align: center;
+      width: 100%;
+      height: 100%;
+      
+    }
+    .white_background {
+      position: absolute;
+      background-image: url('45degreee_fabric.webp');
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      overflow: hidden;
+    }
+
+    #intro {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      width: 450px;
+      margin-top: 70px;
+      margin-bottom: 10px;
+      font-size: 32px;
+      text-align: center;
+      color: #0e0d0d;
+      
+    }
+
+    #intro_desc {
+
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      /* margin-right: 50px; */
+      width: 450px;
+      padding-top: 10px;
+      /* padding-right: 111px; */
+      /* padding-left: -100px; */
+      font-size: 18px;
+      text-align: justify;
+      color: #080808;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <div class="text-intro" id="text-intro-id">
+    <p id="intro" style="color: #fff; opacity: 0.85;"><b>Chang'an (Xi'an)</b></p>
+    <p id="intro_desc" style="color: #fff; opacity: 0.85;"> Chang'an (today's Xi'an), translated as "eternal peace", was one of China's most important and immense ancient capitals. During the Tang Dynasty (618-907 CE), Chang An had become one of the world's great metropolises. At its heyday in the 8th century CE, the city was probably the most densely populated place on earth: nearly 3 million inhabitants (1 million within the imperial city walls and another 2 million in the surrounding suburbs). As the starting point of the Silk Road, Chang'an was a bridgehead for cultural and economic exchanges between China and foreign countries, and many foreign envoys and business people traveled to Chang'an every year. Our story begins here.</p>
+    <div >
+      <p style="color: #fff; " id="clickme"> click the map to start the tour</p>
+    </div>
+  </div>
+
+  <div class="mask" id="front_mask">
+    <img src="85.png" alt="" id="cover_img">
+  </div>
+  <div class="white_background" id="white_bg"></div>
+
+  <div class='map-overlay'>
+    <div class='map-overlay-inner'>
+      <h2 id="laname">Chang An (Xi'an)</h2>
+      <h3 id="name"> </h3>
+      <h4 id="eng_name"> </h4>
+      <p id="description"> Chang'an(today's Xi'an), translated as "eternal peace", was one of China's most important and immense ancient capitals. During the Tang Dynasty (618-907 CE), Chang An had become one of the world's great metropolises. At its heyday in the 8th century CE, the city was probably the most densely populated place on earth: nearly 3 million inhabitants (1 million within the imperial city walls and another 2 million in the surrounding suburbs). As the starting point of the Silk Road, Chang'an was a bridgehead for cultural and economic exchanges between China and foreign countries, and many foreign envoys and business people traveled to Chang'an every year. Our story begins here.
+      </p>
+      <!-- <div class="insert-map">
+        <p>Location of Chang'an:</p>
+        <img src="changan.png" width="250px" height="181px" alt="" id="changan_map">
+      </div> -->
+      <svg id="legend"></svg>
+
+
+      <button id="switchlanguage">Language: English</button>
+      <button id="switch-status">Open label</button>
+      <button id="open_ref_map">Reference map: close</button>
+
+    </div>
+  </div>
+
+  <script>
+
+    //add basemap
+    mapboxgl.accessToken =
+      'pk.eyJ1Ijoic2lyaWthdDkwMTIiLCJhIjoiY2p0Z2MyMXIzMjIxeTRhb2JuaG5pbWZ4eCJ9.clkv6nycz9hXHrgWL2Ur5w';
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/sirikat9012/cl25cmd5y002415pf1eitmt73',
+      zoom: 3,
+      center: [108.983, 34.233],
+      pitch: 0, // pitch in degrees
+      bearing: 0, // bearing in degrees
+
+    });
+    // disable map zoom when using scroll
+    // map.scrollZoom.disable();
+
+    // for hover effect 
+    let hoveredStateId = null;
+
+    //add layers 
+    map.on('load', function () {
+
+
+      // add legend
+      //  select the svg area
+      var SVG = d3.select("#legend")
+      // create a list of keys
+      var keys = ['Palace','Imperial City', 'Residential Living Area',  'Garden', 'Market']
+      var color = ['#bc976e','#cbbfa5','#868e83',   '#60788e', '#e4b95e']
+      // Usually you have a color scale in your chart already
+      var color = d3.scaleOrdinal()
+        .domain(keys)
+        .range(color);
+      // Add one dot in the legend for each name.
+      var size = 20
+      SVG.selectAll("mydots")
+        .data(keys)
+        .enter()
+        .append("rect")
+        .attr("x", 20)
+        .attr("y", function (d, i) {
+          return 20 + i * (size + 5)
+        }) // 100 is where the first dot appears. 25 is the distance between dots
+        .attr("width", size)
+        .attr("height", size)
+        .style("fill", function (d) {
+          return color(d)
+        })
+      // Add one dot in the legend for each name.
+      SVG.selectAll("mylabels")
+        .data(keys)
+        .enter()
+        .append("text")
+        .attr("x", 20 + size * 1.2)
+        .attr("y", function (d, i) {
+          return 20 + i * (size + 5) + (size / 2)
+        }) // 100 is where the first dot appears. 25 is the distance between dots
+        .style("fill", "#f5f0f0a4")
+        .text(function (d) {
+          return d
+        })
+        .attr("text-anchor", "left")
+        .style("alignment-baseline", "middle")
+
+      // add ChangAn data source 
+      map.addSource('ChangAn', {
+        type: 'geojson',
+        data: "https://raw.githubusercontent.com/Siricvbl/visual/main/chinese_migration/data/ChangAn.geojson",
+      });
+
+
+
+      // Add a layer to use the image to represent the data.
+      map.addLayer({
+        'id': 'reference map',
+        'type': 'raster',
+        'source': {
+            type: 'raster',
+            url: 'mapbox://sirikat9012.64ti0xap'
+            
+          },   
+          'source-layer': 'changan_modified-8ipoao',     
+          'layout':{
+          'visibility': 'none'
+        }
+      });
+
+      //city layer
+      map.addLayer({
+        'id': 'CA',
+        'type': 'fill',
+        'source': 'ChangAn',
+        'layout': {
+          'visibility': 'visible'
+        },
+        'paint': { // Color fill by category, using a `match` expression.
+          'fill-color': [
+            'match',
+            ['get', 'category'],
+            'Residential Living Area', '#868e83',
+            'Imperial City', '#cbbfa5',
+            'Palace', '#bc976e',
+            'Garden', '#60788e',
+            '#e4b95e',
+          ],
+          'fill-opacity': 0.25,
+        }
+      });
+
+      // add city hover layer
+      map.addLayer({
+        'id': 'city_hover',
+        'type': 'fill',
+        'source': 'ChangAn',
+        'layout': {},
+        'paint': {
+          // 'line-color': '#fff',
+          // 'line-width': 0.8
+          'fill-color': [
+            'match',
+            ['get', 'category'],
+            'Residential Living Area', '#868e83',
+            'Imperial City', '#cbbfa5',
+            'Palace', '#bc976e',
+            'Garden', '#60788e',
+            //'Garden', '#788b88',
+            '#e4b95e',
+          ],
+          'fill-opacity': 0
+        },
+
+        'filter': ['==', 'fid', 'empty'],
+      });
+
+      // add layer - chinese name 
+      map.addLayer({
+        'id': 'ca_labels',
+        'type': 'symbol',
+        'source': 'ChangAn',
+        'layout': {
+          'text-allow-overlap':true,
+          'text-field': '{name}',
+          'text-size': 12,
+        },
+        'paint': {
+          'text-color': 'rgba(255,255,255,0.6)',
+          'text-opacity':0
+        }
+      });
+
+      // add layer - chinese name 
+      map.addLayer({
+        'id': 'ca_labels_eng',
+        'type': 'symbol',
+        'source': 'ChangAn',
+        'layout': {
+          'text-allow-overlap':true,
+          'text-field': '{eng_name}',
+          'text-size': 10,
+        },
+        'paint': {
+          'text-color': 'rgba(255,255,255,0.6)',
+          'text-opacity':0.95
+        }
+      });
+    
+      // Add a data source containing one point feature.
+      map.addSource('ca_pois_horizon', {
+        'type': 'geojson',
+        'data': {
+        'type': 'FeatureCollection',
+        'features': [
+        {
+          'type': 'Feature',
+          'geometry': {
+          'type': 'Point',
+          'coordinates': [108.9776, 34.2071]
+          },
+          'properties': {
+            'description':
+            "<img src='./ChangAnPoi/虢国夫人游春图.jpg' width='750' height='200'> <p><strong>Lady Guo Guo's Spring Outgoing</strong></p> <p>Spring outing is a social custom in the Tang Dynasty and is celebrated every year on the third lunar month's third day. Emperor Xuanzong renovated 'Qujiang Pond' into a tourist attraction to let people have a good place in spring. 'Lady Guo Guo's Spring Outgoing' was painted by Zhang Xuan, a court painter in the Tang Dynasty. Directly drawn from the court nobles, it depicts the scene of Yang Guifei's sister Lady Guo Guo and her party of eight horses and nine people on a spring outing. The characters in the painting are calm in character, relaxed in gait, and brightly dressed. It depicts the hedonistic life of aristocratic women.</p><p>Data source: <a href='https://artsandculture.google.com/asset/lady-guoguo%E2%80%99s-spring-outing-zhang-xuan/SAGTjfLyplFQQg?hl=zh-cn&ms=%7B%22x%22%3A0.5%2C%22y%22%3A0.5%2C%22z%22%3A9.749397930936302%2C%22size%22%3A%7B%22width%22%3A1.0441406249999998%2C%22height%22%3A1.6943611238741245%7D%7D' target='_blank'> Google Arts & Culture</a></p>"
+          },
+        },{
+          'type': 'Feature',
+          'geometry': {
+          'type': 'Point',
+          'coordinates': [108.9612, 34.2931]
+          },
+          'properties': {
+            'description':
+            "<img src='./ChangAnPoi/捣练图.jpg' width='750' height='150'> <strong>Court Ladies Preparing Newly Woven Silk</strong> <p>Court ladies preparing newly woven silk is the work of Tang Dynasty painter Zhang Xuan. The original work has been lost. Emperor Huizong copied Zhang Xuan's painting in the early 12 century, and it is now in the Boston Museum. This painting depicts the scene of the palace maids in the Tang Dynasty during labor operations. The movements of the characters in the painting are contemplative and natural, and the details are vividly portrayed, showing the author's careful observation. Its lines are meticulous and decisive, and its colors are gorgeous and colorful, showing the typical style of the paintings of ladies in the Tang Dynasty.</p><p>Data source: <a href='https://collections.mfa.org/objects/28127/court-ladies-preparing-newly-woven-silk?ctx=391fffa0-884a-4efb-a3fb-fa99f3783389&idx=0' target='_blank'> Museum of Fine Arts Boston</a></p>"
+          },
+        },{
+          'type': 'Feature',
+          'geometry': {
+          'type': 'Point',
+          'coordinates': [108.9372,34.2723]
+          },
+          'properties': {
+            'description':
+            "<img src='./ChangAnPoi/步辇图.jpeg' width='750' height='200'> <strong>Emperor Taizong Receiving the Tibetan Envoy</strong> <p>Emperor Taizong Receiving the Tibetan Envoy is a painting on silk by Yan Liben to show the friendly encounter between the Tang dynasty and Tibet. The painting is now in The Palace Museum in Beijing. It depicts a major historical event in the early Tang Dynasty. In the seventh century, Songtsen Gampo sent an envoy to Chang'an, the capital of the Tang dynasty, to propose marriage. Emperor Taizong of Tang accepted the proposal and decided to give him Princess Wencheng in marriage. In 641, Gar Tongtsen Yülsung, the Prime Minister of Songtsen Gampo, came to Chang'an to accompany the princess back to Tibet. Princess Wencheng brought Tibetan books, seeds, and artisans, which promoted Tibetan economic and cultural development. Songtsen Gampo built Potala Palace in Lhasa for the marriage with Princess Wencheng.</p><p>Data source: <a href='https://www.dpm.org.cn/collection/paint/234620.html' target='_blank'> The Palace Museum</a></p>"
+          },
+        },
+        
+        ]}});
+
+      // Add a data source containing one point feature.
+      map.addSource('ca_pois_vertical', {
+        'type': 'geojson',
+        'data': {
+        'type': 'FeatureCollection',
+        'features': [
+        {
+          'type': 'Feature',
+          'geometry': {
+          'type': 'Point',
+          'coordinates': [108.9171, 34.2182]
+          },
+          'properties': {
+            'description':
+            "<table><td><img src='./ChangAnPoi/Pottery Dancer with Double-Rings-Styled Hair.png' width='150' height='200'> <strong>Pottery Dancer with Double-Rings-Styled Hair</strong></td> <td><p>This girl is probably a dancer, wearing an exquisite outfit with a slim figure and a double-ringed hairstyle. This pottery figure is regarded as typical material evidence for the study of the dancing costume of the Tang Dynasty.</p></td></table><p>Data source: <a href='https://www.sxhm.com/en/detail/771.html' target='_blank'> SHANXI HISTORY MUSEUM</a></p>"
+          },
+        },
+        ]}});
+
+
+      map.addSource('ca_pois_rhyton', {
+        'type': 'geojson',
+        'data': {
+        'type': 'FeatureCollection',
+        'features': [
+        {
+          'type': 'Feature',
+          'geometry': {
+          'type': 'Point',
+          'coordinates': [108.9022, 34.2465]
+          },
+          'properties': {
+            'description':
+            "<table><tr><img src='./ChangAnPoi/rhyton_2.png' width='500' height='300'> <p><strong>Agate cup with golden Beast head</strong></p></tr> <tr><p>The cup is part of more than a thousand gold and silver artifacts unearthed from the Chang'an site. This kind of drinking utensils is prevalent in Central Asia and West Asia, especially Persia (now Iran), and was introduced to China via the Silk Road. The unearthed of this cup is a testimony to the imitation of novel banquet methods by nobles in the Tang Dynasty.Gilt silver rhyton, found at Altıntepe, eastern Turkey in 5thC BCE. It was originally used as a wine pourer, the lowermost hole in the chest acting as the pourer.</p> <p>Gilt silver rhyton, found at Altintepe, eastern Turkey in 5thC BCE. It was originally used as a wine pourer, the lowermost hole in the chest acting as the pourer.</p></tr></table><p>Data source: <a href='https://www.sxhm.com/collections/detail/512.html' target='_blank'> SHANXI HISTORY MUSEUM</a>, <a href='https://www.britishmuseum.org/collection/object/W_1897-1231-178' target='_blank'> The British Museum</a> </p>"
+          },
+        }
+        ]}});
+
+      map.loadImage('icons8-about-50.png',
+        function (error, image) {
+          if (error) throw error;
+          map.addImage('pois_icon', image);
+          // add ChangAn Gate data source 
+          map.addLayer({
+        'id': 'places_horizon',
+        'type': 'symbol',
+        'source': 'ca_pois_horizon',
+        'layout':{
+          'icon-image':'pois_icon',
+          'icon-size': 0.45,
+          'icon-allow-overlap': true,
+          'icon-ignore-placement': true,
+          'visibility': 'none'
+        },
+        'paint': {
+              "icon-color": "#f6bd60",
+              "icon-halo-color": "#e63946",
+            }
+      });
+
+      map.addLayer({
+        'id': 'places_rhyton',
+        'type': 'symbol',
+        'source': 'ca_pois_rhyton',
+        'layout':{
+          'icon-image':'pois_icon',
+          'icon-allow-overlap': true,
+          'icon-ignore-placement': true,
+          'icon-size': 0.45,
+          'visibility': 'none'
+        },
+        'paint': {
+              "icon-color": "#f6bd60",
+              "icon-halo-color": "#e63946",
+            }
+      });
+
+      
+      map.addLayer({
+        'id': 'places_vertical',
+        'type': 'symbol',
+        'source': 'ca_pois_vertical',
+        'layout':{
+          'icon-image':'pois_icon',
+          'icon-allow-overlap': true,
+          'icon-ignore-placement': true,
+          'icon-size': 0.45,
+          'visibility': 'none'
+        },
+        'paint': {
+              "icon-color": "#f6bd60",
+              "icon-halo-color": "#e63946",
+            }
+      });
+        })
+
+      const popup = new mapboxgl.Popup({
+        closeButton: true,
+        closeOnClick: true,
+        maxWidth: '800px',
+      });
+
+      const popup_vertical = new mapboxgl.Popup({
+        closeButton: true,
+        closeOnClick: true,
+        maxWidth: '300px',
+      });
+
+      const popup_rhyton = new mapboxgl.Popup({
+        closeButton: true,
+        closeOnClick: true,
+        maxWidth: '600px',
+      });
+
+      map.on('click', 'places_horizon', (e) => {
+        // Change the cursor style as a UI indicator.
+        // map.getCanvas().style.cursor = 'crosshair';
+        
+        // Copy coordinates array.
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const description = e.features[0].properties.description;
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+      
+      // Populate the popup and set its coordinates
+      // based on the feature found.
+        popup.setLngLat(coordinates).setHTML(description).addTo(map);
+
+      });
+      
+      map.on('click', 'places_vertical', (e) => {
+        // Change the cursor style as a UI indicator.
+        // map.getCanvas().style.cursor = 'crosshair';
+        
+        // Copy coordinates array.
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const description = e.features[0].properties.description;
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+      
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+        popup_vertical.setLngLat(coordinates).setHTML(description).addTo(map);
+
+      });
+
+      map.on('click', 'places_rhyton', (e) => {
+        // Change the cursor style as a UI indicator.
+        // map.getCanvas().style.cursor = 'crosshair';
+        
+        // Copy coordinates array.
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const description = e.features[0].properties.description;
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+      
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+        popup_rhyton.setLngLat(coordinates).setHTML(description).addTo(map);
+
+      });
+
+
+      map.loadImage(
+        'https://raw.githubusercontent.com/Siricvbl/visual/main/chinese_migration/ancient-gate.png',
+
+        function (error, image) {
+          if (error) throw error;
+          map.addImage('gate123', image);
+          // add ChangAn Gate data source 
+          map.addSource('ChangAn_Gate', {
+            type: 'geojson',
+            data: "https://raw.githubusercontent.com/Siricvbl/visual/main/chinese_migration/data/CA_Gates.geojson",
+          });
+          map.addLayer({
+            'id': 'Gates',
+            'type': 'symbol',
+            'source': 'ChangAn_Gate',
+            'layout': {
+              'icon-image': 'gate123',
+              'icon-size': 0.01,
+              'visibility': 'none'
+            },
+            'paint': {
+              "icon-color": "#f6bd60",
+              "icon-halo-color": "#e63946",
+              "icon-halo-width": 2
+            }
+          });
+        })
+
+
+        document.getElementById('open_ref_map').addEventListener('click', function() {
+          if (document.getElementById("open_ref_map").innerHTML == 'reference map: open') {
+            console.log('close ref map')
+            document.getElementById("open_ref_map").innerHTML = 'reference map: close';
+            map.setLayoutProperty('reference map','visibility','none');
+
+          }
+
+          else {
+            document.getElementById("open_ref_map").innerHTML = 'reference map: open';
+            map.setLayoutProperty('reference map','visibility','visible');
+          }   
+        })
+
+        document.getElementById('switchlanguage').addEventListener('click', function() {
+          if (document.getElementById("switchlanguage").innerHTML == 'Language: English') {
+            document.getElementById("switchlanguage").innerHTML = 'Language: Chinese';
+            map.setPaintProperty('ca_labels','text-opacity',0.95);
+            map.setPaintProperty('ca_labels_eng','text-opacity',0);
+          }
+
+          else {
+            document.getElementById("switchlanguage").innerHTML = 'Language: English';
+            map.setPaintProperty('ca_labels_eng','text-opacity',0.95);
+            map.setPaintProperty('ca_labels','text-opacity',0);
+          }   
+        })
+
+        document.getElementById('switch-status').addEventListener('click', function() {
+          if (document.getElementById("switch-status").innerHTML == 'Open label') {
+            document.getElementById("switch-status").innerHTML = 'Off label';
+            map.setPaintProperty('ca_labels','text-opacity',0);
+            map.setPaintProperty('ca_labels_eng','text-opacity',0);
+          }
+
+          else {
+            document.getElementById("switch-status").innerHTML = 'Open label';
+            if (document.getElementById("switchlanguage").innerHTML == 'Language: Chinese') {
+              map.setPaintProperty('ca_labels','text-opacity',0.95);
+              map.setPaintProperty('ca_labels_eng','text-opacity',0);
+            } 
+
+            if (document.getElementById("switchlanguage").innerHTML == 'Language: English') {
+              map.setPaintProperty('ca_labels','text-opacity',0);
+              map.setPaintProperty('ca_labels_eng','text-opacity',0.95);
+            }
+          }
+        
+        
+
+        })
+      // When the user moves their mouse over the state-fill layer, we'll update the
+      // feature state for the feature under the mouse.
+
+      map.on('mousemove', 'CA', (e) => {
+        var ca = map.queryRenderedFeatures(e
+          .point, { // This queries whether the mouse is over an object in the LocalAuthorities layer
+            layers: ['CA']
+          });
+        if (e.features.length > 0) {
+
+          if (hoveredStateId !== null) {
+
+            map.setFeatureState({
+              source: 'ChangAn',
+              id: hoveredStateId
+            }, {
+              hover: false
+            });
+          }
+
+          hoveredStateId = e.features[0].properties.fid;
+          console.log(hoveredStateId)
+          map.setFilter('city_hover', ['==', 'fid', hoveredStateId]);
+          map.setPaintProperty('city_hover', 'fill-opacity', 0.75);
+
+          // city descriotion
+          //map.setFilter('lahighlight', ['==', 'name', ca[0].properties.name]); // Filter the highlight layer to show the local authority outline
+          // console.log(ca[0].properties.category);
+          document.getElementById('laname').innerHTML = ('<br>' + ca[0].properties.category + '<br>' + '<br>');
+          document.getElementById('name').innerHTML = (ca[0].properties.name);
+          document.getElementById('eng_name').innerHTML = (ca[0].properties.eng_name + '<br>');
+          if (ca[0].properties.category == 'Residential Living Area') {
+            console.log(ca[0].properties.category)
+            document.getElementById('description').innerHTML = (
+              "Residential living area: It occupied 81.3% of the land in Chang'an City. The streets divided Chang'an into 108 small squares, named Li Fang."
+              );
+          } else if (ca[0].properties.category == 'Palace') {
+            console.log(ca[0].properties.category)
+            document.getElementById('description').innerHTML = (
+              "Palace: It can be divided into Taiji Gong, Daming Gong, and Xingqing Gong, collectively referred to as the three major Palaces.Taiji Gong was the living and office space of Li Yuan (566CE-635 CE), the founding emperor of the Tang Dynasty, which is located in the core of the city. Daming Gong (634 CE) was a more magnificent Palace built by Li Shimin, the son of the founding emperor. Li Longji (685 CE-762 CE) built the Xingqing Gong when the Tang Dynasty's national power was at its peak."
+              );
+          } else if (ca[0].properties.category == 'Imperial City') {
+            console.log(ca[0].properties.category)
+            document.getElementById('description').innerHTML = (
+              "Imperial City: Located on the south side of Tai Chi Palace, the Imperial City was the seat of the highest administrative and military institutions in the Tang Dynasty. The residences of important officials were also located here."
+              );
+          } else if (ca[0].properties.category == 'Market') {
+            console.log(ca[0].properties.category)
+            document.getElementById('description').innerHTML = (
+              "Market: Eastern and Western markets (Dong Shi and Xi Shi) were the largest commercial areas in Chang'an, which concentratedly reflected the prosperity of commerce and the development of production at that time. They were essential places for Chinese and foreign countries to conduct economic exchanges. Many goods exported or imported by the Silk Road could be seen here."
+              );
+          } else if (ca[0].properties.category == 'Garden') {
+            console.log(ca[0].properties.category)
+            document.getElementById('description').innerHTML = (
+              "Garden: Fu Rong Yuan, or called Qujiang Pond, located in a low-lying place in the city's southeast corner, it was a public waterscape garden."
+              );
+            hoveredStateId = null
+          } else if (hoveredStateId == null) {
+            document.getElementById('laname').innerHTML = "Chang An (Xi'an)";
+            document.getElementById('name').innerHTML = "安";
+            document.getElementById('description').innerHTML =
+              "Chang'an, translated as 'eternal peace', was one of China's most important and immense ancient capitals. During the Tang Dynasty (618-907 CE), Chang An had become one of the world's great metropolises. At its heyday in the 8th century CE, the city was probably the most densely populated place on earth: nearly 3 million inhabitants (1 million within the imperial city walls and another 2 million in the surrounding suburbs). As the starting point of the Silk Road, Chang'an was a bridgehead for cultural and economic exchanges between China and foreign countries, and many foreign envoys and business people traveled to Chang'an every year. Our story begins here."
+          }
+
+
+        } else {
+          map.setFilter('lahighlight', ['==', 'name', 'null']);
+          console.log('No features');
+          document.getElementById('laname').innerHTML = "Chang An";
+          document.getElementById('description').innerHTML =
+            "Chang'an, translated as 'eternal peace', was one of China's most important and immense ancient capitals. During the Tang Dynasty (618-907 CE), Chang An had become one of the world's great metropolises. At its heyday in the 8th century CE, the city was probably the most densely populated place on earth: nearly 3 million inhabitants (1 million within the imperial city walls and another 2 million in the surrounding suburbs). As the starting point of the Silk Road, Chang'an was a bridgehead for cultural and economic exchanges between China and foreign countries, and many foreign envoys and business people traveled to Chang'an every year. Our story begins here."
+
+        }
+
+        document.getElementById('switchlanguage').addEventListener('click', function() {
+          if (document.getElementById("show-language").innerHTML == 'Chinese') {
+            document.getElementById("show-language").innerHTML = 'English';
+            map.setPaintProperty('ca_labels','text-opacity',0.95);
+            map.setPaintProperty('ca_labels_eng','text-opacity',0);
+          }
+
+          else {
+            document.getElementById("show-language").innerHTML = 'Chinese';
+            map.setPaintProperty('ca_labels_eng','text-opacity',0.95);
+            map.setPaintProperty('ca_labels','text-opacity',0);
+          }
+                  
+        })
+
+        
+      });
+
+      // When the mouse leaves the state-fill layer, update the feature state of the
+      // previously hovered feature.
+      map.on('mouseleave', 'CA', () => {
+        if (hoveredStateId !== null) {
+          map.setFeatureState({
+            source: 'ChangAn',
+            id: hoveredStateId
+          }, {
+            hover: false
+          });
+
+          hoveredStateId = null
+          console.log('leave', hoveredStateId)
+          document.getElementById('laname').innerHTML = "Chang An";
+          document.getElementById('description').innerHTML =
+            "Chang'an, translated as 'eternal peace', was one of China's most important and immense ancient capitals. During the Tang Dynasty (618-907 CE), Chang An had become one of the world's great metropolises. At its heyday in the 8th century CE, the city was probably the most densely populated place on earth: nearly 3 million inhabitants (1 million within the imperial city walls and another 2 million in the surrounding suburbs). As the starting point of the Silk Road, Chang'an was a bridgehead for cultural and economic exchanges between China and foreign countries, and many foreign envoys and business people traveled to Chang'an every year. Our story begins here.";
+          document.getElementById('name').innerHTML = '';
+          document.getElementById('eng_name').innerHTML = '';
+        }
+
+      });
+
+      document.getElementById("cover_img").addEventListener("click", function () {
+                        map.flyTo({
+                            center: [108.983, 34.243],
+                            zoom: 12,
+                            duration: 6000
+                            });
+                    
+                        document.getElementById('white_bg').style.visibility = 'hidden';
+                        document.getElementById('front_mask').style.visibility = 'hidden';
+                        document.getElementById('text-intro-id').style.visibility = 'hidden';
+                        })
+
+      const zoomThreshold = 11.6
+      map.on('zoom', () => {
+        if (map.getZoom() > zoomThreshold) {
+            map.setLayoutProperty('ca_labels_eng','visibility','visible');
+            map.setLayoutProperty('Gates','visibility','visible');
+            map.setLayoutProperty('places_horizon','visibility','visible');
+            map.setLayoutProperty('places_vertical','visibility','visible');
+            map.setLayoutProperty('places_rhyton','visibility','visible');
+        } else {
+          map.setLayoutProperty('ca_labels_eng','visibility','none');
+          map.setLayoutProperty('Gates','visibility','none');
+          map.setLayoutProperty('places_horizon','visibility','none');
+          map.setLayoutProperty('places_vertical','visibility','none');
+          map.setLayoutProperty('places_rhyton','visibility','none');
+
+        }
+        });
+
+    });
+    
+  </script>
+</body>
+
+</html>

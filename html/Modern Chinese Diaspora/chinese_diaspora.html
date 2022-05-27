@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html style="height: 100%" >
+<head>
+    <title>Chinese Diaspora</title>
+    <meta charset="UTF-8">
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
+    <script charset="utf-8" src="https://d3js.org/d3.v4.min.js"></script>
+    <link href='diaspora_style.css' rel='stylesheet' />
+</head>
+
+<body>
+
+    <div id='map'></div>
+
+    <!-- option box -->
+    <div id="pagecontent" style = "position:relative; " >
+        <p><select id="Options" style = "position: relative;" >
+            <option value="mapOption">Map</option>
+            <option value="barOption">Bar</option>
+            </select>
+        </p>
+    </div>
+
+    <!-- city point legend -->
+    <div id="legend" style="visibility: visible;"> 
+        <img src="Data/legend.png" alt="legend of city">
+    </div>
+
+    <!-- map div -->
+    <div id="container"> </div>
+
+    <!-- sided text block -->
+    <div id="text-wrap">
+        <p>This map is a global overview of contemporary Chinese diaspora during 2010–2011. The darker the blue, the more Chinese immigrants there are in the country. The map also exhibits the multiple cities as a destination of immigrants, which are represented by the diamond icons, the larger the size, the higher the immigrant population of the city. There is an option box on the top right corner can convert the map to a bar chart with the ranked top 20 countries of Chinese diaspora.</p>
+        <p>It can be seen that the diaspora distribution has been spread all over the world, and most of the overseas Chinese living in Asia, particularly in Southeast Asia. Among the Chinese residing outside of Asia, most of them live in more developed countries. This contemporary diaspora considerably differs from previous immigration waves of “coolie trade”, students and professionals become the main roles, and the immigrants gradually towards developing countries in Africa, Latin America and Southeast Asia, which are significantly driven by China’s opening-up policy and overseas economic expansion, and friendly political relations with these areas. With the combination of earlier immigration waves’ descendants and modern immigrants, there is a larger and more extensive Chinese population in Southeast Asia and developed Western countries at present.</p>
+        <p>In this context, students, as one of the main sources of new immigrants, is inextricably tied to the rapid economic development of China, as individual family incomes gradually increase, more and more families can afford to study abroad. This is attractive to Chinese households because many believe that an international degree can help obtain better jobs, while also gaining opportunities to learn a foreign language and expand horizons. Some go abroad as they do not adapt to the difficult domestic education system, and there is also a lack of world first-class universities. Many families also regard studying abroad as a path to immigration. The graph below is the number of overseas Chinese students in higher education in 2019.</p>
+        <div id="student"></div>
+        <p>By comparing the bar charts of contemporary Chinese diaspora and overseas student population, the order of top destination countries is ranked differently. Traditional immigrants’ most popular destinations tend to be Asian countries, while students tend to choose the most developed countries. This corresponds to the background stated previously, universities in developed countries can provide more recognized international degrees, more comprehensive academic system and better experience, students with a tendency to immigrate are more likely to stay.</p>
+    </div>
+
+    
+
+    <script type="text/javascript">
+        var dom = document.getElementById('student');
+        var myChart = echarts.init(dom, null, {
+          renderer: 'canvas',
+          useDirtyRect: false
+        });
+        var app = {};
+        
+        var option;
+    
+        // bar chart in sided text box
+        var option = {
+            title: {
+                text: 'Overseas Chinese Student Population',
+                subtext: '(Per thousands people)',
+                subtextStyle: {
+                    fontSize: 13,
+                },
+                textStyle: {
+                    fontStyle: 'normal',
+                    fontSize: 18
+                },
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'axis',
+                formatter: '{b}, {c}',
+                axisPointer: {
+                type: 'shadow'
+                }
+            },
+            // legend: {},
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'value',
+                boundaryGap: [0, 0.001],
+                width: '100%',
+            },
+            yAxis: {
+                type: 'category',
+                data: ['Spain', 'Sweden', 'Netherlands', 'Russia', 'Italy', 'Malaysia', 'New Zealand', 'France', 'Germany', 'South Korea', 'Canada', 'Japan', 'United Kingdom', 'Australia', 'United States'],
+            },
+            series: [{
+                name: 'overseas_students',
+                type: 'bar',
+                color: '#1083a7',
+                data: [2.211, 2.396, 4.929, 11.95, 14.531, 15.957, 17.646, 24.788, 39.871, 71.067, 84.44, 94.047, 120.385, 164.317, 369.548],
+            }]
+        };
+    
+        if (option && typeof option === 'object') {
+          myChart.setOption(option);
+        }
+    
+        window.addEventListener('resize', myChart.resize);
+    </script>
+
+
+    <script type="text/javascript">
+
+        var dom = document.getElementById("container");
+        var myChart = echarts.init(dom);
+        var app = {};
+        var option;
+
+        // the world map background
+        myChart.showLoading();
+        $.get('Data/worldgeo.json', function (worldJson) {
+            myChart.hideLoading();
+            echarts.registerMap('worldmap', worldJson);
+            
+
+            d3.csv('Data/overseas_chinese_country_pop.csv', function(countrydata){
+                console.log(countrydata)
+                console.log(worldJson)
+
+                countrydata.sort(function (a, b) {
+                return a.value - b.value;
+                });
+                var topValue = countrydata.slice(58,79); // sort the top 20 countries
+
+
+
+            // city data embeded here
+            var citydata = [
+            { name:	"Singapore",	value:[	2960.14	,	1.735656126	]},
+            { name:	"Bangkok",	value:[	7221	,	1.929298672	]},
+            { name:	"Kuala_Lumpur",	value:[	2189.2	,	1.67014272	]},
+            { name:	"Johor_Bahru",	value:[	1078.8	,	1.516470469	]},
+            { name:	"George_Town",	value:[	685.8	,	1.41809874	]},
+            { name:	"Ipoh",	value:[	703.1	,	1.423508549	]},
+            { name:	"Jakarta",	value:[	579.612	,	1.381568684	]},
+            { name:	"Surabaya",	value:[	147.047	,	1.083728084	]},
+            { name:	"Medan",	value:[	201.519	,	1.152158	]},
+            { name:	"Pontianak",	value:[	104.325	,	1.009194197	]},
+            { name:	"Bandung",	value:[	83.32	,	0.960374631	]},
+            { name:	"Yangon",	value:[	1287.156	,	1.554815593	]},
+            { name:	"Manila",	value:[	500	,	1.349485002	]},
+            { name:	"Ho_Chi_Minh_City",	value:[	749.5	,	1.498387135	]},
+            { name:	"Tokyo",	value:[	197.51	,	1.147794544	]},
+            { name:	"Kanagawa",	value:[	64.83	,	0.905888011	]},
+            { name:	"Saitama",	value:[	62.948	,	0.899490968	]},
+            { name:	"Osaka",	value:[	674.87	,	1.414610061	]},
+            { name:	"Vientiane",	value:[	176.49	,	1.123360052	]},
+            { name:	"Phnom_Penh",	value:[	147.02	,	1.083688209	]},
+            { name:	"Calcutta",	value:[	129.74	,	1.056536947	]},
+            { name:	"Dubai",	value:[	109.5	,	1.01970706	]},
+            { name:	"Ansan",	value:[	1075.566	,	1.515818533	]},
+            { name:	"New_York",	value:[	865	,	1.468508054	]},
+            { name:	"Los_Angeles",	value:[	678	,	1.415614847	]},
+            { name:	"San_Francisco",	value:[	582	,	1.382461492	]},
+            { name:	"San_Jose",	value:[	239	,	1.18919895	]},
+            { name:	"Boston",	value:[	174	,	1.120274624	]},
+            { name:	"Seattle",	value:[	166	,	1.110054044	]},
+            { name:	"Washington",	value:[	135	,	1.065166884	]},
+            { name:	"Chicago",	value:[	135	,	1.065166884	]},
+            { name:	"Honolulu",	value:[	117	,	1.034092931	]},
+            { name:	"Houston",	value:[	111	,	1.022661489	]},
+            { name:	"Toronto",	value:[	631.05	,	1.400031886	]},
+            { name:	"Vancouver",	value:[	474.655	,	1.33818903	]},
+            { name:	"Calgary",	value:[	89.675	,	0.976335693	]},
+            { name:	"Montreal",	value:[	89.4	,	0.975668759	]},
+            { name:	"Lima",	value:[	14.223	,	0.576495605	]},
+            { name:	"São_Paulo",	value:[	200	,	1.150514998	]},
+            { name:	"Panama_City",	value:[	135.96	,	1.066705578	]},
+            { name:	"Moscow",	value:[	400	,	1.301029996	]},
+            { name:	"Paris",	value:[	600	,	1.389075625	]},
+            { name:	"London",	value:[	44	,	0.821726338	]},
+            { name:	"Manchester",	value:[	13	,	0.556971676	]},
+            { name:	"Birmingham",	value:[	12	,	0.539590623	]},
+            { name:	"Milan",	value:[	18.918	,	0.638437611	]},
+            { name:	"Rome",	value:[	12.013	,	0.539825739	]},
+            { name:	"Prato",	value:[	11.882	,	0.537444774	]},
+            { name:	"Barcelona",	value:[	120	,	1.039590623	]},
+            { name:	"Madrid",	value:[	40.75	,	0.805063807	]},
+            { name:	"Sydney",	value:[	487.976	,	1.344199231	]},
+            { name:	"Melbourne",	value:[	356.324	,	1.275922537	]},
+            { name:	"Brisbane",	value:[	99.593	,	0.999114407	]},
+            { name:	"Perth",	value:[	99.229	,	0.998319307	]},
+            { name:	"Adelaide",	value:[	50.216	,	0.850421058	]},
+            { name:	"Canberra",	value:[	22.445	,	0.675559805	]},
+            { name:	"Auckland",	value:[	171.309	,	1.11689009	]},
+            { name:	"Canterbury",	value:[	21.516	,	0.666380768	]},
+            { name:	"Wellington",	value:[	21.192	,	0.663085973	]},
+            { name:	"Waikato",	value:[	12.084	,	0.541105358	]},
+            ];
+
+            var geoCoordMap = {
+                Singapore	: [	103.8194992	,	1.357107	],
+                Bangkok	: [	100.5107441	,	13.7373979	],
+                Kuala_Lumpur	: [	101.6936373	,	3.1445387	],
+                Johor_Bahru	: [	103.7605655	,	1.4578971	],
+                George_Town	: [	100.3320309	,	5.4178117	],
+                Ipoh	: [	101.110048	,	4.5712252	],
+                Jakarta	: [	106.8112461	,	-6.1446546	],
+                Surabaya	: [	112.7389142	,	-7.2374041	],
+                Medan	: [	98.6716919	,	3.5926572	],
+                Pontianak	: [	109.3427661	,	-0.0305307	],
+                Bandung	: [	107.5997541	,	-6.9217892	],
+                Yangon	: [	96.1498833	,	16.7733311	],
+                Manila	: [	120.9710572	,	14.6011743	],
+                Ho_Chi_Minh_City	: [	106.629662	,	10.823099	],
+                Tokyo	: [	139.691711	,	35.689487	],
+                Kanagawa	: [	130.408676	,	33.167519	],
+                Saitama	: [	139.648849	,	35.856998	],
+                Osaka	: [	135.502167	,	34.693737	],
+                Vientiane	: [	102.6133707	,	17.9640988	],
+                Phnom_Penh	: [	104.9224426	,	11.568271	],
+                Calcutta	: [	88.3638815	,	22.5726723	],
+                Dubai	: [	55.2924914	,	25.2653471	],
+                Ansan	: [	126.8309	,	37.3219	],
+                New_York	: [	-74.0056357	,	40.7160814	],
+                Los_Angeles	: [	-118.2491091	,	34.0671948	],
+                San_Francisco	: [	-122.4115197	,	37.7940949	],
+                San_Jose	: [	-121.8914769	,	37.3324873	],
+                Boston	: [	-71.065117	,	42.3497472	],
+                Seattle	: [	-122.3246248	,	47.5988346	],
+                Washington	: [	-77.0220557	,	38.9003471	],
+                Chicago	: [	-87.6409851	,	41.852461	],
+                Honolulu	: [	-157.8747863	,	21.3161566	],
+                Houston	: [	-95.5544042	,	29.7043423	],
+                Toronto	: [	-79.4019022	,	43.6533133	],
+                Vancouver	: [	-123.1096408	,	49.2805034	],
+                Calgary	: [	-114.0714161	,	51.0512706	],
+                Montreal	: [	-73.5626265	,	45.5070724	],
+                Lima	: [	-77.0428	,	-12.0464	],
+                São_Paulo	: [	-46.6396	,	-23.5558	],
+                Panama_City	: [	-79.5199	,	8.9824	],
+                Moscow	: [	37.6173	,	55.7558	],
+                Paris	: [	2.3522	,	48.8566	],
+                London	: [	-0.1276474	,	51.5073219	],
+                Manchester	: [	-2.2451148	,	53.4794892	],
+                Birmingham	: [	-1.9026911	,	52.4796992 ],
+                Milan	: [	9.19	,	45.4642	],
+                Rome	: [	12.4964	,	41.9028	],
+                Prato	: [	11.1022	,	43.8777	],
+                Barcelona	: [	2.1774322	,	41.3828939	],
+                Madrid	: [	-3.7035825	,	40.4167047	],
+                Sydney	: [	151.2093	,	-33.8688	],
+                Melbourne	: [	144.9631	,	-37.8136	],
+                Brisbane	: [	153.026	,	-27.4705	],
+                Perth	: [	115.8613	,	-31.9523	],
+                Adelaide	: [	138.6007	,	-34.9285	],
+                Canberra	: [	149.131	,	-35.2802	],
+                Auckland	: [	174.7645	,	-36.8509	],
+                Canterbury	: [	171.1637,	-43.7542	],
+                Wellington	: [	174.7787	,	-41.2924	],
+                Waikato	: [	175.0233	,	-37.6191	],
+            };
+
+                var convertData = function (city) {
+                    var res = [];
+                    for (var i = 0; i < citydata.length; i++) {
+                        var geoCoord = geoCoordMap[citydata[i].name];
+                        if (geoCoord) {
+                        res.push({
+                            name: citydata[i].name,
+                            value: geoCoord.concat(citydata[i].value)
+                        });
+                        }
+                    }
+                    return res;
+                };
+
+                // add city scatter point layer 
+                const cityOption = {
+                    tooltip: {
+                        trigger: 'item',
+                        show: true
+                    },
+                    center: [14,14],
+                    geo: {
+                        zoom: 1.13,
+                        show: true,
+                        map: 'worldmap',
+                        roam: false,
+                    },
+                    // legend: {
+                    //     show: true,
+                    //     data: ['The cities with the most Chinese population'],
+                    //     top: '2%',
+                    //     right: '2%',
+                    //     itemHeight: '23',
+                    //     selector: false,
+                    // },
+                    
+                    // visualMap: {
+                    //     show: false,
+                    //     left: 50,
+                    //     datasetIndex: convertData(citydata),
+                    //     // top: 100,
+                    //     min: 5,
+                    //     max: 810,
+                    //     itemHeight: 50,
+                    //     inRange: {
+                    //         color: ['#954D31' ],
+                    //         // colorAlpha: 0,
+                    //         // opacity: 0
+                    //     },
+                    //     text: ['High', 'Low'],
+                    //     // calculable: true,
+                    //     seriesIndex: 'citypop',   
+                    // },
+                    series: [{
+                        symbol: 'diamond',
+                        name: 'The cities with the most Chinese population',
+                        type: 'scatter',
+                        coordinateSystem: 'geo',
+                        symbolSize: function (val) {
+                            return (val[3] * 18) ;
+                        },
+                        color: '#287D7D',
+                        data: convertData(citydata),
+                        encode: {
+                            value: 2
+                        },
+                        animation: true,
+                        universalTransition: true,
+                        itemStyle: {
+                            borderColor: '#fff'
+                        },
+                        tooltip: {
+                            backgroundColor: '#287D7D',
+                            textStyle: {
+                                color: '#fff'
+                            },
+                            formatter : function (params) {
+                                var values = (params.value + '').split(',');
+                                var names = (params.name + '').split(',');
+
+                                name = names[0]  
+                                value = values[2]
+                                return name + ': ' + value;
+                            }
+                        },
+                    }],
+                };
+
+                // add country layer
+                const mapOption = {
+                    title: {
+                        text: 'Contemporary Chinese Diaspora',
+                        subtext: '(Per thousands people)',
+                        subtextStyle: {
+                            fontSize: 18,
+                        },
+                        textStyle: {
+                            fontStyle: 'normal',
+                            fontSize: 25
+                        },
+                        left: 'center',
+                    },
+                    tooltip: {
+                        formatter: '{b}, {c}' 
+                    },
+                    backgroundColor: '#fff',
+                    center: [14,14],
+                    visualMap: {
+                        orient: 'vertical',
+                        show: true,
+                        right: 10,
+                        top: 80,
+                        itemHeight: 500,
+                        min: 5,
+                        max: 8100,
+                        range:[5.01,8100],
+                        outOfRange: {
+                            color:'#287D7D',
+                            opacity:0.9,
+                        },
+                        inRange: {
+                            color: ['#ccdff3','#9ac0e6', '#67a0da', '#3480ce', '#245b94', '#1d4a78', '#193f66', '#143353'],
+                            // color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026'],
+                            // colorAlpha: 0,
+                        },
+                        text: ['High', 'Low'],                      
+                        // seriesIndex: 'country',
+                        calculable: true,
+                    },
+                    series: [{
+                        id: 'population',
+                        name: 'country',
+                        type: 'map',
+                        roam: false,
+                        map: 'worldmap',
+                        // animation: true,
+                        animationDurationUpdate: 1000,
+                        universalTransition: true,
+                        zoom: 1.13,
+                        data: countrydata
+                    }]              
+                };
+
+                
+                // add bar chart layer
+                const barOption = {
+                    title: {
+                        text: 'Top 20 Coutries of Chinese Diaspora',
+                        subtext: '(Per thousands people)',
+                        subtextStyle: {
+                            fontSize: 18,
+                        },
+                        // sublink: 'http://www.pm25.in',
+                        textStyle: {
+                            fontStyle: 'normal',
+                            fontSize: 25
+                        },
+                        left: 'center'
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '-15%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        show: true,
+                        type: 'value',
+                    },
+                    yAxis: {
+                        show: true,
+                        type: 'category',
+                        axisLabel: {
+                            rotate: 0
+                        },
+                        color: '#000',
+                        data: topValue.map(function (item) {
+                        // console.log()
+                        return item.name;
+                        })
+                    }, 
+                    series: {
+                        type: 'bar',
+                        id: 'population',
+                        // color: '#000',
+                        data: topValue.map(function (item) {
+                        // console.log(topValue);
+                        return item.value;
+                    }),
+                    animation: true,
+                    animationDurationUpdate: 1000,
+                    universalTransition: true
+                    }
+                };
+
+                myChart.setOption(cityOption);
+                myChart.setOption(mapOption);
+
+                // the option box trigers the map convert to bar chart
+                trigger = 1
+                document.getElementById("Options").onchange = function() {
+                    if (trigger == 1) {
+                        myChart.setOption(barOption);
+
+                        const mapOption = {
+                            visualMap:{
+                                show: false,
+                                range:[100,8100],
+                                outOfRange: {
+                                    show: true,
+                                    color:'#287D7D',
+                                },
+                            }
+                        };
+                        myChart.setOption(mapOption);
+
+                        const cityOption = {
+
+                            series:{
+                                symbol: 'none'
+                            },
+                            geo: {
+                                show: false
+                            },
+                        };
+                        myChart.setOption(cityOption);
+
+                        trigger = 0;
+                        document.getElementById('legend').style.visibility = 'hidden'
+                        console.log(trigger)
+                    } else {
+                        myChart.setOption(mapOption);
+                        
+                        const barOption = {
+                            yAxis: [{
+                                show: false,
+                                // type: "log",
+                            }],
+                            xAxis: [{
+                                show: false
+                            }],
+                        };
+                        myChart.setOption(barOption);
+
+                        const cityOption = {
+                            series:{
+                                symbol: 'diamond'
+                            },
+                            
+                        };
+                        myChart.setOption(cityOption);
+                        document.getElementById('legend').style.visibility = 'visible'
+                        trigger = 1
+                        console.log(trigger)
+                    }
+                }  
+
+            });
+
+        })
+
+    </script>
+        
+
+    
+
+</body>
+
+</html>
+
+<!-- Page framework referece:
+The framework is inspired by Apache Echarts examples in https://echarts.apache.org/zh/index.html -->

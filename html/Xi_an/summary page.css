@@ -1,0 +1,209 @@
+body {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    overflow: hidden;
+  }
+
+  #switch {
+    position: absolute;
+    top: 10px;
+    z-index: 99;
+  }
+
+  .tl-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 1%;
+    left: 10px;
+    background-size: cover;
+    background-position: center center;
+    z-index: 1;
+
+  }
+
+ .f2-heading--sanSerif {
+    font-family: 'Manrope';
+ }
+
+  .ct-city {
+    position: fixed;
+    top: -95vh;
+    font-family: 'Manrope';
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    z-index: 9;
+  }
+
+  .ct-city p {
+    font-family: 'Manrope';
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  .city2 {
+    position: fixed;
+    top: 10vh;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    z-index: 10;
+    visibility: hidden;
+  }
+
+  .city2-p {
+    font-family: 'Manrope';
+    font-size: 2rem;
+    line-height: 1;
+    visibility: hidden;
+  }
+
+  .tl-item {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 600px;
+    color: #fff;
+    overflow: hidden;
+    -webkit-transition: width 0.5s ease;
+    transition: width 0.5s ease;
+  }
+  
+  .fade {
+    position: relative;
+    width: 100%;
+    min-height: 110vh;
+    top: -25px;
+    background-image: linear-gradient(180deg, transparent, black 100%);
+    z-index: 2;
+  }
+  
+  button {
+    color: rgb(253, 253, 253, 0.7);
+    background: transparent;
+    left: 50px;
+    border: 1.5px solid rgb(255, 255, 255, 0.7);
+    border-radius: 6px;
+    padding: 3px;
+  }
+
+  button:hover {
+    color: rgb(255, 255, 255, 0.7);
+    background: rgba(0, 136, 255, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    border-radius: 6px;
+    padding: 3px;
+  }
+
+  .scolling-caption {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 8px;
+    color: #fff;
+    font-family: 'Manrope';
+    font-size: 350%;
+    font-weight: 300;
+    letter-spacing: 3px;
+    line-height: 150%;
+    perspective: 400px;
+    text-align: justify;
+    z-index: 2;
+  }
+  
+  .show-caption {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    margin: 0 auto;
+    width: 1000px;
+    height: 600px;
+    /* left: 50vw; */
+    top: 50vh;
+    color: #fff;
+    font-family: 'Manrope';
+    font-size: 250%;
+    font-weight: 300;
+    letter-spacing: 3px;
+    line-height: 90%;
+    /* perspective: 400px; */
+    text-align: justify;
+    z-index: 3;
+  }
+
+  .desc {
+    left: 18vw;
+    top: -20vh;
+    justify-content: center;
+    position: relative;
+    visibility: hidden;
+    }
+
+  .desc .title {
+    font-size: 100%;
+    font-weight: 900;
+    text-align: center;
+    position: relative;
+    margin: 0 auto;
+    justify-content: center;            
+    /* align-items: center;    */
+  }
+
+  .desc h1 {
+    position: relative;
+    top: 10px;
+    width: 800px;
+    /* left: 42vw; */
+    text-align: justify;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 36px;
+  }
+
+  .desc p {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 400px;
+    width: 1000px;
+    text-align: justify;
+    /* margin-left: -35%; */
+    font-size: 25px;
+    overflow: auto;
+  }
+
+  .crawl {
+    position: relative;
+    /* top: -0px; */
+    transform-origin: 50% 100%;
+    animation: crawl 60s infinite;
+    visibility: visible;
+    
+  }
+  
+  .crawl > .title {
+    font-size: 100%;
+    font-weight: 900;
+    text-align: center;
+  }
+
+  .crawl p {
+    width: 1700px;
+    /* text-align: center; */
+  }
+  
+  @keyframes crawl {
+    0% {
+      top: 10px;
+      transform: rotateX(20deg)  translateZ(0);
+    }
+    100% { 
+        top: -6000px;
+        transform: rotateX(25deg) translateZ(-2500px);
+      }
+    }
+
+
+

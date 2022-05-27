@@ -1,0 +1,330 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Manrope";
+}
+.mapboxgl-popup {
+  max-width: 500px;
+  font: 12px/15px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  color: #535348;
+  opacity: 0.88;
+  text-align: justify;
+}
+a,
+a:hover,
+a:visited {
+  color: #46545e;
+}
+#map {
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  pointer-events: none;
+}
+#mapInset {
+  bottom: 5px;
+  left: 5px;
+  height: 150px;
+  width: 260px;
+  max-width: 100%;
+  position: fixed;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+  pointer-events: none;
+}
+#header {
+  margin: auto;
+  width: 100%;
+  position: relative;
+  z-index: 3;
+}
+#header h1 {
+  margin: 0;
+  padding: 2vh 2vw;
+  text-align: center;
+  font-family: "Manrope";
+}
+#header h2 {
+  margin: 0;
+  padding: 2vh 2vw;
+  text-align: center;
+  font-size: 20px;
+}
+#header p {
+  margin: 0;
+  padding: 2vh 2vw;
+  text-align: center;
+  font-size: 20px;
+}
+#footer {
+  width: 66%;
+  min-height: 1vh;
+  padding-top: 1vh;
+  padding-bottom: 2vh;
+  text-align: center;
+  line-height: 18px;
+  font-size: 16px;
+  position: relative;
+  z-index: 3;
+  margin-left: 20vw;
+}
+#features {
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+}
+.hidden {
+  visibility: hidden;
+}
+
+/* The console */
+.centered {
+  width: 50vw;
+  margin: 0 auto;
+}
+.lefty {
+  width: 33vw;
+  margin-left: 0vw;
+}
+.righty {
+  width: 33vw;
+  margin-left: 65vw;
+}
+.fully {
+  width: 100%;
+  margin: auto;
+}
+.light {
+  color: rgb(255, 255, 255);
+  background-color: #68675ae8;
+}
+.dark {
+  color: #fafafa;
+  background-color: #444;
+}
+.step {
+  padding-bottom: 100vh;
+  margin-bottom: 10vh;
+  opacity: 0.15;
+}
+.step.active {
+  opacity: 0.9;
+}
+
+.step div {
+  padding: 25px 25px;
+  line-height: 30px;
+  font-size: 13px;
+  line-height: 23px;
+  text-align: justify;
+}
+
+.step img {
+  width: 100%;
+}
+
+@media (max-width: 750px) {
+  .centered,
+  .lefty,
+  .righty,
+  .fully {
+    width: 90vw;
+    margin: 0 auto;
+  }
+}
+
+/* Fix issue on mobile browser where scroll breaks  */
+.mapboxgl-canvas-container.mapboxgl-touch-zoom-rotate.mapboxgl-touch-drag-pan,
+.mapboxgl-canvas-container.mapboxgl-touch-zoom-rotate.mapboxgl-touch-drag-pan
+  .mapboxgl-canvas {
+  touch-action: unset;
+}
+
+.overlay1 {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+}
+
+.overlay1 button {
+  font: 600 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  background-color: #d1d09e;
+  color: #fff;
+  display: inline-block;
+  margin: 0;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+/* the hover botton */
+.overlay1 button:hover {
+  background-color: #ffffff;
+  color: rgb(187, 181, 99);
+}
+
+.overlay2 {
+  position: fixed;
+  top: 10px;
+  left: 130px;
+}
+
+.overlay2 button {
+  font: 600 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  background-color: #d1d09e;
+  color: #fff;
+  display: inline-block;
+  margin: 0;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.overlay2 button:hover {
+  background-color: #ffffff;
+  color: rgb(187, 181, 99);
+}
+
+.overlay3 {
+  position: fixed;
+  top: 10px;
+  left: 315px;
+}
+
+.overlay3 button {
+  font: 600 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  background-color: #d1d09e;
+  color: #fff;
+  display: inline-block;
+  margin: 0;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.overlay3 button:hover {
+  background-color: #ffffff;
+  color: rgb(187, 181, 99);
+}
+
+.overlay4 {
+  position: fixed;
+  top: 10px;
+  left: 450px;
+}
+
+.overlay4 button {
+  font: 600 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  background-color: #d1d09e;
+  color: #fff;
+  display: inline-block;
+  margin: 0;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.overlay4 button:hover {
+  background-color: #ffffff;
+  color: rgb(187, 181, 99);
+}
+
+.overlay5 {
+  position: fixed;
+  top: 10px;
+  left: 615px;
+}
+
+.overlay5 button {
+  font: 600 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  background-color: #d1d09e;
+  color: #fff;
+  display: inline-block;
+  margin: 0;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.overlay5 button:hover {
+  background-color: #ffffff;
+  color: rgb(187, 181, 99);
+}
+
+.overlay6 {
+  position: fixed;
+  bottom: 30px;
+  right: 12px;
+}
+
+.overlay6 button {
+  font: 630 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  background-color: #d1d09e;
+  color: #fff;
+  display: inline-block;
+  margin: 0;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.overlay6 button:hover {
+  background-color: #ffffff;
+  color: rgb(187, 181, 99);
+}
+
+.polygon-mark {
+  border-radius: 50%;
+  display: inline-block;
+  height: 10px;
+  margin-right: 5px;
+  width: 10px;
+}
+
+/* The legend  */
+#full span {
+  border-radius: 50%;
+  display: inline-block;
+  height: 10px;
+  margin-right: 5px;
+  width: 10px;
+}
+
+#qqlfirst span {
+  border-radius: 60%;
+  display: inline-block;
+  height: 10px;
+  margin-right: 5px;
+  width: 10px;
+}
+
+#hhhsecond span {
+  border-radius: 60%;
+  display: inline-block;
+  height: 10px;
+  margin-right: 5px;
+  width: 10px;
+}
+
+#hhhfourth span {
+  border-radius: 60%;
+  display: inline-block;
+  height: 10px;
+  margin-right: 5px;
+  width: 10px;
+}
+
+#hhhfifth span {
+  border-radius: 60%;
+  display: inline-block;
+  height: 10px;
+  margin-right: 5px;
+  width: 10px;
+}

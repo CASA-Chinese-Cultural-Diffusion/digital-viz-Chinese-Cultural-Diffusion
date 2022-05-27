@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>The silllllk road</title>
+        <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+        <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.0/mapbox-gl.css" rel="stylesheet">
+        <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.0/mapbox-gl.js"></script>
+        <script src="compare.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    
+    <body>
+        <div id="map">
+            <div id="left" class="sidebar flex-center left collapsed">
+                <div class="sidebar-content rounded-rect">
+                    <h1>The Silk Road (130 BCE-1453 CE)</h1>
+                    <p>Source: <a href='https://en.unesco.org/silkroad/about-silk-roads'>UNESCO About the Silk Roads</a></p>
+                    <h2>Please drag the arrow on the right to compare the time changes of important cities on the Silk Road.</h2>
+					
+                    <p>The Silk Road was an ancient trade route originating at Chang'an (Xian). The 6,400 km road followed the Great Wall of China to the northwest, bypassed the Takla Makan Desert, climbed the Pamirs, crossed the Middle East, and went on to the Levant; from there the merchandise was shipped across the Mediterranean Sea. Few people travelled the entire route, and goods were handled in a staggered progression by middlemen.</p>
+                    <p>The vast trade networks of the Silk Roads carried more than just merchandise and precious commodities. The constant movement and mixing of populations brought about the widespread transmission of knowledge, ideas, cultures, and beliefs, which had a profound impact on the history and civilizations of the Eurasian peoples. Many of cities developed into hubs of culture and learning. Science, arts, and literature, as well as crafts and technologies, were thus shared and disseminated into societies along the lengths of these routes, and in this way, languages and cultures developed and influenced one another.</p>
+                    <p>The Silk Road reached its golden age in the Tang dynasty (600 CE). With the gradual loss of Roman territory in Asia and the rise of Arabian power in the Levant, the Silk Road became increasingly unsafe and untraveled. In the 13th and 14th centuries, the route was revived under the Mongols, and at that time, the Venetian Marco Polo used it to travel to China. After the fall of the Mongol Empire, the great powers along the Silk Road became separated. The discovery of a sea route from Europe to Asia in the late 15th century dealt a damaging blow to the Silk Road trade again. Since then, the prosperous Silk Road has been on the decline.</p>
+				    <div class="flyto">	
+				    <p>
+                        <button id="east asia" >The full routes: show</button>
+                    </p>
+					</div>
+					<div class="sidebar-toggle rounded-rect left" onclick="toggleSidebar('left')">
+                        &rarr;
+                    </div>
+					<div class="flyto">
+                    <h4>Setup the Viewport: </h4>
+                    <p>
+						<button id="north america">Global view</button>
+                        <button id="world">Overlook</button>
+                        <button id="europe">Eyelevel</button>
+                        <button id="start">Starting point</button>
+                    </p>
+                    </div>
+					
+					
+					
+            </div>
+        </div>
+        <div id="comparison-container">
+            <div id="before" class="map"></div>
+            <div id="after" class="map"></div>
+        </div>
+    </div>
+
+        <script>
+            mapboxgl.accessToken = 'pk.eyJ1Ijoic2lyaWthdDkwMTIiLCJhIjoiY2p0Z2MyMXIzMjIxeTRhb2JuaG5pbWZ4eCJ9.clkv6nycz9hXHrgWL2Ur5w';
+            const beforeMap = new mapboxgl.Map({
+                container: 'before',
+                style: 'mapbox://styles/sirikat9012/cl34mibqf000314qvusl3ayet',
+                interactive: true,
+                zoom: 11.9,
+                center: [108.926,34.22],
+                pitch: 66,
+            });
+
+
+            const afterMap = new mapboxgl.Map({
+                container: 'after',
+                style: 'mapbox://styles/sirikat9012/cl34mxabn00bl14p6xqxgifl7',
+                interactive: true,
+                center: [108.926, 34.22],
+                zoom: 11.9,
+                pitch: 66
+            });
+
+            const speed = 100
+
+            function toggleSidebar(id) {
+                const elem = document.getElementById(id);
+                const collapsed = elem.classList.toggle('collapsed');
+                const padding = {};
+                padding[id] = collapsed ? 0 : 0; 
+                beforeMap.easeTo({
+                    padding: padding,
+                    duration: 3000
+                });
+            }
+
+            beforeMap.on('load', () => {
+                toggleSidebar('left');
+                
+                beforeMap.setFog({
+                    'range': [1, 5],
+                    'color': '#e7d7ac',
+                    'horizon-blend': 0.2,
+                });
+
+
+            beforeMap.loadImage(    
+            'https://raw.githubusercontent.com/sherlkk/DVG/main/llfoot.png',         
+            (error, image) => {   
+                if (error) throw error;
+                beforeMap.addImage('foot', image);
+                beforeMap.addSource('marks', {   
+                    'type': 'geojson',
+                    'data': 'https://raw.githubusercontent.com/sherlkk/DVG/main/boise.geojson'       
+            });
+            
+            // Add a symbol layer               
+            beforeMap.addLayer({     
+                'id': 'marks',
+                'type': 'symbol',
+                'source': 'marks',
+                'paint': {"text-color": "#ffffff"},
+                'layout': {
+                    'icon-image': 'foot',
+                    'icon-size': 0.3,
+                    'text-offset': [0, -12],
+                    'text-anchor': 'top',
+                    'text-field': [
+                    'format',
+                    ['upcase', ['get', 'City']],
+                    { 'font-scale': 0.8 },
+                    '\n',
+                    {},
+                    ['upcase', ['get', 'Country']],
+                    { 'font-scale': 0.6 },
+                    '\n',
+                    {},
+                    ['get', 'Comments'],
+                    { 'font-scale': 0.6 }
+                    ],
+                    'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold']
+                },
+            }); 
+
+            }      
+       );
+
+       // The fly to function
+                    document.getElementById("world").addEventListener("click", function () {
+                        beforeMap.flyTo({
+                            center: [145, 0],
+                            zoom: 2
+                            });beforeMap.setPitch(0);
+                        })
+                    document.getElementById("europe").addEventListener("click", function () {
+                        beforeMap.flyTo({
+                            center: [10.5797, 48.2197],
+                            zoom: 4                  
+                        });beforeMap.setPitch(71.7);
+                    })
+                    document.getElementById("north america").addEventListener("click", function () {
+                        beforeMap.flyTo({
+                            center: [33, 39],
+                            zoom: 2
+                        });
+                    })
+                    document.getElementById("start").addEventListener("click", function () {
+                        beforeMap.flyTo({
+                            center: [106.926,34.225],
+                            zoom: 6
+                        });
+                    })
+
+                    // The full route in before map
+
+                    beforeMap.addSource('bfull', {   
+                            'type': 'geojson',
+                            'data': 'https://raw.githubusercontent.com/sherlkk/DVG/main/ffull.geojson'}); 
+
+                    beforeMap.addLayer({
+                                'id': 'broute',
+                                'type': 'line',
+                                'source': 'bfull',
+                                'paint': {
+                                'line-color': 'white',
+                                'line-opacity': 0.3,
+                                'line-width': 3
+                                },
+                                'layout': {
+                                'line-cap': 'round',
+                                'line-join': 'round',
+                                'visibility': 'none'
+                                }
+                            });
+
+                    
+                    beforeMap.loadImage(
+                        'https://raw.githubusercontent.com/sherlkk/DVG/main/start.png',
+                        (error, image) => {
+                            if (error) throw error;
+
+                            // Add the image to the map style.
+                            beforeMap.addImage('go', image);
+
+                            // Add a data source containing one point feature.
+                            beforeMap.addSource('go', {
+                                'type': 'geojson',
+                                'data': {
+                                    'type': 'FeatureCollection',
+                                    'features': [
+                                        {
+                                            'type': 'Feature',
+                                            'geometry': {
+                                                'type': 'Point',
+                                                'coordinates': [108.936,34.186]
+                                            }
+                                        }
+                                    ]
+                                }
+                            });
+
+                            // Add a layer to use the image to represent the data.
+                            beforeMap.addLayer({
+                                'id': 'go',
+                                'type': 'symbol',
+                                'source': 'go', // reference the data source
+                                'layout': {
+                                    'icon-image': 'go', // reference the image
+                                    'icon-size': 0.12,
+                                    'icon-allow-overlap': false,               
+                                    'icon-ignore-placement': true
+                                }
+                            });
+                            }
+                        );
+       });
+
+            afterMap.on('load', () => {    
+                            
+                            afterMap.setFog({
+                                'range': [1, 5],
+                                'color': 'black',
+                                'horizon-blend': 0.2,
+                            });
+                                    
+                            afterMap.addSource('trace', {   
+                            'type': 'geojson',
+                            'data': 'https://raw.githubusercontent.com/sherlkk/DVG/main/ffinal.geojson'}); 
+
+                            afterMap.addLayer({
+                                'id': 'trace',
+                                'type': 'line',
+                                'source': 'trace',
+                                'paint': {
+                                'line-color': '#ffdd00',
+                                'line-opacity': 0.5,
+                                'line-width': 2
+                                },
+                                'layout': {
+                                'line-cap': 'round',
+                                'line-join': 'round'
+                                }
+                            })
+                            afterMap.addSource('places', {
+                                'type': 'geojson',
+                                'data': 'https://raw.githubusercontent.com/sherlkk/DVG/main/labels.geojson'
+                                });
+                                
+                            afterMap.addLayer({
+                                'id': 'poi-labels',
+                                'type': 'symbol',
+                                'source': 'places',
+                                'paint': {"text-color": "#ffffff"},
+                                'layout': {
+                                'text-offset': [0, -2],
+                                'text-anchor': 'top',
+                                'text-field': [
+                                'format',
+                                ['upcase', ['get', 'city']],
+                                { 'font-scale': 0.7 },
+                                '\n',
+                                {},
+                                ['upcase', ['get', 'country']],
+                                { 'font-scale': 0.5 },
+                                ],
+                                'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold']
+                                }
+                                });
+
+                            // The full route in after map
+
+                            afterMap.addSource('afull', {   
+                                'type': 'geojson',
+                                'data': 'https://raw.githubusercontent.com/sherlkk/DVG/main/ffull.geojson'}); 
+
+                            afterMap.addLayer({
+                                'id': 'aroute',
+                                'type': 'line',
+                                'source': 'afull',
+                                'paint': {
+                                'line-color': '#ffdd00',
+                                'line-opacity': 0.5,
+                                'line-width': 3
+                                },
+                                'layout': {
+                                'line-cap': 'round',
+                                'line-join': 'round',
+								'visibility': 'none',
+                                }
+                                });
+
+                            // Show the full route
+								
+							document.getElementById('east asia').addEventListener('click', function() {
+								  if (document.getElementById("east asia").innerHTML == 'The full routes: show') {
+									document.getElementById("east asia").innerHTML = 'The full routes: hide';
+									afterMap.setLayoutProperty('aroute','visibility','visible');
+                                    beforeMap.setLayoutProperty('broute','visibility','visible');
+
+								  }
+
+								  else {
+									document.getElementById("east asia").innerHTML = 'The full routes: show';
+									afterMap.setLayoutProperty('aroute','visibility','none');
+                                    beforeMap.setLayoutProperty('broute','visibility','none');
+								  }   
+								});
+                                                    
+                            });
+
+        
+            beforeMap.once('click', async () => {
+                
+                beforeMap.removeLayer('go')
+                beforeMap.removeSource('go')
+                    
+            const response = await fetch(         
+            'https://raw.githubusercontent.com/sherlkk/DVG/main/ffinal.geojson'             
+            );
+                    
+            const data = await response.json();            
+            // save full coordinate list for later                
+            const coordinates = data.features[0].geometry.coordinates[0];               
+            // start by showing just the first coordinate               
+            data.features[0].geometry.coordinates[0] = [coordinates[[0]]];    
+            
+            // add it to the map               
+            beforeMap.addSource('trace', { type: 'geojson', data: data }); 
+            beforeMap.addLayer({
+                'id': 'trace',
+                'type': 'line',
+                'source': 'trace',
+                'paint': {
+                'line-color': 'white',
+                'line-opacity': 0.5,
+                'line-width': 2
+                },
+                'layout': {
+                'line-cap': 'round',
+                'line-join': 'round'
+                }
+            });
+
+            // Draw the route
+            let i = 0;
+            const timer = setInterval(() => {     
+                if (i < coordinates.length) {
+                    data.features[0].geometry.coordinates[0].push(coordinates[[i]]);
+                    beforeMap.getSource('trace').setData(data);
+                    beforeMap.panTo(coordinates[[i]]);
+                    i++;
+                    } else {
+                    window.clearInterval(timer);
+                    }
+                },speed);
+
+ 
+            // Anination the camel
+            
+            beforeMap.loadImage(
+                    'https://raw.githubusercontent.com/sherlkk/DVG/main/scamel4.png',
+                    (error, image) => {
+                        if (error) throw error;
+
+                        // Add the image to the map style.
+                        beforeMap.addImage('cat', image);
+                        const point = {
+                            'type': 'FeatureCollection',
+                            'features': [
+                                {
+                                    'type': 'Feature',
+                                    'properties': {},
+                                    'geometry': {
+                                        'type': 'Point',
+                                        'coordinates': [108.943,34.256]
+                                    }
+                                }
+                            ]
+                        };
+
+                        // Add a data source containing one point feature.
+                        beforeMap.addSource('point', { type: 'geojson', data: point }); 
+
+                        // Add a layer to use the image to represent the data.
+                        beforeMap.addLayer({
+                            'id': 'point',
+                            'type': 'symbol',
+                            'source': 'point', // reference the data source
+                            'layout': {
+                                'icon-image': 'cat', // reference the image
+                                'icon-size': 0.5,
+                                'icon-allow-overlap': true,               
+                                'icon-ignore-placement': true
+                            }
+                        });
+                        let i = 0;
+                        const timer = setInterval(() => {     
+                            if (i < 620) {
+                                point.features[0].geometry.coordinates = coordinates[[i+10]];
+                                beforeMap.getSource('point').setData(point);
+                                i++;
+                                } else {
+                                window.clearInterval(timer);
+                                }
+                            }, speed);
+                                    
+                        
+                    }          
+                    );
+                    beforeMap.loadImage(
+                    'https://raw.githubusercontent.com/sherlkk/DVG/main/sfunee.png',
+                    (error, image) => {
+                        if (error) throw error;
+
+                        // Add the image to the map style.
+                        beforeMap.addImage('fune', image);
+                        const move = {
+                            'type': 'FeatureCollection',
+                            'features': [
+                                {
+                                    'type': 'Feature',
+                                    'properties': {},
+                                    'geometry': {
+                                        'type': 'Point',
+                                        'coordinates': [27.678359, 41.188238]
+                                    }
+                                }
+                            ]
+                        };
+
+                        // Add a data source containing one point feature.
+                        beforeMap.addSource('move', { type: 'geojson', data: move }); 
+
+                        // Add a layer to use the image to represent the data.
+                        beforeMap.addLayer({
+                            'id': 'move',
+                            'type': 'symbol',
+                            'source': 'move', // reference the data source
+                            'layout': {
+                                'icon-image': 'fune', // reference the image
+                                'icon-size': 0.5,
+                                'icon-allow-overlap': true,               
+                                'icon-ignore-placement': true
+                            }
+                        });
+                        let i = 0;
+                        const timer = setInterval(() => {
+                            if ( i <= 638){
+                                i++;
+                                }    
+                            else if ( 638 < i < coordinates.length) {
+                                move.features[0].geometry.coordinates = coordinates[[i+8]];
+                                beforeMap.getSource('move').setData(move);
+                                i++;
+                                } 
+                                else {
+                                window.clearInterval(timer);
+                                }
+                            }, speed);
+                    }          
+                    );
+
+
+            // setup the viewport
+            
+            beforeMap.jumpTo({ 'center': coordinates[[0]], 'zoom': 4.1 });
+            beforeMap.setPitch(55);
+
+            });
+
+                
+
+            // A selector or reference to HTML element
+            const container = '#comparison-container';
+            const map = new mapboxgl.Compare(beforeMap, afterMap, container, {
+            });
+
+
+
+    </script>
+</body>
+</html>

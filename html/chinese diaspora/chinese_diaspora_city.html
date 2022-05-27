@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html style="height: 100%" >
+<head>
+    <title>Chinese Diaspora</title>
+    <meta charset="UTF-8">
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
+    <script charset="utf-8" src="https://d3js.org/d3.v4.min.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+
+    <!-- <link href='style.css' rel='stylesheet' /> -->
+    <!-- <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style> -->
+
+</head>
+
+<body style = "height: 100%; margin: 0">
+
+    <div id='map'></div>
+
+    <div id="pagecontent">
+       
+        <p><select id="Options">
+            <option hidden>Change option Here:</option>
+            <option value="mapOption">map</option>
+            <option value="barOption">bar chart</option>
+            </select>
+        </p>
+    
+    </div>
+
+    
+
+    <div id="container" style="height: 100%"></div>
+
+
+    <script type="text/javascript">
+
+        var dom = document.getElementById("container");
+        var myChart = echarts.init(dom);
+        var app = {};
+        var option;
+
+        
+        myChart.showLoading();
+        $.get('Data/worldgeo.json', function (worldJson) {
+            myChart.hideLoading();
+            echarts.registerMap('worldmap', worldJson);
+
+
+            d3.csv('Data/overseas_chinese_country_pop.csv', function(countrydata){
+                console.log(countrydata)
+                
+
+                countrydata.sort(function (a, b) {
+                return a.value - b.value;
+                });
+                var topValue = countrydata.slice(58,79);
+
+
+
+                
+            var citydata = [
+            { name:	"Singapore",	value:[	2960.14	,	3.471312252	]},
+            { name:	"Bangkok",	value:[	7221	,	3.858597345	]},
+            { name:	"Kuala_Lumpur",	value:[	2189.2	,	3.340285439	]},
+            { name:	"Johor_Bahru",	value:[	1078.8	,	3.032940938	]},
+            { name:	"George_Town",	value:[	685.8	,	2.836197481	]},
+            { name:	"Ipoh",	value:[	703.1	,	2.847017098	]},
+            { name:	"Jakarta",	value:[	579.612	,	2.763137368	]},
+            { name:	"Surabaya",	value:[	147.047	,	2.167456169	]},
+            { name:	"Medan",	value:[	201.519	,	2.304315999	]},
+            { name:	"Pontianak",	value:[	104.325	,	2.018388393	]},
+            { name:	"Bandung",	value:[	83.32	,	1.920749261	]},
+            { name:	"Yangon",	value:[	1287.156	,	3.109631185	]},
+            { name:	"Manila",	value:[	500	,	2.698970004	]},
+            { name:	"Ho_Chi_Minh_City",	value:[	992.6	,	2.996774271	]},
+            { name:	"Tokyo",	value:[	197.51	,	2.295589089	]},
+            { name:	"Kanagawa",	value:[	64.83	,	1.811776022	]},
+            { name:	"Saitama",	value:[	62.948	,	1.798981936	]},
+            { name:	"Osaka",	value:[	674.87	,	2.829220123	]},
+            { name:	"Vientiane",	value:[	176.49	,	2.246720103	]},
+            { name:	"Phnom_Penh",	value:[	147.02	,	2.167376418	]},
+            { name:	"Calcutta",	value:[	129.74	,	2.113073894	]},
+            { name:	"Dubai",	value:[	109.5	,	2.039414119	]},
+            { name:	"Ansan",	value:[	1075.566	,	3.031637065	]},
+            { name:	"New_York",	value:[	865	,	2.937016107	]},
+            { name:	"Los_Angeles",	value:[	678	,	2.831229694	]},
+            { name:	"San_Francisco",	value:[	582	,	2.764922985	]},
+            { name:	"San_Jose",	value:[	239	,	2.378397901	]},
+            { name:	"Boston",	value:[	174	,	2.240549248	]},
+            { name:	"Seattle",	value:[	166	,	2.220108088	]},
+            { name:	"Washington",	value:[	135	,	2.130333768	]},
+            { name:	"Chicago",	value:[	135	,	2.130333768	]},
+            { name:	"Honolulu",	value:[	117	,	2.068185862	]},
+            { name:	"Houston",	value:[	111	,	2.045322979	]},
+            { name:	"Toronto",	value:[	631.05	,	2.800063771	]},
+            { name:	"Vancouver",	value:[	474.655	,	2.67637806	]},
+            { name:	"Calgary",	value:[	89.675	,	1.952671385	]},
+            { name:	"Montreal",	value:[	89.4	,	1.951337519	]},
+            { name:	"Lima",	value:[	14.223	,	1.15299121	]},
+            { name:	"São_Paulo",	value:[	200	,	2.301029996	]},
+            { name:	"Panama_City",	value:[	135.96	,	2.133411156	]},
+            { name:	"Moscow",	value:[	400	,	2.602059991	]},
+            { name:	"Paris",	value:[	600	,	2.77815125	]},
+            { name:	"London",	value:[	44	,	1.643452676	]},
+            { name:	"Manchester",	value:[	13	,	1.113943352	]},
+            { name:	"Birmingham",	value:[	12	,	1.079181246	]},
+            { name:	"Milan",	value:[	18.918	,	1.276875221	]},
+            { name:	"Rome",	value:[	12.013	,	1.079651477	]},
+            { name:	"Prato",	value:[	11.882	,	1.074889548	]},
+            { name:	"Barcelona",	value:[	120	,	2.079181246	]},
+            { name:	"Madrid",	value:[	40.75	,	1.610127613	]},
+            { name:	"Sydney",	value:[	487.976	,	2.688398463	]},
+            { name:	"Melbourne",	value:[	356.324	,	2.551845075	]},
+            { name:	"Brisbane",	value:[	99.593	,	1.998228815	]},
+            { name:	"Perth",	value:[	99.229	,	1.996638615	]},
+            { name:	"Adelaide",	value:[	50.216	,	1.700842116	]},
+            { name:	"Canberra",	value:[	22.445	,	1.35111961	]},
+            { name:	"Auckland",	value:[	171.309	,	2.23378018	]},
+            { name:	"Canterbury",	value:[	21.516	,	1.332761536	]},
+            { name:	"Wellington",	value:[	21.192	,	1.326171945	]},
+            { name:	"Waikato",	value:[	12.084	,	1.082210717	]},
+            ];
+
+            var geoCoordMap = {
+                Singapore	: [	103.8407863	,	1.2805179	],
+                Bangkok	: [	100.5107441	,	13.7373979	],
+                Kuala_Lumpur	: [	101.6936373	,	3.1445387	],
+                Johor_Bahru	: [	103.7605655	,	1.4578971	],
+                George_Town	: [	100.3320309	,	5.4178117	],
+                Ipoh	: [	101.110048	,	4.5712252	],
+                Jakarta	: [	106.8112461	,	-6.1446546	],
+                Surabaya	: [	112.7389142	,	-7.2374041	],
+                Medan	: [	98.6716919	,	3.5926572	],
+                Pontianak	: [	109.3427661	,	-0.0305307	],
+                Bandung	: [	107.5997541	,	-6.9217892	],
+                Yangon	: [	96.1498833	,	16.7733311	],
+                Manila	: [	120.9710572	,	14.6011743	],
+                Ho_Chi_Minh_City	: [	106.629662	,	10.823099	],
+                Tokyo	: [	139.691711	,	35.689487	],
+                Kanagawa	: [	130.408676	,	33.167519	],
+                Saitama	: [	139.648849	,	35.856998	],
+                Osaka	: [	135.502167	,	34.693737	],
+                Vientiane	: [	102.6133707	,	17.9640988	],
+                Phnom_Penh	: [	104.9224426	,	11.568271	],
+                Calcutta	: [	88.3638815	,	22.5726723	],
+                Dubai	: [	55.2924914	,	25.2653471	],
+                Ansan	: [	126.8309	,	37.3219	],
+                New_York	: [	-74.0056357	,	40.7160814	],
+                Los_Angeles	: [	-118.2491091	,	34.0671948	],
+                San_Francisco	: [	-122.4115197	,	37.7940949	],
+                San_Jose	: [	-121.8914769	,	37.3324873	],
+                Boston	: [	-71.065117	,	42.3497472	],
+                Seattle	: [	-122.3246248	,	47.5988346	],
+                Washington	: [	-77.0220557	,	38.9003471	],
+                Chicago	: [	-87.6409851	,	41.852461	],
+                Honolulu	: [	-157.8747863	,	21.3161566	],
+                Houston	: [	-95.5544042	,	29.7043423	],
+                Toronto	: [	-79.4019022	,	43.6533133	],
+                Vancouver	: [	-123.1096408	,	49.2805034	],
+                Calgary	: [	-114.0714161	,	51.0512706	],
+                Montreal	: [	-73.5626265	,	45.5070724	],
+                Lima	: [	-77.0428	,	-12.0464	],
+                São_Paulo	: [	-46.6396	,	-23.5558	],
+                Panama_City	: [	-79.5199	,	8.9824	],
+                Moscow	: [	37.6173	,	55.7558	],
+                Paris	: [	2.3522	,	48.8566	],
+                London	: [	0.1276	,	51.5072	],
+                Manchester	: [	2.2426	,	53.4808	],
+                Birmingham	: [	1.8904	,	52.4862	],
+                Milan	: [	9.19	,	45.4642	],
+                Rome	: [	12.4964	,	41.9028	],
+                Prato	: [	11.1022	,	43.8777	],
+                Barcelona	: [	2.1686	,	41.3874	],
+                Madrid	: [	3.7038	,	40.4168	],
+                Sydney	: [	151.2093	,	-33.8688	],
+                Melbourne	: [	144.9631	,	-37.8136	],
+                Brisbane	: [	153.026	,	-27.4705	],
+                Perth	: [	115.8613	,	-31.9523	],
+                Adelaide	: [	138.6007	,	-34.9285	],
+                Canberra	: [	149.131	,	-35.2802	],
+                Auckland	: [	174.7645	,	-36.8509	],
+                Canterbury	: [	171.1637,	-43.7542	],
+                Wellington	: [	174.7787	,	-41.2924	],
+                Waikato	: [	175.0233	,	-37.6191	],
+            };
+
+                var convertData = function (city) {
+                    var res = [];
+                    for (var i = 0; i < citydata.length; i++) {
+                        var geoCoord = geoCoordMap[citydata[i].name];
+                        if (geoCoord) {
+                        res.push({
+                            name: citydata[i].name,
+                            value: geoCoord.concat(citydata[i].value)
+                        });
+                        }
+                    }
+                    return res;
+                };
+
+
+                const mapOption = {
+                    title: {
+                        text: 'Contemporary Overseas Chinese Diaspora',
+                        subtext: '(Per thousands people)',
+                        subtextStyle: {
+                            fontSize: 18,
+                        },
+                        // sublink: 'http://www.pm25.in',
+                        textStyle: {
+                            fontStyle: 'normal',
+                            fontSize: 25
+                        },
+                        left: 'center',
+                    },
+                    tooltip: {
+                        formatter: '{b}, {c}' 
+                    },
+                    // center: [0,0],
+                    visualMap: {
+                        show: true,
+                        right: 20,
+                        top: 100,
+                        min: 5,
+                        max: 8100,
+                        itemHeight: 500,
+                        range:[7,8100],
+                        outOfRange: {
+                            color:'grey',
+                            opacity:0.3
+                        },
+                        inRange: {
+                            color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026'],
+                            // colorAlpha: 0,
+                            // opacity: 0
+                        },
+                        text: ['High', 'Low'],                      
+                        
+                    },
+                    series: [{
+                        id: 'population',
+                        type: 'map',
+                        roam: false,
+                        map: 'worldmap',
+                        animation: true,
+                        animationDurationUpdate: 1000,
+                        universalTransition: true,
+                        zoom: 1,
+                        data: countrydata
+                    }],
+                    z:1,     
+                };
+
+                const cityOption = {
+                    tooltip: {
+                        trigger: 'item',
+                        show: true
+                    },
+
+                    geo: {
+                        show: false,
+                        map: 'worldmap',
+                        roam: false,
+                    },
+                    z:2,
+                    // visualMap: {
+                    //     show: true,
+                    //     right: 50,
+                    //     datasetIndex: 'citypop',
+                    //     // top: 100,
+                    //     min: 5,
+                    //     max: 810,
+                    //     itemHeight: 50,
+                    //     inRange: {
+                    //         color: ['#954D31','#fff' ],
+                    //         // colorAlpha: 0,
+                    //         // opacity: 0
+                    //     },
+                    //     text: ['High', 'Low'],
+                    //     calculable: true,
+                    //     z:3,
+                    //     zlevel:3
+                    // },
+                    series: [{
+                        // symbol: 'pin',
+                        name: 'citypop',
+                        type: 'scatter',
+                        coordinateSystem: 'geo',
+                        symbolSize: function (val) {
+                            return (val[3] * 10) ;
+                        },
+                        data: convertData(citydata),
+                        // colorBy: 'citypop',
+                        color: '#fff',
+                        encode: {
+                            value: 2
+                        },
+                        // animation: true,
+                        universalTransition: true,
+                        tooltip: {
+                            backgroundColor: 'rgb(255,255,255)',
+                            textStyle: {
+                                color: '#954D31'
+                            },
+                            formatter : function (params) {
+                                var values = (params.value + '').split(',');
+                                var names = (params.name + '').split(',');
+
+                                name = names[0]  
+                                value = values[2]
+                                return name + ': ' + value;
+                            }
+                        },
+                        
+
+                    }],
+                };
+
+
+                myChart.setOption(cityOption);
+                myChart.setOption(mapOption);
+                // // myChart.setOption(citybarOption);
+
+
+                // trigger = 1
+                // document.getElementById("Options").onchange = function() {
+                //     if (trigger == 1) {
+                //         myChart.setOption(barOption);
+
+                //         const mapOption = {
+                //             visualMap:{
+                //                 show: false
+                //             }
+                //         };
+                //         myChart.setOption(mapOption);
+
+                //         const cityOption = {
+                //             series:{
+                //                 symbol: 'none'
+                //             }
+                //         };
+                //         myChart.setOption(cityOption);
+
+                //         trigger = 0;
+                //         console.log(trigger)
+                //     } else {
+                //         myChart.setOption(mapOption);
+                        
+                //         const barOption = {
+                //             yAxis: [{
+                //                 show: false,
+                //                 type: "log",
+                //             }]
+                //         };
+                //         myChart.setOption(barOption);
+
+                //         const cityOption = {
+                //             series:{
+                //                 symbol: 'pin'
+                //             },
+                            
+                //         };
+                //         myChart.setOption(cityOption);
+                //         trigger = 1
+                //         console.log(trigger)
+                //     }
+                // }  
+
+
+            });
+
+                if (option && typeof option === 'object') {
+                    myChart.setOption(option);
+                };
+
+
+
+
+
+        })
+
+    </script>
+        
+
+    
+
+</body>
+
+</html>
+
+

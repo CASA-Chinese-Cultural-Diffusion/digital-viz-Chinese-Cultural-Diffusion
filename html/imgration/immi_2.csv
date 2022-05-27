@@ -1,0 +1,191 @@
+,Phase,Time_est,country,Population_est,country_a3,iso3,continent,name,deleteable
+0,The first immigration wave,1560,Thailand,2000,THA,THA,Asia,Thailand,0
+1,The first immigration wave,1560,Myanmar,30000,MMR,MMR,Asia,Myanmar,0
+2,The first immigration wave,1571,Philippines,150,PHL,PHL,Asia,Philippines,0
+3,The first immigration wave,1588,Philippines,10000,PHL,PHL,Asia,Philippines,0
+4,The first immigration wave,1603,Philippines,25000,PHL,PHL,Asia,Philippines,0
+5,The first immigration wave,1609,Indonesia,4000,IDN,IDN,Asia,Indonesia,0
+6,The first immigration wave,1619,Indonesia,400,IDN,IDN,Asia,Indonesia,0
+7,The first immigration wave,1620,Japan,3000,JPN,JPN,Asia,Japan,0
+8,The first immigration wave,1627,Indonesia,3500,IDN,IDN,Asia,Indonesia,0
+9,The first immigration wave,1658,Indonesia,5000,IDN,IDN,Asia,Indonesia,0
+10,The first immigration wave,1815,Indonesia,52394,IDN,IDN,Asia,Indonesia,0
+11,The first immigration wave,1815,Indonesia,94441,IDN,IDN,Asia,Indonesia,0
+12,The first immigration wave,1820,India,150000,IND,IND,Asia,India,0
+13,The first immigration wave,1821,Thailand,700000,THA,THA,Asia,Thailand,0
+14,The first immigration wave,1830,Indonesia,150000,IDN,IDN,Asia,Indonesia,0
+15,The first immigration wave,1830,Vietnam,100000,VNM,VNM,Asia,Vietnam,0
+16,The first immigration wave,1830,Myanmar,130000,MMR,MMR,Asia,Myanmar,0
+17,The first immigration wave,1830,Malaysia ,50000,MYS,MYS,Asia,Malaysia,0
+18,The first immigration wave,1856,Indonesia,135749,IDN,IDN,Asia,Indonesia,0
+19,The first immigration wave,1856,Indonesia,40806,IDN,IDN,Asia,Indonesia,0
+20,"WW1 end, The third immigration wave",1890,United States of America,107475,USA,USA,Americas,United States of America,0
+21,The second immigration wave,1900,South America,400000,FLK,FLK,Americas,Falkland Islands (Malvinas),0
+22,The second immigration wave,1920,Thailand,1000000,THA,THA,Asia,Thailand,0
+23,The second immigration wave,1922,Korea,10000,KOR,KOR,Asia,Republic of Korea,0
+24,The second immigration wave,1903,South America,400000,BOL,BOL,Americas,Bolivia,0
+25,The second immigration wave,1905,South America,400000,VEN,VEN,Americas,Venezuela,0
+26,The second immigration wave,1907,South America,400000,GUF,GUF,Americas,French Guiana,0
+27,The second immigration wave,1909,South America,400000,URY,URY,Americas,Uruguay,0
+28,The second immigration wave,1911,South America,400000,COL,COL,Americas,Colombia,0
+29,The second immigration wave,1913,United States of America,400000,USA,USA,Americas,United States of America,0
+30,The second immigration wave,1915,South America,400000,BRA,BRA,Americas,Brazil,0
+31,The second immigration wave,1917,South America,400000,ECU,ECU,Americas,Ecuador,0
+32,The second immigration wave,1919,South America,400000,SUR,SUR,Americas,Suriname,0
+33,The second immigration wave,1921,South America,400000,ARG,ARG,Americas,Argentina,0
+34,The second immigration wave,1923,South America,400000,CHL,CHL,Americas,Chile,0
+35,The second immigration wave,1925,South America,400000,PER,PER,Americas,Peru,0
+36,The second immigration wave,1927,South America,400000,PRY,PRY,Americas,Paraguay,0
+37,The second immigration wave,1950,Australia,400000,AUS,AUS,Oceania,Australia,0
+38,The second immigration wave,1952,Japan,10000,JPN,JPN,Asia,Japan,0
+39,The second immigration wave,1954,South America,400000,GUY,GUY,Americas,Guyana,0
+40,The second immigration wave,1956,Philippines,100000,PHL,PHL,Asia,Philippines,0
+41,The second immigration wave,1930,Indonesia,1000000,IDN,IDN,Asia,Indonesia,0
+42,The second immigration wave,1932,Singapore,1000000,SGP,SGP,Asia,Singapore,0
+43,The second immigration wave,1934,Malaysia,1000000,MYS,MYS,Asia,Malaysia,0
+44,The second immigration wave,1936,Myanmar,100000,MMR,MMR,Asia,Myanmar,0
+45,"WW1 end, The third immigration wave",1937,Singapore,402563,SGP,SGP,Asia,Singapore,0
+46,"WW1 end, The third immigration wave",1937,Malaysia,402563,MYS,MYS,Asia,Malaysia,0
+47,"WW1 end, The third immigration wave",1937,Thailand,60000,THA,THA,Asia,Thailand,0
+48,"WW1 end, The third immigration wave",1940,United States of America,106334,USA,USA,Americas,United States of America,0
+54,"WW1 end, The third immigration wave",1932,Aferica,50000,MAR,MAR,Africa,Morocco,0
+55,"WW1 end, The third immigration wave",1933,Aferica,50000,GNQ,GNQ,Africa,Equatorial Guinea,0
+57,"WW1 end, The third immigration wave",1934,Aferica,50000,DJI,DJI,Africa,Djibouti,0
+58,"WW1 end, The third immigration wave",1935,Aferica,50000,ZAF,ZAF,Africa,South Africa,0
+59,"WW1 end, The third immigration wave",1936,Aferica,50000,SWZ,SWZ,Africa,Swaziland,0
+60,"WW1 end, The third immigration wave",1937,Aferica,50000,NER,NER,Africa,Niger,0
+72,"WW1 end, The third immigration wave",1938,Aferica,50000,DZA,DZA,Africa,Algeria,0
+73,"WW1 end, The third immigration wave",1939,Aferica,50000,TGO,TGO,Africa,Togo,0
+74,"WW1 end, The third immigration wave",1940,Aferica,50000,CMR,CMR,Africa,Cameroon,0
+75,"WW1 end, The third immigration wave",1941,Aferica,50000,NAM,NAM,Africa,Namibia,0
+77,"WW1 end, The third immigration wave",1942,Aferica,50000,BFA,BFA,Africa,Burkina Faso,0
+79,"WW1 end, The third immigration wave",1943,Aferica,50000,GMB,GMB,Africa,Gambia,0
+80,"WW1 end, The third immigration wave",1944,Aferica,50000,COM,COM,Africa,Comoros,0
+81,"WW1 end, The third immigration wave",1945,Aferica,50000,TZA,TZA,Africa,United Republic of Tanzania,0
+82,"WW1 end, The third immigration wave",1946,Aferica,50000,SDN,SDN,Africa,Sudan,0
+83,"WW1 end, The third immigration wave",1947,Aferica,50000,REU,REU,Africa,Reunion,0
+84,"WW1 end, The third immigration wave",1948,Aferica,50000,CAF,CAF,Africa,Central African Republic,0
+85,"WW1 end, The third immigration wave",1949,Aferica,50000,ESH,ESH,Africa,Western Sahara,0
+93,"WW1 end, The third immigration wave",1950,Aferica,50000,BWA,BWA,Africa,Botswana,0
+103,"WW1 end, The third immigration wave",1951,Aferica,50000,MUS,MUS,Africa,Mauritius,0
+104,"WW1 end, The third immigration wave",1952,Aferica,50000,STP,STP,Africa,Sao Tome and Principe,0
+105,"WW1 end, The third immigration wave",1953,Aferica,50000,GAB,GAB,Africa,Gabon,0
+106,"WW1 end, The third immigration wave",1954,Aferica,50000,TUN,TUN,Africa,Tunisia,0
+107,"WW1 end, The third immigration wave",1955,Aferica,50000,NGA,NGA,Africa,Nigeria,0
+109,"WW1 end, The third immigration wave",1956,Aferica,50000,MYT,MYT,Africa,Mayotte,0
+110,"WW1 end, The third immigration wave",1957,Aferica,50000,SEN,SEN,Africa,Senegal,0
+111,"WW1 end, The third immigration wave",1958,Aferica,50000,LSO,LSO,Africa,Lesotho,0
+112,"WW1 end, The third immigration wave",1959,Aferica,50000,CIV,CIV,Africa,CÃ´te d'Ivoire,0
+113,"WW1 end, The third immigration wave",1960,Aferica,50000,LBY,LBY,Africa,Libyan Arab Jamahiriya,0
+114,"WW1 end, The third immigration wave",1961,Aferica,50000,GHA,GHA,Africa,Ghana,0
+115,"WW1 end, The third immigration wave",1962,Aferica,50000,AGO,AGO,Africa,Angola,0
+116,"WW1 end, The third immigration wave",1963,Aferica,50000,KEN,KEN,Africa,Kenya,0
+118,"WW1 end, The third immigration wave",1941,Oceania,40000,AUS,AUS,Oceania,Australia,0
+125,"WW1 end, The third immigration wave",1948,Aferica,50000,SLE,SLE,Africa,Sierra Leone,0
+141,"WW1 end, The third immigration wave",1950,Aferica,50000,ZWE,ZWE,Africa,Zimbabwe,0
+142,"WW1 end, The third immigration wave",1925,Aferica,50000,EGY,EGY,Africa,Egypt,0
+143,"WW1 end, The third immigration wave",1927,Aferica,50000,LBR,LBR,Africa,Liberia,0
+144,"WW1 end, The third immigration wave",1929,Aferica,50000,MRT,MRT,Africa,Mauritania,0
+145,"WW1 end, The third immigration wave",1931,Aferica,50000,BDI,BDI,Africa,Burundi,0
+146,"WW1 end, The third immigration wave",1933,Aferica,50000,MDG,MDG,Africa,Madagascar,0
+157,"WW1 end, The third immigration wave",1935,Aferica,50000,RWA,RWA,Africa,Rwanda,0
+165,"WW1 end, The third immigration wave",1937,Aferica,50000,SSD,SSD,Africa,South Sudan,0
+166,"WW1 end, The third immigration wave",1939,Aferica,50000,ETH,ETH,Africa,Ethiopia,0
+167,"WW1 end, The third immigration wave",1941,Aferica,50000,SYC,SYC,Africa,Seychelles,0
+168,"WW1 end, The third immigration wave",1943,Aferica,50000,SOM,SOM,Africa,Somalia,0
+169,"WW1 end, The third immigration wave",1945,Aferica,50000,COD,COD,Africa,Democratic Republic of the Congo,0
+170,"WW1 end, The third immigration wave",1947,Aferica,50000,GNB,GNB,Africa,Guinea-Bissau,0
+171,"WW1 end, The third immigration wave",1949,Aferica,50000,MOZ,MOZ,Africa,Mozambique,0
+176,"WW1 end, The third immigration wave",1926,Europe,80000,MKD,MKD,Europe,The former Yugoslav Republic of Macedonia,0
+177,"WW1 end, The third immigration wave",1927,Europe,80000,AND,AND,Europe,Andorra,0
+178,"WW1 end, The third immigration wave",1928,Europe,80000,SVN,SVN,Europe,Slovenia,0
+179,"WW1 end, The third immigration wave",1929,Europe,80000,ALB,ALB,Europe,Albania,0
+180,"WW1 end, The third immigration wave",1930,Europe,80000,SVK,SVK,Europe,Slovakia,0
+181,"WW1 end, The third immigration wave",1931,Europe,80000,NLD,NLD,Europe,Netherlands,0
+182,"WW1 end, The third immigration wave",1932,Europe,80000,GIB,GIB,Europe,Gibraltar,0
+183,"WW1 end, The third immigration wave",1933,Europe,80000,IRL,IRL,Europe,Ireland,0
+184,"WW1 end, The third immigration wave",1934,Europe,80000,LIE,LIE,Europe,Liechtenstein,0
+185,"WW1 end, The third immigration wave",1935,Europe,80000,POL,POL,Europe,Poland,0
+186,"WW1 end, The third immigration wave",1936,Europe,80000,BIH,BIH,Europe,Bosnia & Herzegovina,0
+187,"WW1 end, The third immigration wave",1937,Europe,80000,ROU,ROU,Europe,Romania,0
+188,"WW1 end, The third immigration wave",1938,Europe,80000,BLR,BLR,Europe,Belarus,0
+189,"WW1 end, The third immigration wave",1939,Europe,80000,ITA,ITA,Europe,Italy,0
+190,"WW1 end, The third immigration wave",1940,Europe,80000,PRT,PRT,Europe,Azores Islands,0
+191,"WW1 end, The third immigration wave",1941,Europe,80000,HRV,HRV,Europe,Croatia,0
+192,"WW1 end, The third immigration wave",1942,Europe,80000,MNE,MNE,Europe,Montenegro,0
+193,"WW1 end, The third immigration wave",1943,Europe,80000,SJM,SJM,Europe,Svalbard and Jan Mayen Islands,0
+194,"WW1 end, The third immigration wave",1944,Europe,80000,CZE,CZE,Europe,Czech Republic,0
+195,"WW1 end, The third immigration wave",1945,Europe,80000,MCO,MCO,Europe,Monaco,0
+196,"WW1 end, The third immigration wave",1946,Europe,80000,UKR,UKR,Europe,Ukraine,0
+197,"WW1 end, The third immigration wave",1947,Europe,80000,ISL,ISL,Europe,Iceland,0
+198,"WW1 end, The third immigration wave",1948,Europe,80000,IMY,IMY,Europe,Isle of Man,0
+199,"WW1 end, The third immigration wave",1949,Europe,80000,MDA,MDA,Europe,"Moldova, Republic of",0
+200,"WW1 end, The third immigration wave",1950,Europe,80000,HUN,HUN,Europe,Hungary,0
+201,"WW1 end, The third immigration wave",1951,Europe,80000,VAT,VAT,Europe,Holy See,0
+202,"WW1 end, The third immigration wave",1952,Europe,80000,PRT,PRT,Europe,Azores Islands,0
+203,"WW1 end, The third immigration wave",1953,Europe,80000,PRT,PRT,Europe,Portugal,0
+204,"WW1 end, The third immigration wave",1954,Europe,80000,PRT,PRT,Europe,Portugal,0
+205,"WW1 end, The third immigration wave",1955,Europe,80000,LUX,LUX,Europe,Luxembourg,0
+206,"WW1 end, The third immigration wave",1956,Europe,80000,LVA,LVA,Europe,Latvia,0
+207,"WW1 end, The third immigration wave",1950,South America,500000,BOL,BOL,Americas,Bolivia,0
+208,"WW1 end, The third immigration wave",1950,United States of America,150000,USA,USA,Americas,United States of America,0
+209,"WW1 end, The third immigration wave",1951,Indonesia,3500000,IDN,IDN,Asia,Indonesia,0
+210,"WW1 end, The third immigration wave",1952,Thailand,3000000,THA,THA,Asia,Thailand,0
+211,"WW1 end, The third immigration wave",1953,Singapore,3100000,SGP,SGP,Asia,Singapore,0
+212,"WW1 end, The third immigration wave",1954,Malaysia,3100000,MYS,MYS,Asia,Malaysia,0
+213,"WW1 end, The third immigration wave",1955,Vietnam,1000000,VNM,VNM,Asia,Vietnam,0
+214,"WW1 end, The third immigration wave",1956,Philippines,350000,PHL,PHL,Asia,Philippines,0
+215,"WW1 end, The third immigration wave",1957,Myanmar,350000,MMR,MMR,Asia,Myanmar,0
+216,"WW1 end, The third immigration wave",1958,Cambodia,420000,KHM,KHM,Asia,Cambodia,0
+217,"WW1 end, The third immigration wave",1959,Laos,50000,LAO,LAO,Asia,Lao People's Democratic Republic,0
+218,"WW1 end, The third immigration wave",1960,Brunei,10000,BRN,BRN,Asia,Brunei Darussalam,0
+219,"WW1 end, The third immigration wave",1961,Japan,60000,JPN,JPN,Asia,Japan,0
+220,"WW1 end, The third immigration wave",1962,North Korea,60000,PRK,PRK,Asia,Democratic People's Republic of Korea,0
+221,"WW1 end, The third immigration wave",1963,Europe,80000,SMR,SMR,Europe,San Marino,0
+222,"WW1 end, The third immigration wave",1964,Korea,60000,KOR,KOR,Asia,Republic of Korea,0
+223,"WW1 end, The third immigration wave",1953,South America,500000,PRY,PRY,Americas,Paraguay,0
+224,"WW1 end, The third immigration wave",1955,South America,500000,PER,PER,Americas,Peru,0
+225,"WW1 end, The third immigration wave",1957,South America,500000,CHL,CHL,Americas,Chile,0
+226,"WW1 end, The third immigration wave",1959,South America,500000,ARG,ARG,Americas,Argentina,0
+227,"WW1 end, The third immigration wave",1961,South America,500000,SUR,SUR,Americas,Suriname,0
+228,"WW1 end, The third immigration wave",1963,South America,500000,ECU,ECU,Americas,Ecuador,0
+229,"WW1 end, The third immigration wave",1965,South America,500000,BRA,BRA,Americas,Brazil,0
+230,"WW1 end, The third immigration wave",1967,South America,500000,GUY,GUY,Americas,Guyana,0
+231,"WW1 end, The third immigration wave",1969,South America,500000,COL,COL,Americas,Colombia,0
+232,"WW1 end, The third immigration wave",1971,South America,500000,FLK,FLK,Americas,Falkland Islands (Malvinas),0
+233,"WW1 end, The third immigration wave",1973,South America,500000,URY,URY,Americas,Uruguay,0
+234,"WW1 end, The third immigration wave",1975,South America,500000,GUF,GUF,Americas,French Guiana,0
+235,"WW1 end, The third immigration wave",1977,South America,500000,VEN,VEN,Americas,Venezuela,0
+236,"WW1 end, The third immigration wave",1950,Canada,32000,CAN,CAN,Americas,Canada,0
+238,"WW1 end, The third immigration wave",1950,Europe,80000,EST,EST,Europe,Estonia,0
+239,"WW1 end, The third immigration wave",1950,Europe,80000,AUT,AUT,Europe,Austria,0
+245,"WW1 end, The third immigration wave",1950,Oceania,40000,NZL,NZL,Oceania,New Zealand,0
+269,"WW1 end, The third immigration wave",1944,Europe,80000,CHE,CHE,Europe,Switzerland,0
+272,"WW1 end, The third immigration wave",1945,Europe,80000,FRA,FRA,Europe,France,0
+273,"WW1 end, The third immigration wave",1946,Europe,80000,SRB,SRB,Europe,Serbia,0
+274,"WW1 end, The third immigration wave",1947,Europe,80000,MLT,MLT,Europe,Malta,0
+275,"WW1 end, The third immigration wave",1948,Europe,80000,RUS,RUS,Europe,Russian Federation,0
+276,"WW1 end, The third immigration wave",1949,Europe,80000,LTU,LTU,Europe,Lithuania,0
+277,"WW1 end, The third immigration wave",1950,Europe,80000,FIN,FIN,Europe,Finland,0
+278,"WW1 end, The third immigration wave",1951,Europe,80000,FRO,FRO,Europe,Faroe Islands,0
+279,"WW1 end, The third immigration wave",1952,Europe,80000,GBR,GBR,Europe,U.K. of Great Britain and Northern Ireland,0
+280,"WW1 end, The third immigration wave",1953,Europe,80000,GRC,GRC,Europe,Greece,0
+281,"WW1 end, The third immigration wave",1954,Europe,80000,BGR,BGR,Europe,Bulgaria,0
+282,"WW1 end, The third immigration wave",1955,Europe,80000,ESP,ESP,Europe,Spain,0
+283,"WW1 end, The third immigration wave",1956,Europe,80000,DEU,DEU,Europe,Germany,0
+284,"WW1 end, The third immigration wave",1957,Europe,80000,BEL,BEL,Europe,Belgium,0
+286,"WW1 end, The third immigration wave",1958,Europe,80000,NOR,NOR,Europe,Norway,0
+287,"WW1 end, The third immigration wave",1959,Europe,80000,SWE,SWE,Europe,Sweden,0
+288,"WW1 end, The third immigration wave",1952,Aferica,50000,CPV,CPV,Africa,Cape Verde,0
+289,"WW1 end, The third immigration wave",1954,Aferica,50000,ZMB,ZMB,Africa,Zambia,0
+290,"WW1 end, The third immigration wave",1956,Aferica,50000,BEN,BEN,Africa,Benin,0
+291,"WW1 end, The third immigration wave",1958,Aferica,50000,COG,COG,Africa,Congo,0
+292,"WW1 end, The third immigration wave",1960,Aferica,50000,GIN,GIN,Africa,Guinea,0
+293,"WW1 end, The third immigration wave",1962,Aferica,50000,IOT,IOT,Africa,British Indian Ocean Territory,0
+294,"WW1 end, The third immigration wave",1964,Aferica,50000,TCD,TCD,Africa,Chad,0
+295,"WW1 end, The third immigration wave",1966,Aferica,50000,MLI,MLI,Africa,Mali,0
+296,"WW1 end, The third immigration wave",1968,Aferica,50000,ERI,ERI,Africa,Eritrea,0
+297,"WW1 end, The third immigration wave",1970,Aferica,50000,UGA,UGA,Africa,Uganda,0
+298,"WW1 end, The third immigration wave",1972,Aferica,50000,MWI,MWI,Africa,Malawi,0
+300,"WW1 end, The third immigration wave",1950,Europe,80000,DNK,DNK,Europe,Denmark,0
+301,"WW2 end, The third immigration wave",1980,United States of America,150000,USA,USA,Americas,United States of America,0

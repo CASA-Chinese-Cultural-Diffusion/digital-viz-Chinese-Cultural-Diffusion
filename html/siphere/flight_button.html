@@ -1,0 +1,185 @@
+<head>
+  <style> body { margin: 0; } </style>
+
+  <script src="//unpkg.com/d3-dsv"></script>
+  <script src="//unpkg.com/index-array-by"></script>
+  <script src="//unpkg.com/d3"></script>
+  <script src="js/three.js"></script>
+  <script src="three.js"></script>
+  <script src="//unpkg.com/globe.gl"></script>
+  <!--<script src="../../dist/globe.gl.js"></script>-->
+</head>
+
+<style>
+  .board{
+    background-color: rgba(0, 0, 0, 0.20);
+    box-shadow:0 1px 2px rgba(0, 0, 0, 0.20);
+    position: fixed;	        /* 设置fixed固定定位 */
+    top: 20px;		/* 距离浏览器窗口下边框20px */
+    right: -400px;		/* 距离浏览器窗口右边框20px */
+    width: 1000px;
+    height: 50vh;
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 10px;
+    z-index: 999
+
+  }
+
+  #chart {
+  min-width: 100%;
+  min-height: 100%;
+  top: 20px;
+  left: 0px;
+  }
+</style>
+
+<body>
+<div id="globeViz" style="display: block;"></div>
+<div id="globeViz2" style="display: none;"></div>
+
+<div class="board">
+  <h1 style="color: #fff;">China's Outbound Airline Routes</h1>
+  <button id="showflight">Choropleth map: number of airline routes for each country</button>
+  <iframe src="rose_chart.html" frameborder="0" scrolling="no" id="chart"></iframe>
+
+</div>
+<script>
+
+  showflight_trigger = 0
+  document.getElementById('showflight').addEventListener('click', function() {
+
+    if (document.getElementById('globeViz2').style.display !== "none") {
+    
+      document.getElementById('globeViz2').style.display = "none";
+      document.getElementById('globeViz').style.display = "block";
+      document.getElementById('showflight').innerHTML = 'Choropleth map: number of airline routes for each country'
+    
+    } else {
+      document.getElementById('globeViz2').style.display = "block";
+      document.getElementById('globeViz').style.display = "none";
+      document.getElementById('showflight').innerHTML = 'Back to airline routes'
+    }
+  })
+
+  const COUNTRY = 'China';
+  const OPACITY = 0.3;
+
+  // load data
+  // const scene = new THREE.Scene();
+  // const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000,filmOffset=1000 );
+  const airportParse = ([airportId, name, city, country, iata, icao, lat, lng, alt, timezone, dst, tz, type, source]) => ({ airportId, name, city, country, iata, icao, lat, lng, alt, timezone, dst, tz, type, source });
+  const routeParse = ([airline, airlineId, srcIata, srcAirportId, dstIata, dstAirportId, codeshare, stops, equipment]) => ({ airline, airlineId, srcIata, srcAirportId, dstIata, dstAirportId, codeshare, stops, equipment});
+  const colorScale = d3.scaleSequentialSqrt(d3.interpolateRgb('#00ff0000','#00ff0000')); //透明色
+  // const colorScale1 = d3.scaleSequentialSqrt(d3.interpolateYlOrRd);
+  const colorScale1 = d3.scaleSequentialSqrt(d3.interpolateRgb('#fbf8cc80','#d0000080')); //有颜色
+
+  // const getVal = feat => feat.properties.GDP_MD/ Math.max(1e5, feat.properties.GDP_MD);//原始代码
+  const getVal = feat => feat.properties.Refactored_count/ Math.max(100, feat.properties.Refactored_count); //现在代码
+  
+  Promise.all([
+    fetch('https://raw.githubusercontent.com/Siricvbl/visual/main/chinese_migration/data/airports.dat').then(res => res.text()) //机场点数据
+      .then(d => d3.csvParseRows(d, airportParse)),
+    fetch('https://raw.githubusercontent.com/Siricvbl/visual/main/chinese_migration/data/routes.dat').then(res => res.text()) //航线数据
+      .then(d => d3.csvParseRows(d, routeParse)),
+    fetch('ne_110m_admin_0_countries_flight.geojson').then(d => d.json())
+  ]).then(([airports, routes, countries]) => {
+
+    const byIata = indexBy(airports, 'iata', false);
+
+    const filteredRoutes = routes
+      .filter(d => byIata.hasOwnProperty(d.srcIata) && byIata.hasOwnProperty(d.dstIata)) // exclude unknown airports
+      .filter(d => d.stops === '0') // non-stop flights only
+      .map(d => Object.assign(d, {
+        srcAirport: byIata[d.srcIata],
+        dstAirport: byIata[d.dstIata]
+      }))
+      .filter(d => d.srcAirport.country === COUNTRY && d.dstAirport.country !== COUNTRY); // international routes from country
+
+    console.log('countries',countries)
+    const myGlobe = Globe()
+    (document.getElementById('globeViz'))
+      .backgroundColor('rgba(0,0,0,1)') //更改背景颜色
+      .showGlobe(true)
+      .showAtmosphere(true)
+      .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
+      .globeImageUrl('dnb_land_ocean_ice.2012.3600x1800.jpg')
+      
+      .pointOfView({ lat: 35, lng: 115, altitude: 3 }) // aim at continental china 
+
+      .arcLabel(d => `${d.airline}: ${d.srcIata} &#8594; ${d.dstIata}`)
+      .arcStartLat(d => +d.srcAirport.lat)
+      .arcStartLng(d => +d.srcAirport.lng)
+      .arcEndLat(d => +d.dstAirport.lat)
+      .arcEndLng(d => +d.dstAirport.lng)
+      .arcDashLength(0.5)
+      .arcDashGap(1)
+      .arcDashInitialGap(() => Math.random())
+      .arcDashAnimateTime(4000)
+      .arcColor(d => [`rgba(249,199,79, ${OPACITY})`, `rgba(152,245,255 ${OPACITY})`]) //改变路线的颜色 155, 34, 38  249	199	79
+      .arcsTransitionDuration(1000)
+
+      .pointColor(() => '#f77f00') //改变机场点的颜色大小
+      .pointAltitude(0)
+      .pointRadius(0.04)
+      .pointsMerge(true)
+      .pointsData(airports)
+      .arcsData(filteredRoutes)
+      .lineHoverPrecision(0)
+        .polygonsData(countries.features.filter(d => d.properties.ISO_A2 !== 'CH'))
+        .polygonAltitude(0.005)
+        .polygonCapColor(feat => colorScale(getVal(feat)))
+        .polygonSideColor(() => '#46545e52')
+        .polygonStrokeColor(() => '#111')
+
+        .polygonLabel(({ properties: d }) => `  
+          <b>${d.ADMIN} (${d.ISO_A2}):</b> <br />
+          Number of Flights: <i>${d.Refactored_count}</i>
+        `)//set popup
+        .onPolygonHover(hoverD => myGlobe
+          .polygonAltitude(feat => feat === hoverD ? 0.04 : 0.005) //hover效果
+          .polygonCapColor(feat => feat === hoverD ? colorScale1(getVal(feat)) : colorScale(getVal(feat))) //hover颜色
+          // .polygonCapColor(d => d === hoverD ? '#457b9d52' : colorScale(getVal(d)))
+
+        )
+        .polygonsTransitionDuration(300)
+      (document.getElementById('globeViz'));
+      myGlobe
+      .pointOfView({ lat: 35, lng: 115, altitude: 3 }) // aim at continental china 
+  });
+
+  fetch('ne_110m_admin_0_countries_flight.geojson').then(res => res.json()).then(countries =>
+    {
+      const maxVal = Math.max(...countries.features.map(getVal));
+      colorScale.domain([0, maxVal]);
+      colorScale1.domain([0, maxVal]);
+
+      const myGlobe = Globe()
+      (document.getElementById('globeViz2'))
+      .globeImageUrl('dnb_land_ocean_ice.2012.3600x1800.jpg')
+        .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
+        .lineHoverPrecision(0)
+        .polygonsData(countries.features.filter(d => d.properties.ISO_A2 !== 'CH'))
+        .polygonAltitude(0.005)
+        .polygonCapColor(feat => colorScale1(getVal(feat)))
+        .polygonSideColor(() => '#46545e52')
+        .polygonStrokeColor(() => '#111')
+
+        .polygonLabel(({ properties: d }) => `  
+          <b>${d.ADMIN} (${d.ISO_A2}):</b> <br />
+          Number of Flights: <i>${d.Refactored_count}</i>
+        `)//set popup
+        .onPolygonHover(hoverD => myGlobe
+          .polygonAltitude(d => d === hoverD ? 0.04 : 0.005) //hover效果
+          // .polygonCapColor(d => d === hoverD ? colorScale1(getVal(d)) : colorScale(getVal(d))) //hover颜色
+          .polygonCapColor(feat => feat === hoverD ? colorScale1(getVal(feat)) : colorScale1(getVal(feat)))
+
+        )
+        .polygonsTransitionDuration(300)
+      (document.getElementById('globeViz2'))
+      myGlobe
+      .pointOfView({ lat: 35, lng: 115, altitude: 3 }) // aim at continental china 
+    });
+</script>
+
+</body>

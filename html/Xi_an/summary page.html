@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="summary page.css">
+</head>
+
+<body>
+    <div class="fade"></div>
+    <button id="switch" onclick="switch_desc()">Static</button>
+    
+    <!-- background image -->
+    <div class="tl-bg" style="background-image: url(https://github.com/joeylizh/Group4Project/blob/main/images/%E8%A5%BF%E5%AE%89%E5%A4%A7%E5%94%90%E4%B8%8D%E5%A4%9C%E5%9F%8E.png?raw=true)"></div>
+    <!-- picture reference: https://www.ourchinastory.com/zh/2393/%E8%87%B3%E6%BD%AE%E7%8E%A9%E6%A8%82%EF%BD%9C%E8%A5%BF%E5%AE%89%E5%A4%A7%E5%94%90%E4%B8%8D%E5%A4%9C%E5%9F%8E%20%E6%8E%A2%E7%B4%A2%E5%8B%95%E9%9D%9C%E7%9A%86%E5%AE%9C%E7%9A%84%E6%96%87%E5%8C%96%E4%B9%8B%E6%97%85 -->
+
+    <!-- the rising caption  -->
+    <section class="scolling-caption">
+
+        <div class="ct-city">
+            <p class="f2-heading--sanSerif">Xi'an, China</p>
+        </div>
+        
+        <div class="crawl" id="crawl_word">
+            <div class="title">
+                <p>Conclusion</p>
+            </div>
+            
+            <p>This is a journey about the diffusion of Chinese culture around the world, where we treat people as the carrier of culture. Backtracking across the millennium, Chang’an as a metropolis during the most splendid period of ancient China, the powerful national strength and prosperous cultural propaganda activities enabled international trade in Silk Road. And after centuries of changes, Zheng He’s voyages expanded the communication network, Chinese culture diffuse to Europe, Middle East, and even Africa through camels and boats. From middle 16th century to 1950s, lots of Chinese people decided to emigrate abroad. Initially, people move abroad to do international business conveniently. However, as the change of world pattern, Chinese people do the emigration activities with the desire of pursuing a new life. The emigration waves also cause the indirect culture diffusion. From 1950s to now, China becomes prosperous and strong in peaceful development. More and more Chinese people also choose moving abroad with various purpose, such as learning, travelling and experience a new life. In this process, the ties between the China and the world become closer and closer, and cultural diffusion is becoming more and more frequent. Chinatown as a carrier of fusion culture, has its own unique values. It is no longer just an ethnic enclave of Chinese, but more as a unique symbol of Chinese culture going global and relocation.
+            <br/> Now, the story is still silently going on ...</p>
+            
+        </div>
+
+    </section>
+
+    <!-- the static caption -->
+    <section class="show-caption">
+        <div class="ct-city2">
+            <p class="city2-p">Xi'an, China</p>
+        </div>
+        
+        <div class="desc" id="normal_word">
+            <div class="title">
+                <h1>Conclusion</h1>
+            </div>
+            
+            <p>This is a journey about the diffusion of Chinese culture around the world, where we treat people as the carrier of culture. Backtracking across the millennium, Chang’an as a metropolis during the most splendid period of ancient China, the powerful national strength and prosperous cultural propaganda activities enabled international trade in Silk Road. And after centuries of changes, Zheng He’s voyages expanded the communication network, Chinese culture diffuse to Europe, Middle East, and even Africa through camels and boats. From middle 16th century to 1950s, lots of Chinese people decided to emigrate abroad. Initially, people move abroad to do international business conveniently. However, as the change of world pattern, Chinese people do the emigration activities with the desire of pursuing a new life. The emigration waves also cause the indirect culture diffusion. From 1950s to now, China becomes prosperous and strong in peaceful development. More and more Chinese people also choose moving abroad with various purpose, such as learning, travelling and experience a new life. In this process, the ties between the China and the world become closer and closer, and cultural diffusion is becoming more and more frequent. Chinatown as a carrier of fusion culture, has its own unique values. It is no longer just an ethnic enclave of Chinese, but more as a unique symbol of Chinese culture going global and relocation.
+            <br/> Now, the story is still silently going on ...</p>
+        </div>
+    
+    </section>
+
+    <!-- the button -->
+    <script>
+        function switch_desc() {
+            if (document.getElementById('switch').innerHTML == 'Static') {
+
+                document.getElementById('normal_word').style.visibility = 'visible'
+                document.getElementById('crawl_word').style.visibility = 'hidden'
+                document.getElementById('switch').innerHTML = 'Normal'
+            } else {
+                document.getElementById('normal_word').style.visibility = 'hidden'
+                document.getElementById('crawl_word').style.visibility = 'visible'
+                document.getElementById('switch').innerHTML = 'Static'
+            }
+        }
+    </script>
+</body>
+</html>
+

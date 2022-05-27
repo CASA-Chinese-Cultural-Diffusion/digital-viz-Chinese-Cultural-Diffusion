@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>immigration wave viz</title>
+    <script src="https://libs.cartocdn.com/carto-vl/v1.4.4/carto-vl.min.js"></script>
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js"></script>
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css" rel="stylesheet" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js"></script>
+    <script charset="utf-8" src="https://d3js.org/d3.v4.min.js"></script>
+    <script charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/dimple/2.3.0/dimple.latest.min.js"></script>
+    <link href="https://carto.com/developers/carto-vl/v1.4.4/examples/maps/style.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/FileSaver.js/2014-11-29/FileSaver.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/dimple/2.3.0/dimple.latest.min.js"></script>
+    <link href="immi_style.css" rel="stylesheet" />
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <!-- Add map container -->
+    <div id="map"></div>
+    <div class="dashboard">
+        <header>
+            <h1 style="font-size: 30px;">Emigration Waves</h1>
+        </header>
+        <p style="text-align: justify;">There are three emigration waves from Ming Dystany to the 20th centeries.</p>
+        
+            <a href="#first" id="firstwave"><b>The first emigration wave</b></a> <p style="text-align: justify;">The footprint of the first Chinese immigrants is mainly 
+            located in southeast Asia, especially in Philippine; Nagasaki, Japan; Java; Malaysia and Thailand. The Filipino Chinese
+             were the most numerous. After the 18th century, the Chinese became more involved in the mining, plantation, and construction 
+             industries and became more involved in Southeast Asian society.</p></p>
+
+        <a href="#second" id="secondwave"><b>The second emigration wave</b></a> 
+        <p style="text-align: justify;">
+            The second emigration wave appears during the 1850s to 1920s, the Opium Wars led to a renewed loosening of China's closed-door policy. 
+            Moreover, due to the abolition of the slave trade, the road mines and botanical gardens in 
+            the European and American colonies were short of labour. Thus, many Chinese were forced to 
+            be sent to Europe and America to work. These labourers mainly came from Guangdong and Fujian, 
+            and the footprints of Chinese immigrants gradually dispersed around the world.</p>
+        
+            <a href="#third" id="thirdwave"><b>The third emigration wave</b></a>
+        <p style="text-align: justify;"> 
+            After World War I, China was involved in a series of wars, and lots of Chinese people
+             went abroad to pursue a new life and even make a fortune. The most famous immigrants 
+             of this period were the first generation of Chinese Americans who went to California 
+             for the gold rush. Their descendants continue breeding children, emigrating, thus 
+             spreading all over the world</p>
+
+        <button id="show_pic">emigation gallery: open</button>
+
+
+        <p id="colorbar" style="font-size: 14px; "><b> appearance time Chinese emigration (Year)</b></p>
+        <ul id="content"></ul>
+        <footer class="js-footer"></footer>
+        <section style="margin-top: 15px;">
+            <input type="button" id="js-play-button">
+            <input type="button" id="js-pause-button">
+            <input type="range" id="js-time-range" min="0" max="1" step="0.01" value="0.0">
+            <span id="js-current-time" class="open-sans">1555 </span> <span id="js-current-time" class="open-sans"> AD</span>
+        </section>
+        <hr>
+        <p style="font-size: 8px;">data: McKeown, A. (2010). Chinese emigration in global context, 1850–1940. Journal of Global History, 5(1), pp.95–124. doi:10.1017/s174002281000001x.</p> 
+        <p style="font-size: 8px;">Zhuang, G (2011). Shi jie hua qiao hua ren shu liang he fen bu de li shi bian hua. Beijing: Shi jie li shi</p>
+    </div>
+
+    <div id="desc" style="visibility: hidden;">
+        <div id="close">
+            <button class="btn-close" onclick="close_desc()" aria-label="Close"></button>
+        </div>
+        <p id="text_desc">aaaa</p>
+    </div>
+
+    <script>
+
+    function close_desc() {
+        document.getElementById('desc').style.visibility = 'hidden'
+    }
+    mapboxgl.accessToken = 'pk.eyJ1Ijoic2lyaWthdDkwMTIiLCJhIjoiY2p0Z2MyMXIzMjIxeTRhb2JuaG5pbWZ4eCJ9.clkv6nycz9hXHrgWL2Ur5w';
+
+    
+    const map = new mapboxgl.Map({
+			container: 'map',
+			style: 'mapbox://styles/sirikat9012/cl390huqa002z14plhsfvl1yg',
+			center: [-49,37],
+			zoom: 1.3,
+			scrollZoom: false
+		});
+
+    map.on('load', () => {
+
+        map.addSource('ChangAn', {
+            type: 'geojson',
+            data: "https://raw.githubusercontent.com/Siricvbl/visual/main/chinese_migration/data/ChangAn.geojson",
+        });
+        
+    pics_path = [
+    './emigration_waves/1.singapore Chinatown1900.jpeg',
+    './emigration_waves/4.Canada_railway.jpeg',
+    './emigration_waves/3.London_limehouse.jpeg',
+    './emigration_waves/2.australia_gold_rush.jpeg',
+    './emigration_waves/5.NewYork_Chinatown.jpeg',
+    './emigration_waves/6.japan1874.jpeg',
+    './emigration_waves/Paolo_Sarpi_1950s.jpeg'
+    ]
+
+    pics_json = [
+        {
+          'type': 'Feature',
+          'geometry': {
+          'type': 'Point',
+          'coordinates': [103.849409, 1.309548] // singapore
+          },
+          'properties': {
+            'path':'./emigration_waves/1.singapore Chinatown1900.jpeg',
+
+            'description':
+            "<p id='pics' style='text-align: center;'><img src='./emigration_waves/1.singapore Chinatown1900.jpeg' style='margin: 0 auto' width='750' height='300'></p> <p style='text-align: center'><strong>Singapore Chinatown, around 1900</strong></p> <p>The physical development of Singapore's Chinatown began in 1843, and it gradually became the hometown of Chinese immigrants and a transit point for Chinese workers to Malaysia. In the past, there was no running water in Chinatown, and bullock carts generally carried water. Over time, people called this place Niu Che Shui ('Ox Cart Water').</p><p>History of Chinatown - Part of Singapore’s Heritage & Culture (no date) Chinatown Singapore. Available at: https://chinatown.sg/history-of-chinatown/ (Accessed: 22 May 2022).</p>"
+          },
+        },{
+          'type': 'Feature',
+          'geometry': {
+          'type': 'Point',
+          'coordinates': [-123.00530, 49.23549] // vancouver
+          },
+          'properties': {
+            'path':'./emigration_waves/4.Canada_railway.jpeg',
+
+            'description':
+            "<p id='pics' style='text-align: center;'><img src='./emigration_waves/4.Canada_railway.jpeg' style='margin: 0 auto' width='500' height='250'></p> <p style='text-align: center'><strong>Chinese railway workers, C.P.R. mountains, 1884</strong></p> <p>The first Chinese immigrants arrived in the 1850s and came to work in the mines, canneries, sawmills, and, later on, building the railway. They were paid less than white workers, subjected to onerous head taxes that prevented the mostly male workers from bringing their families to Canada, and denied the right to vote. Despite these awful conditions, the Chinese community created a flourishing cultural enclave. After World War II, the racist attitudes of many white British Columbians began to soften, and the Chinese community began to grow and thrive. The focus of the Chinese community has since moved south to Richmond, but Chinatown itself has been preserved as a national historic site for future generations.</p>"
+          },
+        },{
+          'type': 'Feature',
+          'geometry': {
+          'type': 'Point',
+          'coordinates': [-0.127758, 51.507351] // london
+          },
+          'properties': {
+            'path':'./emigration_waves/3.London_limehouse.jpeg',
+            'description':
+            "<p id='pics' style='text-align: center;'><img src='./emigration_waves/3.London_limehouse.jpeg' style='margin: 0 auto' width='500' height='250'></p> <p style='text-align: center'><strong>Chinatown, Limehouse Causeway, London, 1933</strong></p> <p>London's original Chinatown was located in the East End, where Chinese workers first gathered in the 18th century and settled in Limehouse. By 1914, a Chinese community was thriving, with new restaurants and shops serving sailors. In the 1950s, Chinese food was favoured by British soldiers, and supermarkets and restaurants sprang up. Their success attracted more Chinese entrepreneurs to leave the East Side searching for their fortunes, and today's Chinatown was born. By the late 1960s, Chinatown had become the heart of London's Chinese community.</p>"
+          },
+        },{
+          'type': 'Feature',
+          'geometry': {
+          'type': 'Point',
+          'coordinates': [133.774581, -25.271321] // australia
+          },
+          'properties': {
+            'path':'./emigration_waves/2.australia_gold_rush.jpeg',
+            'description':
+            "<p id='pics' style='text-align: center;'><img src='./emigration_waves/2.australia_gold_rush.jpeg' style='margin: 0 auto' width='500' height='250'></p> <p style='text-align: center'><strong>Australia Gold Rush</strong></p> <p>By the early 1850s, news of the Australian Gold Rush reached southern China, triggering many Chinese immigrants to Australia. However, in 1861, the New South Wales government passed the Chinese Immigration Act, which imposed tariffs only on the Chinese. A number of policies restricting Chinese immigration were introduced in the ensuing decades, only to be completely repealed in the 1970s.</p><p>Gold Rush Collection (no date) Museum of Chinese Australian History. Available at: https://www.chinesemuseum.com.au/gold-rush-collection (Accessed: 22 May 2022).ondinee (2018) Chinese on the goldfields, Sydney Living Museums. Available at: https://sydneylivingmuseums.com.au/stories/chinese-goldfields (Accessed: 22 May 2022).</p>"
+          },
+        },{
+          'type': 'Feature',
+          'geometry': {
+          'type': 'Point',
+          'coordinates': [-73.99329, 40.74278] // new york
+          },
+          'properties': {
+            'path':'./emigration_waves/5.NewYork_Chinatown.jpeg',
+            'description':
+            "<p id='pics' style='text-align: center;'><img src='./emigration_waves/5.NewYork_Chinatown.jpeg' style='margin: 0 auto' width='500' height='250'></p> <p style='text-align: center'><strong>New York Chinatown on Sunday, 1899</strong></p> <p>Chinese traders and sailors began trickling into the United States in the mid-eighteenth century; while this population was largely transient, small numbers stayed in New York and married. Starting in the mid-nineteenth century, the Chinese arrived in significant numbers, lured to the Pacific coast of the United States by the stories of 'Gold Mountain' California during the gold rush of the 1840s and 1850s, and brought by labor brokers to build the Central Pacific Railroad.</p>"
+          },
+        },
+        {
+          'type': 'Feature',
+          'geometry': {
+          'type': 'Point',
+          'coordinates': [139.61929,35.53742] // japan
+          },
+          'properties': {
+            'path':'./emigration_waves/6.japan1874.jpeg',
+
+            'description':
+            "<p id='pics' style='text-align: center;'><img src='./emigration_waves/6.japan1874.jpeg' style='margin: 0 auto' width='500' height='250'></p> <p style='text-align: center'><strong>Nankin-machi, Yokohama's Chinatown, Japan, 1874 or before</strong></p> <p>The earliest Chinese to Japan can be traced back to the Qin Dynasty (200 BC) when Xu Fu led hundreds of Chinese to the East China Sea to find the elixir of life for Emperor Qin. Around 500 AD, the Emperor of Japan vigorously promoted Buddhism and attracted a large number of Chinese immigrants to Japan. After the fall of the Tang Dynasty in the 9th century, fewer and fewer Chinese came to Japan and the Chinese who stayed in Japan gradually integrated into Japanese society. After 1000 AD, due to the Sino-Japanese maritime trade, the pattern of Chinese immigration to Japan changed from the cultural diaspora to the trade diaspora. In later centuries, trade restrictions between China and Japan restricted immigration until Yokohama officially opened as one of the first trading ports in 1858. After that, Chinese immigrants in the late Qing Dynasty gradually poured into Yokohama and established the 'Nankin-machi'.</p>"
+          },
+        }
+    ]
+
+    i = 0
+    for (let i = 0; i < pics_path.length; i++) {
+
+        map.addSource('immi_pics'+i, {
+            'type': 'geojson',
+            'data': pics_json[i]
+        })
+
+        map.loadImage(pics_path[i],
+
+        function (error, image) {
+          if (error) throw error;
+          console.log(pics_path[i],i)
+          map.addImage('pics'+i, image);
+          // add ChangAn Gate data source 
+          map.addLayer({
+            'id': 'places'+i,
+            'type': 'symbol',
+            'source': 'immi_pics'+i,
+            'layout':{
+              'icon-image':'pics'+i,
+              'icon-size': 0.05,
+              'icon-allow-overlap': true,
+              'icon-ignore-placement': true,
+              'visibility': 'visible'
+            },
+            'paint': {
+                  "icon-color": "#f6bd60",
+                  "icon-halo-color": "#e63946",
+                }
+          });
+
+        })
+
+        map.on('click', 'places'+i, (e) => {
+        // Change the cursor style as a UI indicator.
+        map.getCanvas().style.cursor = 'pointer';
+        
+        // Copy coordinates array.
+        const description = e.features[0].properties.description;
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        document.getElementById('text_desc').innerHTML = description
+        document.getElementById('desc').style.visibility = 'visible'
+      });
+    }
+
+        //** CARTO VL functionality begins here **//
+
+        // Define user. API Key requires access to the Geolife dataset
+        carto.setDefaultAuth({
+            username: 'cehou',
+            apiKey: '174cbdc93446a90186b3033d6d0ef055ab3180d5'
+        });
+
+        // Define source
+        const source = new carto.source.Dataset('immigration');
+        const trail = new carto.source.Dataset('trails_df');
+        
+         const viz1 = new carto.Viz(`
+            @duration: 15
+            @animation: animation($time_est, @duration, fade(1, hold))
+            filter: @animation
+            color: ramp(globalQuantiles($time_est,5),[#12455980,#F9C74F80])
+            width: ramp(zoomrange([15,18]),[7,20])
+            strokeWidth: 0
+        `);
+        
+        // Add a second viz object which will cumulatively record the trails over time. Note fade out set to 'hold', so points do not fade out, and the alpha(transparency) value set very low at 0.007
+
+        const viz2 = new carto.Viz(`
+            @duration: 15
+            @animation: animation($time_est, @duration, fade(1, 3))
+            filter: @animation
+            color: rgba(255,228,225,0.007)
+            width: ramp(zoomrange([6,18]),[2,10])
+            strokeWidth: 0
+        `);
+
+        const viz3 = new carto.Viz(`
+            @duration: 15
+            @animation: animation($time_est, @duration, fade(0, 3))
+            filter: @animation
+            color: #779eaa50
+            width: ramp(zoomrange([15,18]),[0.5,20])
+            strokeWidth: 0
+        `);
+
+        const viz4 = new carto.Viz(`
+            @duration: 15
+            @animation: animation($time_est, @duration, fade(0, 5))
+            filter: @animation
+            color: #779eaa50
+            width: ramp(zoomrange([15,18]),[0.5,20])
+            strokeWidth: 0
+        `);
+
+        const layer1 = new carto.Layer('layer1', source, viz1);
+        const layer2 = new carto.Layer('layer2', source, viz2);
+        const layer3 = new carto.Layer('layer3', trail, viz3);
+        const layer4 = new carto.Layer('layer4', trail, viz4);
+
+        layer4.addTo(map); 
+        layer3.addTo(map); 
+        layer2.addTo(map);
+        layer1.addTo(map); 
+
+        // Get HTML elements
+        const $playbutton = document.getElementById('js-play-button');
+        const $pausebutton = document.getElementById('js-pause-button');
+        const $durationRange = document.getElementById('js-duration-range');
+        const $timeRange = document.getElementById('js-time-range');
+        const $spanDuration = document.getElementById('js-duration-span');
+        const $currentTime = document.getElementById('js-current-time');
+        const $firstwave = document.getElementById('firstwave');
+        const $secondwave = document.getElementById('secondwave');
+        const $thirdwave = document.getElementById('thirdwave');
+
+        // $currentTime.innerText = viz1.variables.animation.getProgressValue().toISOString()
+
+        // Save initial time range value
+        let last = Math.round($timeRange.value);
+
+        viz1.variables.animation.setProgressPct($timeRange.value);
+        viz2.variables.animation.setProgressPct($timeRange.value);
+        viz3.variables.animation.setProgressPct($timeRange.value);
+        viz4.variables.animation.setProgressPct($timeRange.value);
+
+        // Listen to interaction events
+        $playbutton.addEventListener('click', () => {
+            // Play the animation
+            viz1.variables.animation.play();
+            viz2.variables.animation.play();
+            viz3.variables.animation.play();
+            viz4.variables.animation.play();
+
+        });
+
+
+        $pausebutton.addEventListener('click', () => {
+            // Pause the animation
+            viz1.variables.animation.pause();
+            viz2.variables.animation.pause();
+            viz3.variables.animation.pause();
+            viz4.variables.animation.pause();
+        });
+
+        $firstwave.addEventListener('click', () => {
+            // Update animation progress
+            console.log('value,',0.8)
+            viz1.variables.animation.setProgressPct(0.8);
+            viz2.variables.animation.setProgressPct(0.8);
+            viz3.variables.animation.setProgressPct(0.8);
+            viz4.variables.animation.setProgressPct(0.8);
+
+            last = $timeRange.value;
+
+            // change time bar
+            $currentTime.innerText = Math.round(viz3.variables.animation.getProgressValue()); 
+
+            if(viz1.variables.animation.isPlaying()) { }
+            else { 
+                viz1.variables.animation.play();
+                viz2.variables.animation.play();
+                viz3.variables.animation.play();
+                viz4.variables.animation.play();
+
+                console.log("test");
+                viz1.variables.animation.pause();
+                viz2.variables.animation.pause();
+                viz3.variables.animation.pause();
+                viz4.variables.animation.pause();
+
+            };
+
+
+        });
+
+        $secondwave.addEventListener('click', () => {
+            // Update animation progress
+            console.log('value,',0.9)
+            viz1.variables.animation.setProgressPct(0.9);
+            viz2.variables.animation.setProgressPct(0.9);
+            viz3.variables.animation.setProgressPct(0.9);
+            viz4.variables.animation.setProgressPct(0.9);
+
+            last = $timeRange.value;
+
+            // change time bar
+            $currentTime.innerText = Math.round(viz3.variables.animation.getProgressValue()); 
+
+            if(viz1.variables.animation.isPlaying()) { }
+            else { 
+                viz1.variables.animation.play();
+                viz2.variables.animation.play();
+                viz3.variables.animation.play();
+                viz4.variables.animation.play();
+
+                console.log("test");
+                viz1.variables.animation.pause();
+                viz2.variables.animation.pause();
+                viz3.variables.animation.pause();
+                viz4.variables.animation.pause();
+
+            };
+
+        });
+
+        $thirdwave.addEventListener('click', () => {
+            // Update animation progress
+            console.log('value,',1)
+            viz1.variables.animation.setProgressPct(1);
+            viz2.variables.animation.setProgressPct(1);
+            viz3.variables.animation.setProgressPct(1);
+            viz4.variables.animation.setProgressPct(1);
+
+            last = $timeRange.value;
+
+            // change time bar
+            $currentTime.innerText = Math.round(viz3.variables.animation.getProgressValue()); 
+
+            if(viz1.variables.animation.isPlaying()) { }
+            else { 
+                viz1.variables.animation.play();
+                viz2.variables.animation.play();
+                viz3.variables.animation.play();
+                viz4.variables.animation.play();
+
+                console.log("test");
+                viz1.variables.animation.pause();
+                viz2.variables.animation.pause();
+                viz3.variables.animation.pause();
+                viz4.variables.animation.pause();
+
+            };
+
+        });
+
+        $timeRange.addEventListener('input', () => {
+            // Update animation progress
+            viz1.variables.animation.setProgressPct($timeRange.value);
+            viz2.variables.animation.setProgressPct($timeRange.value);
+            viz3.variables.animation.setProgressPct($timeRange.value);
+            viz4.variables.animation.setProgressPct($timeRange.value);
+
+            last = $timeRange.value;
+
+            // change time bar
+            $currentTime.innerText = Math.round(viz3.variables.animation.getProgressValue()); 
+
+            if(viz1.variables.animation.isPlaying()) { }
+            else { 
+                viz1.variables.animation.play();
+                viz2.variables.animation.play();
+                viz3.variables.animation.play();
+                viz4.variables.animation.play();
+
+                viz1.variables.animation.pause();
+                viz2.variables.animation.pause();
+                viz3.variables.animation.pause();
+                viz4.variables.animation.pause();
+
+            };
+
+        });
+
+        function show_first() {
+            viz1.variables.animation.setProgressPct($timeRange.value);
+            viz2.variables.animation.setProgressPct($timeRange.value);
+            viz3.variables.animation.setProgressPct($timeRange.value);
+            viz4.variables.animation.setProgressPct($timeRange.value);
+
+            last = 1920;
+
+            // change time bar
+            $currentTime.innerText = '1920AD'; 
+
+            viz1.variables.animation.pause();
+                viz2.variables.animation.pause();
+                viz3.variables.animation.pause();
+                viz4.variables.animation.pause();
+
+        }
+
+    layer1.on('loaded', () => {
+
+        const colorLegend = layer1.viz.color.getLegendData();
+
+        let colorLegendList = '';
+
+        colorLegend.data.forEach((legend) => {
+          const colorHex = rgbToHex(legend.value);
+          const keyMin = legend.key[0];
+          const keyMax = legend.key[1];
+          let bucket = `${keyMin} - ${keyMax}`;
+          if (keyMin==='-Infinity'){
+            bucket = `<${keyMax}`;
+          }else if (keyMax==='Infinity'){
+            bucket = `>${keyMin}`;
+          }
+
+        colorLegendList +=
+            `<li><span class="polygon-mark" style="background-color:${colorHex};"></span> <span>${bucket}</span></li>\n`;
+        });
+        console.log(colorLegendList)
+
+        document.getElementById('content').innerHTML = colorLegendList;
+
+    });
+
+    function rgbToHex(color) {
+        return "#" + ((1 << 24) + (color.r << 16) + (color.g << 8) + color.b).toString(16).slice(1);
+    }
+
+        // Listen to layer events
+        layer1.on('updated', () => {
+            if ($timeRange.value == last) {
+                $timeRange.value = viz1.variables.animation.getProgressPct();
+                // last = $timeRange.value + 0.05;
+            }
+            // $currentTime.innerText = Math.round(viz1.variables.animation.getProgressValue());
+        });        
+        
+        layer2.on('updated', () => {
+            if ($timeRange.value == last) {
+                $timeRange.value = viz2.variables.animation.getProgressPct();
+                // last = $timeRange.value + 0.03;
+            }
+
+            // $currentTime.innerText = Math.round(viz1.variables.animation.getProgressValue());
+        });    
+        layer3.on('updated', () => {
+            if ($timeRange.value == last) {
+                $timeRange.value = viz3.variables.animation.getProgressPct();
+                last = $timeRange.value;
+            }
+
+            $currentTime.innerText = Math.round(viz3.variables.animation.getProgressValue());
+        });
+
+        layer4.on('updated', () => {
+            if ($timeRange.value == last) {
+                $timeRange.value = viz4.variables.animation.getProgressPct();
+                last = $timeRange.value;
+            }
+
+            //$currentTime.innerText = viz2.variables.animation.getProgressValue().toISOString();
+        });
+
+    });
+
+    document.getElementById('show_pic').addEventListener('click', function() {
+
+        if (document.getElementById('show_pic').innerHTML == 'emigation gallery: open') {
+        for (let i = 0; i < pics_path.length; i++) {
+            map.setLayoutProperty('places'+i,'visibility','none');
+            console.log('places'+i)
+        }
+        document.getElementById('show_pic').innerHTML = 'emigation gallery: close'
+        document.getElementById('desc').style.visibility = 'hidden'
+
+        } else {
+        for (let i = 0; i < pics_path.length; i++) {
+            map.setLayoutProperty('places'+i,'visibility','visible');
+        }
+        document.getElementById('show_pic').innerHTML = 'emigation gallery: open'
+
+          }
+    })
+
+    </script>
+</body>
+</html>

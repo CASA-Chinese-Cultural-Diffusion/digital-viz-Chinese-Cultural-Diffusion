@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Chinese among the world</title>
+  <link rel="stylesheet" href="../css/timeline.css" />
+  <!-- <link rel="stylesheet" href="./style.css"> -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"></script>
+  <script charset="utf-8" src="https://d3js.org/d3.v4.min.js"></script>
+  <script charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/dimple/2.3.0/dimple.latest.min.js"></script>
+  <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
+  <!-- <script src="/js/button_click.js"></script> -->
+  <link rel="stylesheet" href="../css/nav_style.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900'><link rel="stylesheet" href="./style.css">
+  
+</head>
+
+<body>
+
+  <nav class="btn-pluss-wrapper">
+    <h2 class="tooltip">Time travel!</h2>
+    <div href="#" class="btn-pluss">
+     <ul>
+      <li><a href="#changan_submap">Chang'an</a></li>
+      <li><a href="#silk">Silk road</a></li>
+      <li><a href="#zhenghe">Zhenghe's voyage</a></li>
+      <li><a href="#emigration">Emigation waves</a></li>
+      <li><a href="#diaspora">Modern Chinese Diaspora</a></li>
+      <li><a href="#chinatown">Chinese Culture relocation</a></li>
+      <li><a href="#xian">Back to Chang'an</a></li>
+      <li><a href="#about_us">About us</a></li>
+      <li><a href="#references">References</a></li>
+     </ul>
+    </div>
+   </nav>
+
+	<!-- covering -->
+	<div id="cover">
+    <!-- <iframe src="./cover/cover_img.html" frameborder="0" scrolling="no" class="cover_pic"></iframe> -->
+
+    <link rel="stylesheet" href="./cover/style.css">
+    <div id="cover">
+      <div class="title_broad">
+        <div class="text-div">
+          <h3 id="main_title" style="text-align:center">The History of Chinese Cultural Diffusion</h3>
+          <h4 id="sub_title" style="text-align:center">People as the Carrier of Culture</h4>
+
+          <button id="scroll-down" class="arrow"></button>
+      </div>
+    </div>
+    <!-- The History of Chinese Diaspora： From Chang’an to the world  
+    Backtracking across the millennia -->
+    <!-- IMAGES reference: https://www.fodors.com/news/photos/these-are-the-15-best-chinatowns-around-the-world -->
+
+      <div class="cover"></div>  
+    </div>
+  </div>
+
+  	<!-- covering -->
+    <link rel="stylesheet" href="../css/horizontal_line.css">
+	<div id="horizontal-line">
+    <p id="between-intro"> <b>A retrospective journey of Chinese cultural diffusion</b></p>
+    <p id="between-intro-3"> <b>From Chang'an to the world</b></p>
+    <p id="between-intro-4"> <b>Backtracking across the millennia</b></p>
+    <p id="between-intro-5"> <b>Our story starts in Chang'an, the most prosperous metropolis of 5th century</b></p>
+
+      <p id="between-intro-2">Click the button to start our journey</p>
+    <div class="changan_button">
+      <img src="../figure/changan_button.png" id="changan_button" width="3%" height="3%" onclick="moveto()" alt="">
+    </div>
+      
+    </div>
+  </div>
+
+  
+  <link rel="stylesheet" href="../css/arrow_style.scss">
+
+  <div class="js-timeline_item ag-timeline_item" id="changan_block">
+
+    <div class="js-timeline-card_point-box ag-timeline-card_point-box"></div>
+    <!-- map -->
+    <div class="ag-timeline-card_item" id="changan_card_item">
+      <!-- <img src="../GIF/changan.gif" class="submap" alt=""> -->
+      <iframe src="./changan0525/changan.html" frameborder="0" id="changan_submap" class="submap"></iframe>
+    </div>
+
+
+  </div>
+  <div class="desc" id="changan_desc">
+    <p><b>Farewell to Chang'an, the Chinese gradually went abroad on camels and boats.</b></p>
+    <p>The legend of the Silk Road resounded throughout the Eurasian continent, and the tale of Zheng He was recited on the desert island.</p>
+    <p> Goldrush, sailing to the South China Sea, crossing the East Sea .... the story of Chinese immigrants was happening worldwide.</p>
+  </div>
+  <!-- timeline -->
+      <div class="js-timeline ag-timeline">
+        <div class="js-timeline_line ag-timeline_line">
+          <div class="js-timeline_line-progress ag-timeline_line-progress"></div>
+        </div>
+
+          <!-- block -->
+          <div class="js-timeline_item ag-timeline_item">
+            <div class="ag-timeline-card_box">
+              <div class="js-timeline-card_point-box ag-timeline-card_point-box">
+                <div class="ag-timeline-card_point" id="silk">唐</div>
+                <div class="ag-timeline-card_point_eng">Tang</div>
+              </div>
+              
+              <div class="ag-timeline-card_meta-box">
+                <div class="ag-timeline-card_meta">600CE: Great Silk Road</div>
+              </div>
+            </div>
+
+            <div class="desc" id="silk_desc">
+              <p>A road and a story as old as time,</p>
+              <p>Asia and Europe crossing a line,</p>
+              <p>bridging divides between people and culture,</p>
+              <p>crisscrossed with danger, predators and vultures (Dodwalker,2020).</p>
+            </div>
+
+            <!-- map -->
+            <div class="ag-timeline-card_item" id="silk_card_item">
+              <a href="../html/new_silk/final.html">
+                <img src="../GIF/silkroad.gif" class="submap" alt="">
+              </a>
+              <!-- <iframe src="./new_silk/final.html" frameborder="0" class="submap"></iframe> -->
+              <!-- insert map if needed -->
+              <!-- <iframe src="./changan/minimap.html" frameborder="1" scrolling="no" class="minimap"></iframe> -->
+            </div>
+            </div>
+          </div>
+          <!-- block over -->
+
+          <!-- block -->
+          <div class="js-timeline_item ag-timeline_item">
+
+            <div class="ag-timeline-card_box">
+              <div class="js-timeline-card_point-box ag-timeline-card_point-box">
+                <div class="ag-timeline-card_point" id="zhenghe">明</div>
+                <div class="ag-timeline-card_point_eng">Ming</div>
+
+              </div>
+              
+              <div class="ag-timeline-card_meta-box">
+                <div class="ag-timeline-card_meta">1400 CE: Chinese in Age of Discovery: Zhenghe's Voyage</div>
+              </div>
+            </div>
+
+            <div class="desc" id="zhenghe_desc">
+              <p>In times that time forgot,</p>
+              <p>Zheng He sailed far seas,</p>
+              <p>with his great treasure fleet.</p>
+              <p>The beaches he landed on,</p>
+              <p>written history did not register (He, n.d.).</p>
+            </div>
+
+            <!-- map -->
+            <div class="ag-timeline-card_item" id="zhenghe_card_item">
+              <a href="./new_zhenghe/zhenghe.html">
+                <img src="../GIF/zhenghe.gif" class="submap" id="zhenghe_submap" alt="">
+              </a>
+              <!-- <iframe src="new_zhenghe/zhenghe.html" frameborder="0" class="submap" id="zhenghe"></iframe> -->
+
+              <!-- insert map if needed -->
+              <!-- <iframe src="./changan/minimap.html" frameborder="1" scrolling="no" class="minimap"></iframe> -->
+            </div>
+
+            </div>
+          </div>
+          <!-- block over -->
+
+          <!-- block -->
+          <div class="js-timeline_item ag-timeline_item">
+
+            <div class="ag-timeline-card_box">
+              <div class="js-timeline-card_point-box ag-timeline-card_point-box">
+                <div class="ag-timeline-card_point" id="emigration">清</div>
+                <div class="ag-timeline-card_point_eng">Qing</div>
+
+              </div>
+              
+              <div class="ag-timeline-card_meta-box" >
+                <div class="ag-timeline-card_meta">16th to 20th Century: Emigration Waves</div>
+              </div>
+            </div>
+
+            <div class="desc" id="emi_desc">
+              <p>The face of Chinatown returns its color,</p>
+              <p>plucked from July's industrial steamer.</p>
+              <p><strong>Dry the cup!</strong></p>
+              <p>So we do.</p>
+              <p>Four noodle shops on East </p>
+              <p>Broadway release their belches collectively.</p>
+              <p>They breed in me a hankering for family life (Jenny, 2022).</p>
+
+            </div>
+
+            <!-- map -->
+            <div class="ag-timeline-card_item" id="emi_card_item">
+              <a href="./imgration/immi_anime.html">
+                <img src="../GIF/emigration.gif" class="submap" alt="" style="border-radius: 5px;">
+              </a>
+              <!-- <iframe src="./imgration/immi_anime.html" frameborder="0" class="submap"></iframe> -->
+
+              <!-- insert map if needed -->
+              <!-- <iframe src="./changan/minimap.html" frameborder="1" scrolling="no" class="minimap"></iframe> -->
+            </div>
+
+            </div>
+          </div>
+          <!-- block over -->
+
+          <div class="desc" id="flight_desc">
+            <p>In 21st century, traveling by airplane is prevalent now!</p>
+            <p>The entire world is becoming a global village.</p>
+            <p>More and more Chinese go abroad for diverse reasons.</p>
+          </div>
+
+          <!-- block -->
+          <div class="js-timeline_item ag-timeline_item">
+
+            <div class="ag-timeline-card_box">
+              <div class="js-timeline-card_point-box ag-timeline-card_point-box">
+                <div class="ag-timeline-card_point" id="diaspora">今</div>
+                <div class="ag-timeline-card_point_eng">2016</div>
+
+              </div>
+              
+              <div class="ag-timeline-card_meta-box">
+                <div class="ag-timeline-card_meta">2016: Modern Chinese Diaspora</div>
+                
+              </div>
+            </div>
+
+            <!-- map -->
+            <div class="ag-timeline-card_item" id="diaspora_card_item">
+              <a href="./Modern Chinese Diaspora/chinese_diaspora.html">
+                <img src="../GIF/diaspora.gif" class="submap" alt="" id="diaspora_submap" >
+              </a>
+              <!-- <iframe src="./Modern Chinese Diaspora/chinese_diaspora.html" frameborder="0" scrolling='no' class="submap"></iframe> -->
+
+              <!-- insert map if needed -->
+              <!-- <iframe src="./changan/minimap.html" frameborder="1" scrolling="no" class="minimap"></iframe> -->
+            </div>
+
+            <div class="ag-timeline-card_item" id="flight_card_item">
+              <a href="./siphere/flight_button.html">
+                <img src="../GIF/flight.gif" class="submap" alt="" id="flight_submap">
+              </a>
+              <!-- <iframe src="./Modern Chinese Diaspora/chinese_diaspora.html" frameborder="0" scrolling='no' class="submap"></iframe> -->
+
+              <!-- insert map if needed -->
+              <!-- <iframe src="./changan/minimap.html" frameborder="1" scrolling="no" class="minimap"></iframe> -->
+            </div>
+
+            </div>
+          </div>
+          <!-- block over -->
+
+          <div class="desc" id="chinatown_desc">            
+            <p>After several generations of unremitting efforts, today, </p>
+              <p>Chinatown is no longer just a Chinese ethnic enclave, but more as a distinctive </p>
+              <p> symbol of Chinese culture going global and relocation.</p>
+            <!-- <p></p>
+            <p></p> -->
+          </div>
+
+          <!-- block -->
+          <div class="js-timeline_item ag-timeline_item">
+
+            <div class="ag-timeline-card_box">
+              <div class="js-timeline-card_point-box ag-timeline-card_point-box">
+                <div class="ag-timeline-card_point">今</div>
+                <div class="ag-timeline-card_point_eng">2022</div>
+              </div>
+              
+              <div class="ag-timeline-card_meta-box">
+                <div class="ag-timeline-card_meta">2022: Culture Relocation: Chinatowns in Modern Time</div>
+              </div>
+            </div>
+
+            <!-- map -->
+
+            </div>
+          </div>
+          <!-- block over -->
+          
+        </div>
+      </div>
+              
+      <iframe src="Chinatown/chinatown.html" frameborder="0" class="submap" id="chinatown"></iframe>
+
+          <!-- block -->
+        <!-- <div class="ag-timeline-card_box">
+          <div class="js-timeline-card_point-box ag-timeline-card_point-box"></div>
+        </div> -->
+        <div id="xian_desc">
+          <p>In the end, let's go back to the original starting point, Chang'an.</p>
+        </div>
+        <!-- map -->
+        <iframe src="Xi_an/summary page.html" frameborder="0" class="submap" id="xian"></iframe>
+
+          <!-- block over -->
+
+      
+  	<!-- end -->
+    <div id="about_us">
+
+      <!-- team members -->
+      <div class="container">
+        <div class="at-section">
+          <!-- <p class="at-section__title"><strong>Acknowledgement</strong></p> -->
+          <p class="at-section__title"><b>CASA Group 4</b></p>
+        </div>
+        <div class="at-grid" data-column="4">
+          <div class="at-column">
+            <div class="at-user">
+              <div class="at-user__avatar"><img src="../figure/about_us/ce_hou.jpg"/></div>
+              <div class="at-user__name">Ce Hou</div>
+              <div class="at-user__title">Technical Director</div>
+              <!-- <ul class="at-social">
+                <li class="at-social__item"><a href="">
+                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14 9h3l-.375 3H14v9h-3.89v-9H8V9h2.11V6.984c0-1.312.327-2.304.984-2.976C11.75 3.336 12.844 3 14.375 3H17v3h-1.594c-.594 0-.976.094-1.148.281-.172.188-.258.5-.258.938V9z" fill-rule="evenodd"></path>
+                    </svg></a></li>
+                <li class="at-social__item"><a href="">
+                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20.875 7.5v.563c0 3.28-1.18 6.257-3.54 8.93C14.978 19.663 11.845 21 7.938 21c-2.5 0-4.812-.687-6.937-2.063.5.063.86.094 1.078.094 2.094 0 3.969-.656 5.625-1.968a4.563 4.563 0 0 1-2.625-.915 4.294 4.294 0 0 1-1.594-2.226c.375.062.657.094.844.094.313 0 .719-.063 1.219-.188-1.031-.219-1.899-.742-2.602-1.57a4.32 4.32 0 0 1-1.054-2.883c.687.328 1.375.516 2.062.516C2.61 9.016 1.938 7.75 1.938 6.094c0-.782.203-1.531.609-2.25 2.406 2.969 5.515 4.547 9.328 4.734-.063-.219-.094-.562-.094-1.031 0-1.281.438-2.36 1.313-3.234C13.969 3.437 15.047 3 16.328 3s2.375.484 3.281 1.453c.938-.156 1.907-.531 2.907-1.125-.313 1.094-.985 1.938-2.016 2.531.969-.093 1.844-.328 2.625-.703-.563.875-1.312 1.656-2.25 2.344z" fill-rule="evenodd"></path>
+                    </svg></a></li>
+                <li class="at-social__item"><a href="">
+                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M19.547 3c.406 0 .75.133 1.031.398.281.266.422.602.422 1.008v15.047c0 .406-.14.766-.422 1.078a1.335 1.335 0 0 1-1.031.469h-15c-.406 0-.766-.156-1.078-.469C3.156 20.22 3 19.86 3 19.453V4.406c0-.406.148-.742.445-1.008C3.742 3.133 4.11 3 4.547 3h15zM8.578 18V9.984H6V18h2.578zM7.36 8.766c.407 0 .743-.133 1.008-.399a1.31 1.31 0 0 0 .399-.96c0-.407-.125-.743-.375-1.009C8.14 6.133 7.813 6 7.406 6c-.406 0-.742.133-1.008.398C6.133 6.664 6 7 6 7.406c0 .375.125.696.375.961.25.266.578.399.984.399zM18 18v-4.688c0-1.156-.273-2.03-.82-2.624-.547-.594-1.258-.891-2.133-.891-.938 0-1.719.437-2.344 1.312V9.984h-2.578V18h2.578v-4.547c0-.312.031-.531.094-.656.25-.625.687-.938 1.312-.938.875 0 1.313.578 1.313 1.735V18H18z" fill-rule="evenodd"></path>
+                    </svg></a></li>
+              </ul> -->
+            </div>
+          </div>
+          <div class="at-column">
+            <div class="at-user">
+              <div class="at-user__avatar"><img src="../figure/about_us/rongrong_xue.jpg"/></div>
+              <div class="at-user__name">Rongrong Xue</div>
+              <div class="at-user__title">Visual Designer</div>
+              <!-- <ul class="at-social">
+                <li class="at-social__item"><a href="">
+                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14 9h3l-.375 3H14v9h-3.89v-9H8V9h2.11V6.984c0-1.312.327-2.304.984-2.976C11.75 3.336 12.844 3 14.375 3H17v3h-1.594c-.594 0-.976.094-1.148.281-.172.188-.258.5-.258.938V9z" fill-rule="evenodd"></path>
+                    </svg></a></li>
+                <li class="at-social__item"><a href="">
+                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20.875 7.5v.563c0 3.28-1.18 6.257-3.54 8.93C14.978 19.663 11.845 21 7.938 21c-2.5 0-4.812-.687-6.937-2.063.5.063.86.094 1.078.094 2.094 0 3.969-.656 5.625-1.968a4.563 4.563 0 0 1-2.625-.915 4.294 4.294 0 0 1-1.594-2.226c.375.062.657.094.844.094.313 0 .719-.063 1.219-.188-1.031-.219-1.899-.742-2.602-1.57a4.32 4.32 0 0 1-1.054-2.883c.687.328 1.375.516 2.062.516C2.61 9.016 1.938 7.75 1.938 6.094c0-.782.203-1.531.609-2.25 2.406 2.969 5.515 4.547 9.328 4.734-.063-.219-.094-.562-.094-1.031 0-1.281.438-2.36 1.313-3.234C13.969 3.437 15.047 3 16.328 3s2.375.484 3.281 1.453c.938-.156 1.907-.531 2.907-1.125-.313 1.094-.985 1.938-2.016 2.531.969-.093 1.844-.328 2.625-.703-.563.875-1.312 1.656-2.25 2.344z" fill-rule="evenodd"></path>
+                    </svg></a></li>
+                <li class="at-social__item"><a href="">
+                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M19.547 3c.406 0 .75.133 1.031.398.281.266.422.602.422 1.008v15.047c0 .406-.14.766-.422 1.078a1.335 1.335 0 0 1-1.031.469h-15c-.406 0-.766-.156-1.078-.469C3.156 20.22 3 19.86 3 19.453V4.406c0-.406.148-.742.445-1.008C3.742 3.133 4.11 3 4.547 3h15zM8.578 18V9.984H6V18h2.578zM7.36 8.766c.407 0 .743-.133 1.008-.399a1.31 1.31 0 0 0 .399-.96c0-.407-.125-.743-.375-1.009C8.14 6.133 7.813 6 7.406 6c-.406 0-.742.133-1.008.398C6.133 6.664 6 7 6 7.406c0 .375.125.696.375.961.25.266.578.399.984.399zM18 18v-4.688c0-1.156-.273-2.03-.82-2.624-.547-.594-1.258-.891-2.133-.891-.938 0-1.719.437-2.344 1.312V9.984h-2.578V18h2.578v-4.547c0-.312.031-.531.094-.656.25-.625.687-.938 1.312-.938.875 0 1.313.578 1.313 1.735V18H18z" fill-rule="evenodd"></path>
+                    </svg></a></li>
+              </ul> -->
+            </div>
+          </div>
+
+          <div class="at-column">
+            <div class="at-user">
+              <div class="at-user__avatar"><img src="../figure/about_us/yuning_jiang.jpg"/></div>
+              <div class="at-user__name">Yuning Jiang</div>
+              <div class="at-user__title">Creative Director</div>
+              <!-- <ul class="at-social">
+                <li class="at-social__item"><a href="">
+                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14 9h3l-.375 3H14v9h-3.89v-9H8V9h2.11V6.984c0-1.312.327-2.304.984-2.976C11.75 3.336 12.844 3 14.375 3H17v3h-1.594c-.594 0-.976.094-1.148.281-.172.188-.258.5-.258.938V9z" fill-rule="evenodd"></path>
+                    </svg></a></li>
+                <li class="at-social__item"><a href="">
+                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20.875 7.5v.563c0 3.28-1.18 6.257-3.54 8.93C14.978 19.663 11.845 21 7.938 21c-2.5 0-4.812-.687-6.937-2.063.5.063.86.094 1.078.094 2.094 0 3.969-.656 5.625-1.968a4.563 4.563 0 0 1-2.625-.915 4.294 4.294 0 0 1-1.594-2.226c.375.062.657.094.844.094.313 0 .719-.063 1.219-.188-1.031-.219-1.899-.742-2.602-1.57a4.32 4.32 0 0 1-1.054-2.883c.687.328 1.375.516 2.062.516C2.61 9.016 1.938 7.75 1.938 6.094c0-.782.203-1.531.609-2.25 2.406 2.969 5.515 4.547 9.328 4.734-.063-.219-.094-.562-.094-1.031 0-1.281.438-2.36 1.313-3.234C13.969 3.437 15.047 3 16.328 3s2.375.484 3.281 1.453c.938-.156 1.907-.531 2.907-1.125-.313 1.094-.985 1.938-2.016 2.531.969-.093 1.844-.328 2.625-.703-.563.875-1.312 1.656-2.25 2.344z" fill-rule="evenodd"></path>
+                    </svg></a></li>
+                <li class="at-social__item"><a href="">
+                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M19.547 3c.406 0 .75.133 1.031.398.281.266.422.602.422 1.008v15.047c0 .406-.14.766-.422 1.078a1.335 1.335 0 0 1-1.031.469h-15c-.406 0-.766-.156-1.078-.469C3.156 20.22 3 19.86 3 19.453V4.406c0-.406.148-.742.445-1.008C3.742 3.133 4.11 3 4.547 3h15zM8.578 18V9.984H6V18h2.578zM7.36 8.766c.407 0 .743-.133 1.008-.399a1.31 1.31 0 0 0 .399-.96c0-.407-.125-.743-.375-1.009C8.14 6.133 7.813 6 7.406 6c-.406 0-.742.133-1.008.398C6.133 6.664 6 7 6 7.406c0 .375.125.696.375.961.25.266.578.399.984.399zM18 18v-4.688c0-1.156-.273-2.03-.82-2.624-.547-.594-1.258-.891-2.133-.891-.938 0-1.719.437-2.344 1.312V9.984h-2.578V18h2.578v-4.547c0-.312.031-.531.094-.656.25-.625.687-.938 1.312-.938.875 0 1.313.578 1.313 1.735V18H18z" fill-rule="evenodd"></path>
+                    </svg></a></li>
+              </ul> -->
+            </div>
+          </div>
+          <div class="at-column">
+            <div class="at-user">
+              <div class="at-user__avatar"><img src="../figure/about_us/zhonghao_li.png"/></div>
+              <div class="at-user__name">Zhonghao Li</div>
+              <div class="at-user__title">Visual Designer</div>
+              <!-- <ul class="at-social">
+                <li class="at-social__item"><a href="">
+                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14 9h3l-.375 3H14v9h-3.89v-9H8V9h2.11V6.984c0-1.312.327-2.304.984-2.976C11.75 3.336 12.844 3 14.375 3H17v3h-1.594c-.594 0-.976.094-1.148.281-.172.188-.258.5-.258.938V9z" fill-rule="evenodd"></path>
+                    </svg></a></li>
+                <li class="at-social__item"><a href="">
+                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20.875 7.5v.563c0 3.28-1.18 6.257-3.54 8.93C14.978 19.663 11.845 21 7.938 21c-2.5 0-4.812-.687-6.937-2.063.5.063.86.094 1.078.094 2.094 0 3.969-.656 5.625-1.968a4.563 4.563 0 0 1-2.625-.915 4.294 4.294 0 0 1-1.594-2.226c.375.062.657.094.844.094.313 0 .719-.063 1.219-.188-1.031-.219-1.899-.742-2.602-1.57a4.32 4.32 0 0 1-1.054-2.883c.687.328 1.375.516 2.062.516C2.61 9.016 1.938 7.75 1.938 6.094c0-.782.203-1.531.609-2.25 2.406 2.969 5.515 4.547 9.328 4.734-.063-.219-.094-.562-.094-1.031 0-1.281.438-2.36 1.313-3.234C13.969 3.437 15.047 3 16.328 3s2.375.484 3.281 1.453c.938-.156 1.907-.531 2.907-1.125-.313 1.094-.985 1.938-2.016 2.531.969-.093 1.844-.328 2.625-.703-.563.875-1.312 1.656-2.25 2.344z" fill-rule="evenodd"></path>
+                    </svg></a></li>
+                <li class="at-social__item"><a href="">
+                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M19.547 3c.406 0 .75.133 1.031.398.281.266.422.602.422 1.008v15.047c0 .406-.14.766-.422 1.078a1.335 1.335 0 0 1-1.031.469h-15c-.406 0-.766-.156-1.078-.469C3.156 20.22 3 19.86 3 19.453V4.406c0-.406.148-.742.445-1.008C3.742 3.133 4.11 3 4.547 3h15zM8.578 18V9.984H6V18h2.578zM7.36 8.766c.407 0 .743-.133 1.008-.399a1.31 1.31 0 0 0 .399-.96c0-.407-.125-.743-.375-1.009C8.14 6.133 7.813 6 7.406 6c-.406 0-.742.133-1.008.398C6.133 6.664 6 7 6 7.406c0 .375.125.696.375.961.25.266.578.399.984.399zM18 18v-4.688c0-1.156-.273-2.03-.82-2.624-.547-.594-1.258-.891-2.133-.891-.938 0-1.719.437-2.344 1.312V9.984h-2.578V18h2.578v-4.547c0-.312.031-.531.094-.656.25-.625.687-.938 1.312-.938.875 0 1.313.578 1.313 1.735V18H18z" fill-rule="evenodd"></path>
+                    </svg></a></li>
+              </ul> -->
+            </div>
+          </div>
+    
+        
+      </div>
+
+      <!-- acknowledgement -->
+      </div>
+      <div class="acknow">
+        <p class="acknow_title"><strong>Acknowledgements</strong></p>
+        <p>We would like to thank Dr. Duncan Smith and Dr. Valerio Signorelli for their support and advice throughout this project. We would also like to thank Han Yu, our friend who kindly provided the Chang'an urban layout references. Finally, we would like to thank our team for every effort we have made.</p>
+    </div>
+    <!-- references -->
+    <div class="ref">
+      <p class="ref_title" id="references"><b>References</b></p>
+      <p class="sub_ref"><b>Cover page reference</b></p>
+      <ul>
+        <li style="list-style-type: circle">	HANLY, C., (2020). London's Chinatown keeps its spirits up by getting chefs and restaurants to share recipes. [online] hot-dinners.com. Available at: <https://www.hot-dinners.com/202004229449/Gastroblog/Latest-news/london-chinatown-lockdown-recipes-campaign> [Accessed 11 May 2022].	</li>
+        <li style="list-style-type: circle">	Hoffman, R., (2019). Yokohama Chinatown Street Food Guide | byFood. [online] Byfood.com. Available at: <https://www.byfood.com/blog/yokohama/yokohama-chinatown-street-food-guide> [Accessed 19 May 2022].	</li>
+        <li style="list-style-type: circle">	Visit Manchester. (n.d.) Chinatown. [online] Available at: <https://www.visitmanchester.com/things-to-see-and-do/chinatown-p275031> [Accessed 10 May 2022].	</li>
+        <li style="list-style-type: circle">	Prabhune, M., 2013. Kobe Chinatown Streets by Night - Kobe, Hyogo. [online] JapanTravel. Available at: <https://en.japantravel.com/hyogo/chinatown-streets-by-night-in-kobe/4380> [Accessed 8 May 2022].	</li>
+        <li style="list-style-type: circle">	Lemmin-Woolfrey, U., 2(021). These Are the 15 Best Chinatowns Around the World. [online] Fodors Travel Guide. Available at: <https://www.fodors.com/news/photos/these-are-the-15-best-chinatowns-around-the-world> [Accessed 12 May 2022].	</li>
+      </ul>
+
+      <p class="sub_ref"><b>Chang'an References:</b></p>
+      <ul>
+        <li style="list-style-type: circle">	Bu Nian Tu_the palace museum (no date). Available at: https://www.dpm.org.cn/Home.html?_wap=1 (Accessed: 22 May 2022).	</li>
+        <li style="list-style-type: circle">	Court ladies preparing newly woven silk	</li>
+        <li style="list-style-type: circle">	(no date). Available at: https://collections.mfa.org/objects/28127/court-ladies-preparing-newly-woven-silk (Accessed: 22 May 2022).	</li>
+        <li style="list-style-type: circle">	Earth at Night (2017). NASA Earth Observatory.	</li>
+        <li style="list-style-type: circle">	Available at: https://earthobservatory.nasa.gov/features/NightLights (Accessed: 25 May 2022).	</li>
+        <li style="list-style-type: circle">	Iloveplanet (no date). Available at: http://www.iloveplanet.cn/ (Accessed: 25 May 2022).	</li>
+        <li style="list-style-type: circle">	Lady Guo Guo’s Spring Out (no date). Available	</li>
+        <li style="list-style-type: circle">	at: https://upload.wikimedia.org/wikipedia/commons/3/30/%E8%99%A2%E5%9B%BD%E5%A4%AB%E4%BA%BA%E6%B8%B8%E6%98%A5%E5%9B%BE.jpg (Accessed: 22 May 2022).	</li>
+        <li style="list-style-type: circle">	Pottery Dancer with Double-Rings-Styled Hair_Shaanxi History	</li>
+        <li style="list-style-type: circle">	Museum_Pottery,Dancer,with,Double-Rings-Styled,Hair	</li>
+        <li style="list-style-type: circle">	(no date). Available at: https://www.sxhm.com/en/detail/771.html (Accessed: 22 May 2022).	</li>
+        <li style="list-style-type: circle">	rhyton | British Museum (no date) The British Museum. Available at: https://www.britishmuseum.org/collection/object/W_1897-1231-178 (Accessed: 22 May 2022).	</li>
+        <li style="list-style-type: circle">	Shaanxi History Museum (no date). Available at:	</li>
+        <li style="list-style-type: circle">	https://www.sxhm.com/en/index.html (Accessed: 25 May 2022).	</li>
+        <li style="list-style-type: circle">	Xiang jin shou shou ma nao bei_ Shaanxi History Museum	</li>
+        <li style="list-style-type: circle">	(no date). Available at: https://www.sxhm.com/collections/detail/512.html (Accessed: 22 May 2022).	</li>
+      </ul>
+      
+      <p class="sub_ref"><b>The Silk Road References:</b></p>
+      <ul>
+        <li style="list-style-type: circle">	Dodwalker (2020) ‘The silk road’, Medium, 13 June. Available at: https://medium.com/@dodwalker1/the-silk-road-9d40faa7291b (Accessed: 13 May 2022).	</li>
+        <li style="list-style-type: circle">	earthobservatory.nasa.gov. (2017). Earth at Night. [online] Available at: https://earthobservatory.nasa.gov/features/NightLights.	</li>
+        <li style="list-style-type: circle">	Foltz, R. (2010). Religions of the Silk Road : overland trade and cultural exchange from antiquity to the fifteenth century. Basingstoke: Macmillan.	</li>
+        <li style="list-style-type: circle">	Hansen, V. (2012). The Silk Road. [online] Google Books. OUP USA. Available at: https://books.google.co.uk/books?hl=en&lr=&id=0LYDf02jgdAC&oi=fnd&pg=PP2&dq=silk+road&ots=XPTocv4N7e&sig=nyvh1jTapGLy7U5-cLiySPjnqws&redir_esc=y#v=onepage&q=silk%20road&f=false [Accessed 17 May 2022].	</li>
+        <li style="list-style-type: circle">	Hansen, V. (2017). The Silk Road : a new history with documents. New York ; Oxford Oxford University Press.	</li>
+        <li style="list-style-type: circle">	Kurin, R. (2018). The Silk Road: Connecting People and Cultures. [online] Smithsonian Folklife Festival. Available at: https://festival.si.edu/2002/the-silk-road/the-silk-road-connecting-peoples-and-cultures/smithsonian.	</li>
+        <li style="list-style-type: circle">	Liu, X. (2010). The Silk Road in world history. Oxford ; New York: Oxford University Press.	</li>
+        <li style="list-style-type: circle">	Mapbox. (n.d.). Swipe between maps | Mapbox GL JS. [online] Available at: https://docs.mapbox.com/mapbox-gl-js/example/mapbox-gl-compare/ [Accessed 26 May 2022].	</li>
+        <li style="list-style-type: circle">	Mapbox. (n.d.). Update a feature in realtime | Mapbox GL JS. [online] Available at: https://docs.mapbox.com/mapbox-gl-js/example/live-update-feature/ [Accessed 26 May 2022].	</li>
+        <li style="list-style-type: circle">	The Editors of Encyclopedia Britannica (2021). Silk Road | Facts, History, & Map. In: Encyclopædia Britannica. [online] Available at: https://www.britannica.com/topic/Silk-Road-trade-route.	</li>
+        <li style="list-style-type: circle">	UNESCO (n.d.). About the Silk Roads | SILK ROADS. [online] en.unesco.org. Available at: https://en.unesco.org/silkroad/about-silk-roads.	</li>
+      </ul>
+
+      <p class="sub_ref"><b>The Seven Voyages of Zheng He References:</b></p>
+      <ul>
+        <li style="list-style-type: circle">	Aramcoworld.com. (2015). Saudi Aramco World : The Admiral: Zheng He. [online] Available at: https://archive.aramcoworld.com/issue/200504/the.admiral.zheng.he.htm.	</li>
+        <li style="list-style-type: circle">	Barbieri, A. (2020). [online] Ucsb.edu. Available at: https://barbierilow.faculty.history.ucsb.edu/Research/ZhengHeMapZoomify/ZhengHe.htm.	</li>
+        <li style="list-style-type: circle">	Cartwright, M. (2019). The Seven Voyages of Zheng He. [online] World History Encyclopedia. Available at: https://www.worldhistory.org/article/1334/the-seven-voyages-of-zheng-he/.	</li>
+        <li style="list-style-type: circle">	Christopher John Baker and Pasuk Phongpaichit (2017). A history of Ayutthaya : Siam in the early modern world. Cambridge, United Kingdom ; New York, Ny, Usa: Cambridge University Press.	</li>
+        <li style="list-style-type: circle">	en.people.cn. (2006). People’s Daily Online -- Children of the master voyager? [online] Available at: http://en.people.cn/200611/03/eng20061103_317869.html.	</li>
+        <li style="list-style-type: circle">	Esmond Bradley Martin (1970). Malindi, past and present. Nairobi, National Museum Of Kenya.	</li>
+        <li style="list-style-type: circle">	Graff, D.A. (2007). Zheng He: China and the Oceans in the Early Ming Dynasty, 1405-1433 (review). The Journal of Military History, 71(1), pp.213–214. doi:10.1353/jmh.2007.0029.	</li>
+        <li style="list-style-type: circle">	He, Z. (no date) Zheng He by Nunoftferreira. Available at: https://allpoetry.com/poem/15615565-Zheng-He--by-Nunoftferreira (Accessed: 13 May 2022).	</li>
+        <li style="list-style-type: circle">	Hsu, M.-L. (1991). Maps and map-makers. Paris, France: Unesco.	</li>
+        <li style="list-style-type: circle">	Khan Academy. (n.d.). Zheng He (article). [online] Available at: https://www.khanacademy.org/humanities/big-history-project/expansion-interconnection/exploration-interconnection/a/zheng-he.	</li>
+        <li style="list-style-type: circle">	Library of Congress, Washington, D.C. 20540 USA. (n.d.). Wu bei zhi. [online] Available at: https://www.loc.gov/item/2004633695/ [Accessed 26 May 2022].	</li>
+        <li style="list-style-type: circle">	Lo, J. (2019). Zheng He | Biography, Facts, & Significance. In: Encyclopædia Britannica. [online] Available at: https://www.britannica.com/biography/Zheng-He.	</li>
+        <li style="list-style-type: circle">	Ma, H., Chengjun Feng and J V G Mills (1970). Ying-yai sheng-lan. ‘The overall survey of the ocean’s shores’ [1433]. Cambridge [England] Published For The Hakluyt Society At The University Press.	</li>
+        <li style="list-style-type: circle">	Maldives. (n.d.). China and Maldives friendship History. [online] Available at: https://maldivesembassy.cn/china-and-maldives-friendship-history/ [Accessed 24 May 2022].	</li>
+        <li style="list-style-type: circle">	Meicun, L. and Zhang, R. (2015). Zheng He’s voyages to Hormuz: the archaeological evidence. Antiquity, 89(344), pp.417–432. doi:10.15184/aqy.2014.28.	</li>
+        <li style="list-style-type: circle">	nationthailand. (2015). The Chinese fleet in Ayutthaya. [online] Available at: https://www.nationthailand.com/life/30275236 [Accessed 25 May 2022].	</li>
+        <li style="list-style-type: circle">	Newworldencyclopedia.org. (2019). Zheng He - New World Encyclopedia. [online] Available at: https://www.newworldencyclopedia.org/entry/Zheng_He.	</li>
+        <li style="list-style-type: circle">	Richard Maxwell Eaton (2011). The rise of Islam and the Bengal frontier, 1204-1760. New Delhi: Oxford University Press.	</li>
+        <li style="list-style-type: circle">	Rslc.us. (2022). Mao Kun Explorer. [online] Available at: https://zhenghe.rslc.us [Accessed 17 May 2022].	</li>
+        <li style="list-style-type: circle">	Unesco.org. (2022). [online] Available at: https://unesdoc.unesco.org/ark:/48223/pf0000088508 [Accessed 23 May 2022].	</li>
+        <li style="list-style-type: circle">	Washington.edu. (2019). Palmyra as a Caravan City. [online] Available at: https://depts.washington.edu/silkroad/cities/syria/palmyra/palmyra.html.	</li>
+        <li style="list-style-type: circle">	web.archive.org. (2010). Zheng He - World Heritage Site. [online] Available at: https://web.archive.org/web/20100412063521/http://www.worldheritagesite.org/tags/tag622.html [Accessed 25 May 2022].	</li>
+        <li style="list-style-type: circle">	Wong, E. (2014). Celebrating the Legacy of a Chinese Explorer. The New York Times. [online] 19 Dec. Available at: https://www.nytimes.com/2014/12/19/world/asia/celebrating-the-legacy-of-a-chinese-explorer.html.	</li>
+        <li style="list-style-type: circle">	www.china.org.cn. (n.d.). Zheng He: A Peaceful Mariner and Diplomat. [online] Available at: http://www.china.org.cn/english/features/zhenhe/134661.htm#:~:text=The%2075%20years%20historian%20said [Accessed 26 May 2022].	</li>
+        <li style="list-style-type: circle">	www.mapbox.com. (n.d.). Interactive Storytelling | Mapbox. [online] Available at: https://www.mapbox.com/solutions/interactive-storytelling [Accessed 26 May 2022].	</li>
+      </ul>
+
+      <p class="sub_ref"><b>Emigration Waves References:</b></p>
+      <ul>
+        <li style="list-style-type: circle">	carto.com. (n.d.). CARTO VL - Home — Documentation — CARTO. [online] Available at: https://carto.com/developers/carto-vl/ [Accessed 25 May 2022].	</li>
+        <li style="list-style-type: circle">	Chen, L. (2005) ‘Chinese in Japan’, in, pp. 680–688. doi:10.1007/978-0-387-29904-4_70.	</li>
+        <li style="list-style-type: circle">	Cheng, L., Yuzun, L. and Dehua, Z. (1982). Chinese Emigration, the Sunning Railway and the Development of Toisan. Amerasia Journal, 9(1), pp.59–74. doi:10.17953/amer.9.1.g45275775410l055.	</li>
+        <li style="list-style-type: circle">	Chinatowns of the world (no date). Available at: https://www.chinatownology.com/chinatowns_of_the_world.html (Accessed: 22 May 2022)	</li>
+        <li style="list-style-type: circle">	Foundation, P. (2022) Chinatown Diptych by Jenny Xie, Poetry Foundation. Poetry Foundation. Available at: https://www.poetryfoundation.org/poems/147493/chinatown-diptych (Accessed: 13 May 2022).	</li>
+        <li style="list-style-type: circle">	Gold Rush Collection (no date) Museum of Chinese Australian History. Available at: https://www.chinesemuseum.com.au/gold-rush-collection (Accessed: 22 May 2022).	</li>
+        <li style="list-style-type: circle">	History of Chinatown - Part of Singapore’s Heritage & Culture (no date) Chinatown Singapore. Available at: https://chinatown.sg/history-of-chinatown/ (Accessed: 22 May 2022).	</li>
+        <li style="list-style-type: circle">	Mainichi Daily News (2020) ‘Oldest photo of Yokohama’s Chinatown believed part of pastry shop owner’s collection’, 1 August. Available at: https://mainichi.jp/english/articles/20200801/p2a/00m/0et/007000c (Accessed: 22 May 2022).	</li>
+        <li style="list-style-type: circle">	McKeown, A. (2010). Chinese emigration in global context, 1850–1940. Journal of Global History, 5(1), pp.95–124. doi:10.1017/s174002281000001x.	</li>
+        <li style="list-style-type: circle">	Miles, S.B. (2020). Chinese Diasporas. doi:10.1017/9781316841211.	</li>
+        <li style="list-style-type: circle">	New York City Chinatown > Pell Street on a Sunday, 1899 (no date). Available at: https://www.nychinatown.org/history/photos/pell21b.html (Accessed: 23 May 2022).	</li>
+        <li style="list-style-type: circle">	ondinee (2018) Chinese on the goldfields, Sydney Living Museums. Available at: https://sydneylivingmuseums.com.au/stories/chinese-goldfields (Accessed: 22 May 2022).	</li>
+        <li style="list-style-type: circle">	Pbs.org. (2019). Chinese Immigrants and the Gold Rush | American Experience | PBS. [online] Available at: https://www.pbs.org/wgbh/americanexperience/features/goldrush-chinese-immigrants/.	</li>
+        <li style="list-style-type: circle">	Taylor, A. (2013). Chinese Emigration to Australia around 1900: A Re-examination of Australia’s ‘Great White Walls’. History Compass, 11(2), pp.104–116. doi:10.1111/hic3.12032.	</li>
+        <li style="list-style-type: circle">	TC2 Source Docs - Chinese Canadian life on the railway (no date). Available at: https://tc2.ca/sourcedocs/history-docs/topics/chinese-canadian-history/chinese-canadian-life-on-the-railway.html (Accessed: 23 May 2022).	</li>
+        <li style="list-style-type: circle">	The History of New York City’s Chinatown (no date). Available at: https://www.ny.com/articles/chinatown.html (Accessed: 23 May 2022).	</li>
+        <li style="list-style-type: circle">	Vancouver Then and Now: Chinatown (PHOTOS) | News (no date). Available at: https://dailyhive.com/vancouver/vancouver-then-and-now-chinatown-photos (Accessed: 22 May 2022).	</li>
+        <li style="list-style-type: circle">	Yen, C.H. (1980). The Organization of Chinese Emigration 1848-1888: With Special Reference to Chinese Emigration to Australia.Sing-wu Wang. The Australian Journal of Chinese Affairs, 3, pp.130–132. doi:10.2307/2159019.	</li>
+        <li style="list-style-type: circle">	Zhou, M (2009). Hua ren guo ji yi min de li shi hui gu he she hui xue fen xi. Hua ren yan jiu guo ji xue bao, 01(01), pp.51–72. doi:10.1142/s1793724809000042.	</li>
+        <li style="list-style-type: circle">	Zhuang, G (2011). Shi jie hua qiao hua ren shu liang he fen bu de li shi bian hua. Beijing: Shi jie li shi	</li>
+        <li style="list-style-type: circle">	‘Find out about Chinatown’ (no date) Chinatown London. Available at: https://chinatown.co.uk/en/about-us/ (Accessed: 22 May 2022).	</li>
+        <li style="list-style-type: circle">	(20+) Old Photos of Essex Kent & London - Posts | Facebook (no date). Available at: https://www.facebook.com/Oldphotos10/posts/chinatown-limehouse-causeway-london-1933/2985063968236326/ (Accessed: 22 May 2022).	</li>
+      </ul>
+
+      <p class="sub_ref"><b>China's Outbound Flight Routes References:</b></p>
+      <ul>
+        <li style="list-style-type: circle">	Globe.GL (no date) globe.gl. Available at: http://globe.gl/ (Accessed: 25 May 2022).	</li>
+        <li style="list-style-type: circle">	Nightingale Rose Chart - Learn about this chart and tools (no date). Available at: https://datavizcatalogue.com/methods/nightingale_rose_chart.html (Accessed: 25 May 2022).	</li>
+        <li style="list-style-type: circle">	OpenFlights: Airport and airline data (no date). Available at: https://openflights.org/data.html (Accessed: 25 May 2022).	</li>
+        <li style="list-style-type: circle">	Zhuang, G., (2006). Jin 30 Nian Lai De Zhong Guo Hai Wai Yi Min: Yi Fu Zhou Yi Min Wei Li. Shi Jie Min Zu, 3, pp.38-39.	</li>
+      </ul>
+
+      <p class="sub_ref"><b>Contemporary Chinese Diaspora References:</b></p>
+      <ul>
+        <li style="list-style-type: circle">	Abs.gov.au. (n.d.) 2016 Australia, Census All persons QuickStats | Australian Bureau of Statistics. [online] Available at: <https://www.abs.gov.au/census/find-census-data/quickstats/2016/0> [Accessed 19 May 2022].	</li>
+        <li style="list-style-type: circle">	Arifin, E., Hasbullah, M. and Pramono, A., (2016). Chinese Indonesians: how many, who and where?. Asian Ethnicity, 18(3), pp.310-329.	</li>
+        <li style="list-style-type: circle">	Aw, T., (2019). Coming out of the shadows: what it means to be French and Chinese. [online] the Guardian. Available at: <https://www.theguardian.com/world/2019/nov/26/what-you-hear-about-chinese-people-in-france-feeling-scared-its-true> [Accessed 8 May 2022].	</li>
+        <li style="list-style-type: circle">	Cabral, P., (2017). Panama City’s Chinatown reveals historic ties. [online] CGTN America. Available at: <https://america.cgtn.com/2017/09/19/panama-citys-chinatown-reveals-historic-ties> [Accessed 12 May 2022].	</li>
+        <li style="list-style-type: circle">	CCCB. (2009). Qingtian: Chinese Immigration in Barcelona | Activities | CCCB. [online] Available at: <https://www.cccb.org/en/activities/file/qingtian-chinese-immigration-in-barcelona/218100> [Accessed 11 May 2022].	</li>
+        <li style="list-style-type: circle">	Chinadaily.com.cn. (2017). Remains of 19th century Chinese laborers found in Peru[1]- Chinadaily.com.cn. [online] Available at: <https://www.chinadaily.com.cn/world/2017-08/26/content_31136470.htm> [Accessed 26 May 2022].	</li>
+        <li style="list-style-type: circle">	Culturaldiplomacy.org. (n.d). Chinese Diaspora. [online] Available at: <https://www.culturaldiplomacy.org/academy/index.php?chinese-diaspora> [Accessed 6 May 2022].	</li>
+        <li style="list-style-type: circle">	Echarts.apache.org. (n.d.) Apache ECharts. [online] Available at: <https://echarts.apache.org/zh/index.html> [Accessed 17 May 2022].	</li>
+        <li style="list-style-type: circle">	Economist Intelligence Unit. (2020). How will the coronavirus affect outbound Chinese students?. [online] Available at: <https://www.eiu.com/n/how-will-the-coronavirus-affect-outbound-chinese-students/> [Accessed 19 May 2022].	</li>
+        <li style="list-style-type: circle">	Ethnicity-facts-figures.service.gov.uk. (2020). Chinese ethnic group: facts and figures. [online] Available at: <https://www.ethnicity-facts-figures.service.gov.uk/summaries/chinese-ethnic-group> [Accessed 6 May 2022].	</li>
+        <li style="list-style-type: circle">	Istat.it. (n.d.) Istat.it Population and households. [online] Available at: <https://www.istat.it/en/population-and-households> [Accessed 20 May 2022].	</li>
+        <li style="list-style-type: circle">	Khanh, T., (2015). The Ethnic Chinese and Economic Development in Vietnam. [online] Cambridge Core. Available at: <https://www.cambridge.org/core/books/ethnic-chinese-and-economic-development-in-vietnam/638085AB7D0A0A6FB28F2C2EFB93C838> [Accessed 8 May 2022].	</li>
+        <li style="list-style-type: circle">	Larin, A., (2008). Life in Russia through the Eyes of Chinese Migrants. [online] Demoscope.ru. Available at: <http://www.demoscope.ru/weekly/transl.php> [Accessed 16 May 2022].	</li>
+        <li style="list-style-type: circle">	Lucas, B., (2008). Chinese expats in Dubai. [online] timeoutdubai.com. Available at: <https://www.timeoutdubai.com/things-to-do/things-to-do-features/3683-chinese-expats-in-dubai> [Accessed 10 May 2022].	</li>
+        <li style="list-style-type: circle">	Mandavia, M., (2015). Why India remains a difficult terrain for 7,000 Chinese expatriates living in the country. [online] The Economic Times. Available at: <https://economictimes.indiatimes.com/news/politics-and-nation/why-india-remains-a-difficult-terrain-for-7000-chinese-expatriates-living-in-the-country/articleshow/48703439.cms> [Accessed 14 May 2022].	</li>
+        <li style="list-style-type: circle">	Official tourism website. (2021). Chinese Madrid. [online] Available at: <https://www.esmadrid.com/en/chinese-madrid> [Accessed 7 May 2022].	</li>
+        <li style="list-style-type: circle">	Penh, P., (2014). Wayback Machine. [online] Web.archive.org. Available at: <https://web.archive.org/web/20161113144749/http://www.nis.gov.kh/nis/CSES/Final%20Report%20CSES%202013.pdf> [Accessed 10 May 2022].	</li>
+        <li style="list-style-type: circle">	Pew Research Center (2021). Top 10 U.S. metropolitan areas by Chinese population, 2019. [online] Available at: <https://www.pewresearch.org/social-trends/chart/top-10-u-s-metropolitan-areas-by-chinese-population-2019/> [Accessed 6 May 2022].	</li>
+        <li style="list-style-type: circle">	Poston, D. L. and Wong, J. H. (2016). ‘The Chinese diaspora: The current distribution of the overseas Chinese population’. Chinese Journal of Sociology. SAGE Publications, 2 (3), pp. 348–373. doi: 10.1177/2057150X16655077.	</li>
+        <li style="list-style-type: circle">	ROSSETTI, F., (n.d.) The Chinese in LaosRebirth of the Laotian Chinese Community as peace returns to Indochina - CEFC. [online] CEFC. Available at: <https://www.cefc.com.hk/article/the-chinese-in-laosrebirth-of-the-laotian-chinese-community-as-peace-returns-to-indochina/> [Accessed 15 May 2022].	</li>
+        <li style="list-style-type: circle">	Sawe, B., (2019). Largest Ethnic Groups In Myanmar (Burma). [online] WorldAtlas. Available at: <https://www.worldatlas.com/articles/largest-ethnic-groups-in-myanmar-burma.html> [Accessed 22 May 2022].	</li>
+        <li style="list-style-type: circle">	See, T., (2005). Chinese in the Philippines. Encyclopedia of Diasporas, pp.760-769.	</li>
+        <li style="list-style-type: circle">	Statista. (2021). Singapore: resident population by ethnic group 2021 | Statista. [online] Available at: <https://www.statista.com/statistics/622748/singapore-resident-population-by-ethnic-group/> [Accessed 11 May 2022].	</li>
+        <li style="list-style-type: circle">	Stats.govt.nz. (2019). 2018 Census ethnic group summaries | Stats NZ. [online] Available at: <https://www.stats.govt.nz/tools/2018-census-ethnic-group-summaries/chinese> [Accessed 15 May 2022].	</li>
+        <li style="list-style-type: circle">	Stenberg, J., (2012). The Chinese of São Paulo: A Case Study. Journal of Chinese Overseas, 8(1), pp.105-122.	</li>
+        <li style="list-style-type: circle">	Sun, H. and Zhang, S., (2018). Zai Ri Hua Ren Tong Ji Ren Kou Da 92 Wan Chuang Li Shi Xin Gao. [online] Rbzwdb.com. Available at: <http://www.rbzwdb.com/hrxw/2018/01-17/12748.shtml> [Accessed 15 May 2022].	</li>
+        <li style="list-style-type: circle">	Web.archive.org. (2018). Wayback Machine. [online] Available at: <https://web.archive.org/web/20180412212213/http:/www.spr.gov.my/sites/default/files/Jilid%201%20Kajian%20Semula%20Persempadanan%20V2.pdf> [Accessed 17 May 2022].	</li>
+        <li style="list-style-type: circle">	Wong, D. (2013). ‘Introduction: The New Chinese Migration to Southeast Asia’. Asian and Pacific Migration Journal. SAGE Publications Ltd STM, 22 (1), pp. 1–6. doi: 10.1177/011719681302200101.	</li>
+        <li style="list-style-type: circle">	Www12.statcan.gc.ca. (n.d.) 2016 Census of Population – Data products. [online] Available at: <https://www12.statcan.gc.ca/census-recensement/2016/dp-pd/index-eng.cfm> [Accessed 17 May 2022].	</li>
+        <li style="list-style-type: circle">	yunhap news. (2019). 2.36 million foreigners residing in Korea…8.6% increase from the previous year. [online] Available at: <https://www.yna.co.kr/view/AKR20190527147000371> [Accessed 9 May 2022].	</li>
+      </ul>
+
+      <p class="sub_ref"><b>Chinatown and Xi'an References:</b></p>
+      <ul>
+        <li style="list-style-type: circle">	Chinatown London. (n.d.) Find out about Chinatown | Chinatown London. [online] Available at: <https://chinatown.co.uk/en/about-us/> [Accessed 17 May 2022].	</li>
+        <li style="list-style-type: circle">	Chinatown Melbourne. (n.d.) About Chinatown - Chinatown Melbourne. [online] Available at: <https://chinatownmelbourne.com.au/about-chinatown/> [Accessed 17 May 2022].	</li>
+        <li style="list-style-type: circle">	ChinatownLondon (2022). 1 April. Available at https://twitter.com/ChinatownLondon/status/1509908726593032197?cxt=HHwWisC4vZX_ovQpAAAA [Accessed 16 May 2022].	</li>
+        <li style="list-style-type: circle">	Google Maps Street View. (n.d.) Discover Street View and contribute your own imagery to Google Maps.. [online] Available at: <https://www.google.com/streetview/> [Accessed 16 May 2022].	</li>
+        <li style="list-style-type: circle">	Harrison, P., Moyo, K. and Yang, Y. (2012). ‘Strategy and Tactics: Chinese Immigrants and Diasporic Spaces in Johannesburg, South Africa’. Journal of Southern African Studies. Routledge, 38 (4), pp. 899–925. doi: 10.1080/03057070.2012.741013.	</li>
+        <li style="list-style-type: circle">	Long, Z., (2021). Zhi Chao Wan Le | Xi An Da Tang Bu Ye Cheng, Tan Suo Dong JIng Jie Yi De Wen Hua Zhi Lv. [online] Our China Story. Available at: <https://www.ourchinastory.com/zh/2393/> [Accessed 17 May 2022].	</li>
+        <li style="list-style-type: circle">	Rosenberg, Z. (2015). How Chinatown survived the homogenization of Manhattan. [online] Curbed NY. Available at: <https://ny.curbed.com/2015/9/25/9917416/how-chinatown-survived-the-homogenization-of-manhattan> [Accessed 16 May 2022].	</li>
+        <li style="list-style-type: circle">	Shircliff, J. E. (2020). ‘Is Chinatown a place or space? A case study of Chinatown Singapore’. Geoforum, 117, pp. 225–233. doi: 10.1016/j.geoforum.2020.10.006.	</li>
+        <li style="list-style-type: circle">	Su, X., (2016). Ethnic Social Isolation in Africa: the Case of Johannesburg Chinatown | The African Exponent.. [online] The African Exponent. Available at: <https://www.africanexponent.com/bpost/4425-chinatown-residents-not-in-hurry-to-accommodate-non-chinese> [Accessed 17 May 2022].	</li>
+        <li style="list-style-type: circle">	Toy, V. (2006). Luxury Condos Arrive in Chinatown (Published 2006). [online] Nytimes.com. Available at: <https://www.nytimes.com/2006/09/17/realestate/17cov.html?> [Accessed 17 May 2022].	</li>
+        <li style="list-style-type: circle">	Tuder, S. (2019). New York City Actually Has Nine Chinatowns. [online] Eater NY. Available at: <https://ny.eater.com/2019/2/25/18236523/chinatowns-restaurants-elmhurst-homecrest-bensonhurst-east-village-little-neck-forest-hills-nyc> [Accessed 17 May 2022].	</li>
+        <li style="list-style-type: circle">	Uk.hotels.com (n.d.) [online] Available at: <https://uk.hotels.com/go/singapore/best-chinatown-things-to-do> [Accessed 17 May 2022].	</li>
+        <li style="list-style-type: circle">	Uk.hotels.com (n.d.) [online] Available at: <https://uk.hotels.com/go/england/chinatown-gate-london> [Accessed 17 May 2022].	</li>
+        <li style="list-style-type: circle">	Viator. (n.d.) Singapore's Little India & Chinatown Walking Tour. [online] Available at: <https://www.viator.com/en-GB/tours/Singapore/Singapore-Little-India-and-Chinatown-Tour/d18-215191P3> [Accessed 16 May 2022].	</li>
+        <li style="list-style-type: circle">	Visitmelbourne.com (n.d.). [online] Available at: <https://www.visitmelbourne.com/regions/melbourne/destinations/chinatown> [Accessed 16 May 2022].	</li>
+        <li style="list-style-type: circle">	Visitsingapore.com. (n.d.) Chinatown. [online] Available at: <https://www.visitsingapore.com/see-do-singapore/places-to-see/chinatown/> [Accessed 17 May 2022].	</li>
+        <li style="list-style-type: circle">	Waxman, S. (n.d.) The History of New York City's Chinatown. [online] Ny.com. Available at: <https://www.ny.com/articles/chinatown.html> [Accessed 16 May 2022].	</li>
+        <li style="list-style-type: circle">	Willemse, L. (2014). ‘The Role of Economic Factors and Guanxi Networks in the Success of Chinese Shops in Johannesburg, South Africa’. Urban Forum, 25 (1), pp. 105–123. doi: 10.1007/s12132-013-9202-4.	</li>
+      </ul>
+
+    <p class="sub_ref"><b>Last Background Page References:</b></p>
+    <ul>
+      <li style="list-style-type: circle">	HANLY, C., (2020). London's Chinatown keeps its spirits up by getting chefs and restaurants to share recipes. [online] hot-dinners.com. Available at: <https://www.hot-dinners.com/202004229449/Gastroblog/Latest-news/london-chinatown-lockdown-recipes-campaign> [Accessed 11 May 2022].	</li>
+      <li style="list-style-type: circle">	Hoffman, R., (2019). Yokohama Chinatown Street Food Guide | byFood. [online] Byfood.com. Available at: <https://www.byfood.com/blog/yokohama/yokohama-chinatown-street-food-guide> [Accessed 19 May 2022].	</li>
+      <li style="list-style-type: circle">	Lemmin-Woolfrey, U., 2(021). These Are the 15 Best Chinatowns Around the World. [online] Fodors Travel Guide. Available at: <https://www.fodors.com/news/photos/these-are-the-15-best-chinatowns-around-the-world> [Accessed 12 May 2022].	</li>
+      <li style="list-style-type: circle">	Prabhune, M., 2013. Kobe Chinatown Streets by Night - Kobe, Hyogo. [online] JapanTravel. Available at: <https://en.japantravel.com/hyogo/chinatown-streets-by-night-in-kobe/4380> [Accessed 8 May 2022].	</li>
+      <li style="list-style-type: circle">	Visit Manchester. (n.d.) Chinatown. [online] Available at: <https://www.visitmanchester.com/things-to-see-and-do/chinatown-p275031> [Accessed 10 May 2022].	</li>
+    </ul>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+  document.getElementById('scroll-down').onclick = function(){
+          window.scrollTo(0,1000)
+}
+
+  function showmenu() {
+    if (document.getElementById('open-nav').innerHTML == 'aaa') {
+      document.getElementById("nav_bar").style.top = "50px";
+            document.getElementById('open-nav').innerHTML = 'x'
+    } else {
+      document.getElementById('nav_bar').style.top = "-50px"
+      document.getElementById('open-nav').innerHTML = 'aaa'
+    }
+  }
+
+  function moveto() {
+    window.scrollTo(0,2050)
+  }
+</script>
+
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+  <script  src="/js/timeline.js"></script>
+  <link rel="stylesheet" href="../css/aboutus_style.css">
+</body>
+</html>
