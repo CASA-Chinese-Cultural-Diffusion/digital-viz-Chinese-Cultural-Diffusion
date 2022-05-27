@@ -610,7 +610,7 @@ img {
 #between-intro {
   position: relative;
   text-align: center;
-  font-family: 'Manrope';
+  font-family: 'Microsoft YaHei';
   font-size: 30px;
   width: 100vw;
   top: 30vh;
@@ -621,7 +621,7 @@ img {
 #between-intro-3 {
   position: relative;
   text-align: justify;
-  font-family: 'Manrope';
+  font-family: 'Microsoft YaHei';
   font-size: 28px;
   width: 1000px;
   top: 36vh;
@@ -633,7 +633,7 @@ img {
 #between-intro-4 {
   position: relative;
   text-align: justify;
-  font-family: 'Manrope';
+  font-family: 'Microsoft YaHei';
   font-size: 28px;
   width: 800px;
   top: 38vh;
@@ -646,7 +646,7 @@ img {
 #between-intro-5 {
   position: relative;
   text-align: center;
-  font-family: 'Manrope';
+  font-family: 'Microsoft YaHei';
   font-size: 28px;
   width: 80vw;
   top: 52vh;
@@ -659,7 +659,7 @@ img {
 #between-intro-2 {
   position: relative;
   text-align: center;
-  font-family: 'Manrope';
+  font-family: 'Microsoft YaHei';
   font-size: 20px;
   top: 57vh;
   color: rgba(255, 255, 255, 0.7);
