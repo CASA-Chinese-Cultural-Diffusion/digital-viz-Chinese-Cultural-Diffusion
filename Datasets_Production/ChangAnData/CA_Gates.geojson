@@ -1,0 +1,27 @@
+{
+"type": "FeatureCollection",
+"name": "CA_Gates",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 1, "name": "光化門", "category": "outer", "eng_name": "Guang Hua Gate" }, "geometry": { "type": "Point", "coordinates": [ 108.895667530357798, 34.282882116531283 ] } },
+{ "type": "Feature", "properties": { "id": 2, "name": "景曜門", "category": "outer", "eng_name": "Jing Yao Gate" }, "geometry": { "type": "Point", "coordinates": [ 108.907284249688686, 34.282882116531283 ] } },
+{ "type": "Feature", "properties": { "id": 3, "name": "芳林門", "category": "outer", "eng_name": "Fang Lin Gate" }, "geometry": { "type": "Point", "coordinates": [ 108.919669722504707, 34.282882116531283 ] } },
+{ "type": "Feature", "properties": { "id": 30, "name": "承天門", "category": "inner", "eng_name": "Cheng Tian Gate" }, "geometry": { "type": "Point", "coordinates": [ 108.93524901904722, 34.269571118936611 ] } },
+{ "type": "Feature", "properties": { "id": 31, "name": "丹鳳門", "category": "inner", "eng_name": "Dan Huang Date" }, "geometry": { "type": "Point", "coordinates": [ 108.959372111289269, 34.282805414258384 ] } },
+{ "type": "Feature", "properties": { "id": 20, "name": null, "category": "small", "eng_name": null }, "geometry": { "type": "Point", "coordinates": [ 108.952170562166131, 34.282909784535526 ] } },
+{ "type": "Feature", "properties": { "id": 21, "name": null, "category": "small", "eng_name": null }, "geometry": { "type": "Point", "coordinates": [ 108.954623263679082, 34.282753229119805 ] } },
+{ "type": "Feature", "properties": { "id": 22, "name": null, "category": "small", "eng_name": null }, "geometry": { "type": "Point", "coordinates": [ 108.964016588622314, 34.282805414258384 ] } },
+{ "type": "Feature", "properties": { "id": 4, "name": "通化門", "category": "outer", "eng_name": "Tong Hua Gate" }, "geometry": { "type": "Point", "coordinates": [ 108.988930450607882, 34.269258129371217 ] } },
+{ "type": "Feature", "properties": { "id": 5, "name": "春明門", "category": "outer", "eng_name": "Chun Ming Gate" }, "geometry": { "type": "Point", "coordinates": [ 108.988873572060768, 34.252478957974368 ] } },
+{ "type": "Feature", "properties": { "id": 6, "name": "延興門", "category": "outer", "eng_name": "Yan Xing Gate" }, "geometry": { "type": "Point", "coordinates": [ 108.988873572060783, 34.231718288279971 ] } },
+{ "type": "Feature", "properties": { "id": 7, "name": "啟夏門", "category": "outer", "eng_name": "Qi Xia Gate" }, "geometry": { "type": "Point", "coordinates": [ 108.951049338234, 34.206122942081393 ] } },
+{ "type": "Feature", "properties": { "id": 8, "name": "明德門", "category": "outer", "eng_name": "Ming De Gate" }, "geometry": { "type": "Point", "coordinates": [ 108.935293980685103, 34.206009184987174 ] } },
+{ "type": "Feature", "properties": { "id": 9, "name": "安化門", "category": "outer", "eng_name": "An Hua Gate" }, "geometry": { "type": "Point", "coordinates": [ 108.919595501683304, 34.20606606353428 ] } },
+{ "type": "Feature", "properties": { "id": 10, "name": "延平門", "category": "outer", "eng_name": "Yan Ping Gate" }, "geometry": { "type": "Point", "coordinates": [ 108.88398953119372, 34.231604531185752 ] } },
+{ "type": "Feature", "properties": { "id": 11, "name": "金光門", "category": "outer", "eng_name": "Jin Guang Gate" }, "geometry": { "type": "Point", "coordinates": [ 108.884046409740833, 34.252422079427262 ] } },
+{ "type": "Feature", "properties": { "id": 12, "name": "開遠門", "category": "outer", "eng_name": "Kai Yuan Gate" }, "geometry": { "type": "Point", "coordinates": [ 108.884103288287946, 34.269258129371217 ] } },
+{ "type": "Feature", "properties": { "id": 13, "name": "含光門", "category": "inner", "eng_name": "Han Guang Gate" }, "geometry": { "type": "Point", "coordinates": [ 108.927838471505652, 34.253249383257689 ] } },
+{ "type": "Feature", "properties": { "id": 14, "name": "朱雀門", "category": "inner", "eng_name": "Zhu Que Gate" }, "geometry": { "type": "Point", "coordinates": [ 108.93533691360112, 34.253249383257689 ] } },
+{ "type": "Feature", "properties": { "id": 15, "name": "安上門", "category": "inner", "eng_name": "An Shang Gate" }, "geometry": { "type": "Point", "coordinates": [ 108.942835355696587, 34.253249383257689 ] } }
+]
+}
