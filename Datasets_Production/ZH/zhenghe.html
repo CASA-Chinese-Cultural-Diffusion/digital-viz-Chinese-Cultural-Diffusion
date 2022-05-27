@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Zhenghe</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/mapbox/assembly/publisher-staging/src/svgs/mapbox.svg">
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://unpkg.com/intersection-observer@0.12.0/intersection-observer.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Manrope' rel='stylesheet'>
+	<script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+    <script src="https://unpkg.com/scrollama"></script>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="map"></div>
+<div id="mapInset"></div>
+<div id="story"></div>
+
+<script src="./zconfig.js"></script>
+<script>
+
+var initLoad = true;
+var layerTypes = {
+    'fill': ['fill-opacity'],
+    'line': ['line-opacity'],
+    'circle': ['circle-opacity', 'circle-stroke-opacity'],
+    'symbol': ['icon-opacity', 'text-opacity'],
+    'raster': ['raster-opacity'],
+    'fill-extrusion': ['fill-extrusion-opacity'],
+    'heatmap': ['heatmap-opacity']
+}
+
+var alignments = {
+    'left': 'lefty',
+    'center': 'centered',
+    'right': 'righty',
+    'full': 'fully'
+}
+
+function getLayerPaintType(layer) {
+    var layerType = map.getLayer(layer).type;
+    return layerTypes[layerType];
+}
+
+function setLayerOpacity(layer) {
+    var paintProps = getLayerPaintType(layer.layer);
+    paintProps.forEach(function(prop) {
+        var options = {};
+        if (layer.duration) {
+            var transitionProp = prop + "-transition";
+            options = { "duration": layer.duration };
+            map.setPaintProperty(layer.layer, transitionProp, options);
+        }
+        map.setPaintProperty(layer.layer, prop, layer.opacity, options);
+    });
+}
+
+var story = document.getElementById('story');
+var features = document.createElement('div');
+features.setAttribute('id', 'features');
+
+var header = document.createElement('div');
+
+if (config.title) {
+    var titleText = document.createElement('h1');
+    titleText.innerText = config.title;
+    header.appendChild(titleText);
+}
+
+if (config.subtitle) {
+    var subtitleText = document.createElement('h2');
+    subtitleText.innerText = config.subtitle;
+    header.appendChild(subtitleText);
+}
+
+if (config.byline) {
+    var bylineText = document.createElement('p');
+    bylineText.innerText = config.byline;
+    header.appendChild(bylineText);
+}
+
+if (header.innerText.length > 0) {
+    header.classList.add(config.theme);
+    header.setAttribute('id', 'header');
+    story.appendChild(header);
+}
+
+config.chapters.forEach((record, idx) => {
+    var container = document.createElement('div');
+    var chapter = document.createElement('div');
+
+    if (record.title) {
+        var title = document.createElement('h3');
+        title.innerText = record.title;
+        chapter.appendChild(title);
+    }
+
+    if (record.image) {
+        var image = new Image();
+        image.src = record.image;
+        chapter.appendChild(image);
+    }
+
+    if (record.description) {
+        var story = document.createElement('p');
+        story.innerHTML = record.description;
+        chapter.appendChild(story);
+    }
+
+    container.setAttribute('id', record.id);
+    container.classList.add('step');
+    if (idx === 0) {
+        container.classList.add('active');
+    }
+
+    chapter.classList.add(config.theme);
+    container.appendChild(chapter);
+    container.classList.add(alignments[record.alignment] || 'centered');
+    if (record.hidden) {
+        container.classList.add('hidden');
+    }
+    features.appendChild(container);
+});
+
+story.appendChild(features);
+
+var footer = document.createElement('div');
+
+if (config.footer) {
+    var footerText = document.createElement('p');
+    footerText.innerHTML = config.footer;
+    footer.appendChild(footerText);
+}
+
+if (footer.innerText.length > 0) {
+    footer.classList.add(config.theme);
+    footer.setAttribute('id', 'footer');
+    story.appendChild(footer);
+}
+
+mapboxgl.accessToken = config.accessToken;
+
+const transformRequest = (url) => {
+    const hasQuery = url.indexOf("?") !== -1;
+    const suffix = hasQuery ? "&pluginName=scrollytellingV2" : "?pluginName=scrollytellingV2";
+    return {
+      url: url + suffix
+    }
+}
+
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: config.style,
+    center: config.chapters[0].location.center,
+    zoom: config.chapters[0].location.zoom,
+    bearing: config.chapters[0].location.bearing,
+    pitch: config.chapters[0].location.pitch,
+    interactive: true,
+	//cooperativeGestures: true,
+    transformRequest: transformRequest,
+    projection: config.projection
+});
+
+// Create a inset map if enabled in config.js
+if (config.inset) {
+ var insetMap = new mapboxgl.Map({
+    container: 'mapInset', // container id
+    style: 'mapbox://styles/sherlker/cjyl6a06a1fp91co24zjyaz6k', //hosted style id
+    center: config.chapters[0].location.center,
+    zoom: 1, 
+    hash: false,
+    interactive: false,
+    attributionControl: false,
+  });
+}
+
+if (config.showMarkers) {
+    var marker = new mapboxgl.Marker({ color: config.markerColor });
+    marker.setLngLat(config.chapters[0].location.center).addTo(map);
+}
+
+// instantiate the scrollama
+var scroller = scrollama();
+
+
+map.on("load", function() {
+    if (config.use3dTerrain) {
+        map.addSource('mapbox-dem', {
+            'type': 'raster-dem',
+            'url': 'mapbox://mapbox.mapbox-terrain-dem-v1',
+            'tileSize': 512,
+            'maxzoom': 14
+        });
+        // add the DEM source as a terrain layer with exaggerated height
+        map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1.5 });
+
+        // add a sky layer that will show when the map is highly pitched
+        map.addLayer({
+            'id': 'sky',
+            'type': 'sky',
+            'paint': {
+                'sky-type': 'atmosphere',
+                'sky-atmosphere-sun': [0.0, 0.0],
+                'sky-atmosphere-sun-intensity': 15
+            }
+        });
+    };
+
+    
+
+    // As the map moves, grab and update bounds in inset map.
+    if (config.inset) {
+    map.on('move', getInsetBounds);
+    }
+    // setup the instance, pass callback functions
+    scroller
+    .setup({
+        step: '.step',
+        offset: 0.5,
+        progress: true
+    })
+    // A dynamic inset map,
+    .onStepEnter(async response => {
+        var chapter = config.chapters.find(chap => chap.id === response.element.id);
+        response.element.classList.add('active');
+        map[chapter.mapAnimation || 'flyTo'](chapter.location);
+        if (config.inset) {
+          if (chapter.location.zoom < 4) {
+            insetMap.flyTo({center: chapter.location.center, zoom: 1});
+          }
+          else {
+            insetMap.flyTo({center: chapter.location.center, zoom: 1});
+          }
+        }
+        if (config.showMarkers) {
+            marker.setLngLat(chapter.location.center);
+        }
+        if (chapter.onChapterEnter.length > 0) {
+            chapter.onChapterEnter.forEach(setLayerOpacity);
+        }
+        if (chapter.callback) {
+            window[chapter.callback]();
+        }
+        if (chapter.rotateAnimation) {
+            map.once('moveend', () => {
+                const rotateNumber = map.getBearing();
+                map.rotateTo(rotateNumber + 80, {
+                    duration: 30000, easing: function (t) {
+                        return t;
+                    }
+                });
+            });
+        }
+    })
+    .onStepExit(response => {
+        var chapter = config.chapters.find(chap => chap.id === response.element.id);
+        response.element.classList.remove('active');
+        if (chapter.onChapterExit.length > 0) {
+            chapter.onChapterExit.forEach(setLayerOpacity);
+        }
+    });
+
+});
+
+// Functions for insetmap
+function getInsetBounds() {
+            let bounds = map.getBounds();
+
+            let boundsJson = {
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [
+                            [
+                                [
+                                    bounds._sw.lng,
+                                    bounds._sw.lat
+                                ],
+                                [
+                                    bounds._ne.lng,
+                                    bounds._sw.lat
+                                ],
+                                [
+                                    bounds._ne.lng,
+                                    bounds._ne.lat
+                                ],
+                                [
+                                    bounds._sw.lng,
+                                    bounds._ne.lat
+                                ],
+                                [
+                                    bounds._sw.lng,
+                                    bounds._sw.lat
+                                ]
+                            ]
+                        ]
+                    }
+                }]
+            }
+
+            if (initLoad) {
+                addInsetLayer(boundsJson);
+                initLoad = false;
+            } else {
+                updateInsetLayer(boundsJson);
+            }
+
+        }
+
+function addInsetLayer(bounds) {
+    insetMap.addSource('boundsSource', {
+        'type': 'geojson',
+        'data': bounds
+    });
+
+    insetMap.addLayer({
+        'id': 'boundsLayer',
+        'type': 'fill',
+        'source': 'boundsSource', // reference the data source
+        'layout': {},
+        'paint': {
+            'fill-color': '#e9f74d', // blue color fill
+            'fill-opacity': 0.05
+        }
+    });
+    // // Add a black outline around the polygon.
+    insetMap.addLayer({
+        'id': 'outlineLayer',
+        'type': 'line',
+        'source': 'boundsSource',
+        'layout': {},
+        'paint': {
+            'line-color': '#606980',
+            'line-width': 1
+        }
+    });
+}
+
+function updateInsetLayer(bounds) {
+    insetMap.getSource('boundsSource').setData(bounds);
+}
+
+// setup resize event
+window.addEventListener('resize', scroller.resize);
+
+//The hover for maritime
+
+map.on('load', () => {
+
+    
+        map.addSource('hover', {
+            'type': 'geojson',
+            'data': 'https://raw.githubusercontent.com/sherlkk/DVG/main/zhpoints.geojson',
+        });
+        // Add a layer showing the places.
+        map.addLayer({
+            'id': 'hover',
+            'type': 'symbol',
+            'source': 'hover',
+            'layout': {
+                'icon-image': 'nz-state-2',
+                'icon-size': 0.4,
+                'icon-allow-overlap': true,               
+                'icon-ignore-placement': true,
+            },
+            'paint': {
+                  'icon-opacity':
+                    0.88,
+            }
+        });
+
+        // Create a popup, but don't add it to the map yet.
+        const popup = new mapboxgl.Popup({
+            closeButton: false,
+            closeOnClick: false
+        });
+
+        map.on('mouseenter', 'hover', (e) => {
+            // Change the cursor style as a UI indicator.
+            map.getCanvas().style.cursor = 'pointer';
+
+            // Copy coordinates array.
+            const coordinates = e.features[0].geometry.coordinates.slice();
+            const description = e.features[0].properties.description;
+
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            // Populate the popup and set its coordinates
+            // based on the feature found.
+            popup.setLngLat(coordinates).setHTML(description).addTo(map);
+        });
+
+        map.on('mouseleave', 'hover', () => {
+            map.getCanvas().style.cursor = '';
+            popup.remove();
+        });
+
+        map.on('mousemove', 'hover', function(e) {
+            if (e.features[0]) {
+              mouseover(e.features[0]);
+            } else {
+              mouseout();
+            }
+
+          });
+
+          map.on('mouseout', 'hover', function(e) {
+            mouseout();
+          });
+
+          function mouseover(feature) {
+            fHover = feature;
+            map.getCanvasContainer().style.cursor = 'pointer';
+
+            map.setFeatureState({
+              source: 'hover',
+              id: fHover.id
+            }, {
+              hover: true
+            });
+          }
+
+          function mouseout() {
+            if (!fHover) return;
+            map.getCanvasContainer().style.cursor = 'default';
+            map.setFeatureState({
+              source: 'hover',
+              id: fHover.id
+            }, {
+              hover: false
+            });
+            fHover = null;
+
+          }
+    });
+
+
+//The hover for the silk
+
+    map.on('load', () => {
+        map.addSource('marks', {
+            'type': 'geojson',
+            'data': 'https://raw.githubusercontent.com/sherlkk/DVG/main/zhsilk.geojson',
+        });
+        // Add a layer showing the places.
+        map.addLayer({
+            'id': 'marks',
+            'type': 'symbol',
+            'source': 'marks',
+            'layout': {
+                'icon-image': 'za-national-2',
+                'icon-size': 0.41,
+                'icon-allow-overlap': true,               
+                'icon-ignore-placement': true,
+            },
+            'paint': {
+                  'icon-opacity': 0.9,
+            }
+        });
+
+        // Create a popup, but don't add it to the map yet.
+        const popup = new mapboxgl.Popup({
+            closeButton: false,
+            closeOnClick: false
+        });
+
+        map.on('mouseenter', 'marks', (e) => {
+            // Change the cursor style as a UI indicator.
+            map.getCanvas().style.cursor = 'pointer';
+
+            // Copy coordinates array.
+            const coordinates = e.features[0].geometry.coordinates.slice();
+            const description = e.features[0].properties.description;
+
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            // Populate the popup and set its coordinates
+            // based on the feature found.
+            popup.setLngLat(coordinates).setHTML(description).addTo(map);
+        });
+
+        map.on('mouseleave', 'marks', () => {
+            map.getCanvas().style.cursor = '';
+            popup.remove();
+        });
+
+        map.on('mousemove', 'marks', function(e) {
+            if (e.features[0]) {
+              mouseover(e.features[0]);
+            } else {
+              mouseout();
+            }
+
+          });
+
+          map.on('mouseout', 'marks', function(e) {
+            mouseout();
+          });
+
+          function mouseover(feature) {
+            fHover = feature;
+            map.getCanvasContainer().style.cursor = 'pointer';
+
+            map.setFeatureState({
+              source: 'marks',
+              id: fHover.id
+            }, {
+              hover: true
+            });
+          }
+
+          function mouseout() {
+            if (!fHover) return;
+            map.getCanvasContainer().style.cursor = 'default';
+            map.setFeatureState({
+              source: 'marks',
+              id: fHover.id
+            }, {
+              hover: false
+            });
+            fHover = null;
+
+          }
+    });
+
+    
+</script>
+
+<!-- Animate the seven routes -->
+<!-- The buttom -->
+<div id="anime"></div>
+    <div class="overlay1">
+        <button id="qqlfirst"><span style="background-color: #566f70"></span>First Voyage</button>
+    </div>
+    <div class="overlay2">
+        <button id="hhhsecond"><span style="background-color: #6d2fb4"></span>Second & Third Voyage</button>
+    </div>
+    <div class="overlay3">
+        <button id="hhhfourth"><span style="background-color: #ca6e22"></span>Fourth Voyage</button>
+    </div>
+    <div class="overlay4">
+        <button id="hhhfifth"><span style="background-color: #549c57"></span>Fifth & Sixth Voyage</button>
+    </div>
+    <div class="overlay5">
+        <button id="full"><span style="background-color: #e45eb1"></span>Seventh Voyage (Last)</button>
+    </div>
+    <div class="overlay6">
+        <button id="interactive">Open the interaction</button>
+    </div>
+
+
+    <script>
+	mapboxgl.accessToken = 'pk.eyJ1Ijoic2hlcmxrZXIiLCJhIjoiY2p5bDVwMHJmMDR1djNscDd1eWF4eHpnMiJ9.Vbcq4CS53bHzqfWU_mAaHA';
+        // Create a new map.
+        const anime = new mapboxgl.Map({
+            container: 'anime',
+            style: 'mapbox://styles/sherlker/cl3fuiig9006o14nw3kt3p21q',
+            center: [ 93.85960, 26.20345],
+            zoom: 2.5
+        });
+		
+    const speed = 27
+    map.on('load', async () => {
+    
+            // The last route
+            const response = await fetch(         
+            'https://raw.githubusercontent.com/sherlkk/DVG/main/zhfull.geojson'             
+            );
+                    
+            const data = await response.json();            
+            // save full coordinate list for later                
+            const coordinates = data.features[0].geometry.coordinates[0];               
+            // start by showing just the first coordinate               
+            data.features[0].geometry.coordinates[0] = [coordinates[[0]]];    
+            
+
+            //The start animation 
+
+            map.addSource('trace', { type: 'geojson', data: data }); 
+
+            // map.addLayer({
+            //     'id': 'trace',
+            //     'type': 'line',
+            //     'source': 'trace',
+            //     'paint': {
+            //     'line-color': 'white',
+            //     'line-opacity': 0.5,
+            //     'line-width': 2
+            //     },
+            //     'layout': {
+            //     'line-cap': 'round',
+            //     'line-join': 'round'
+            //     }
+            // });
+ 
+            map.loadImage(
+                'https://raw.githubusercontent.com/sherlkk/DVG/main/sfunee.png',
+                    (error, image) => {
+                        if (error) throw error;
+
+                        // Add the image to the map style.
+                        map.addImage('fune', image);
+                        const move = {
+                            'type': 'FeatureCollection',
+                            'features': [
+                                {
+                                    'type': 'Feature',
+                                    'properties': {},
+                                    'geometry': {
+                                        'type': 'Point',
+                                        'coordinates': [ 118.800474076522789, 32.059281932576795 ]
+                                    }
+                                }
+                            ]
+                        };
+
+                        // Add a data source containing one point feature.
+                        map.addSource('move', { type: 'geojson', data: move }); 
+
+                        // Add a layer to use the image to represent the data.
+                        map.addLayer({
+                            'id': 'move',
+                            'type': 'symbol',
+                            'source': 'move', // reference the data source
+                            'layout': {
+                                'icon-image': 'fune', // reference the image
+                                'icon-size': 0.3,
+                                'icon-allow-overlap': true,               
+                                'icon-ignore-placement': true
+                            }
+                        });
+                        let i = 0;
+                        const timer = setInterval(() => {
+                            if (i < coordinates.length) {
+                                move.features[0].geometry.coordinates = coordinates[[i]];
+                                map.getSource('move').setData(move);
+                                i++;
+                                } 
+                                else {
+                                window.clearInterval(timer);
+                                }
+                            }, 20);
+                    }          
+            );
+
+
+            // setup the viewport
+            map.jumpTo({ 'center': coordinates[[0-15]], 'zoom': 2.2 });
+
+            // The last route 
+
+            document.getElementById('full').addEventListener('click',() => {
+                map.removeImage('fune')
+                map.removeLayer('move')
+                map.removeSource('move')
+                map.removeSource('trace')
+                
+
+            })
+
+            document.getElementById('full').addEventListener('click', async () => {
+
+                const response = await fetch(         
+                'https://raw.githubusercontent.com/sherlkk/DVG/main/zhfull.geojson'             
+                );
+                        
+                const data = await response.json();            
+                // save full coordinate list for later                
+                const coordinates = data.features[0].geometry.coordinates[0];               
+                // start by showing just the first coordinate               
+                data.features[0].geometry.coordinates[0] = [coordinates[[0]]];    
+                
+                // add it to the map               
+                map.addSource('trace', { type: 'geojson', data: data }); 
+                map.loadImage(
+                    'https://raw.githubusercontent.com/sherlkk/DVG/main/sfunee.png',
+                    (error, image) => {
+                        if (error) throw error;
+
+                        // Add the image to the map style.
+                        map.addImage('fune', image);
+                        const move = {
+                            'type': 'FeatureCollection',
+                            'features': [
+                                {
+                                    'type': 'Feature',
+                                    'properties': {},
+                                    'geometry': {
+                                        'type': 'Point',
+                                        'coordinates': [ 118.800474076522789, 32.059281932576795 ]
+                                    }
+                                }
+                            ]
+                        };
+
+                        // Add a data source containing one point feature.
+                        map.addSource('move', { type: 'geojson', data: move }); 
+
+                        // Add a layer to use the image to represent the data.
+                        map.addLayer({
+                            'id': 'move',
+                            'type': 'symbol',
+                            'source': 'move', // reference the data source
+                            'layout': {
+                                'icon-image': 'fune', // reference the image
+                                'icon-size': 0.3,
+                                'icon-allow-overlap': true,               
+                                'icon-ignore-placement': true
+                            }
+                        });
+                        let i = 0;
+                        const timer = setInterval(() => {
+                            if (i < coordinates.length) {
+                                move.features[0].geometry.coordinates = coordinates[[i]];
+                                map.getSource('move').setData(move);
+                                i++;
+                                } 
+                                else {
+                                window.clearInterval(timer);
+                                }
+                            }, speed);
+                    }          
+                    );
+                });
+
+            //The first one
+
+            document.getElementById('qqlfirst').addEventListener('click',() => {
+                map.removeLayer('move')
+                map.removeSource('move')
+                map.removeSource('trace')
+            })
+
+            document.getElementById('qqlfirst').addEventListener('click', async () => {
+
+                const response = await fetch(         
+                'https://raw.githubusercontent.com/sherlkk/DVG/main/zhfirst.geojson'             
+                );
+                        
+                const data = await response.json();            
+                // save full coordinate list for later                
+                const coordinates = data.features[0].geometry.coordinates[0];               
+                // start by showing just the first coordinate               
+                data.features[0].geometry.coordinates[0] = [coordinates[[0]]];    
+                
+                // add it to the map               
+                map.addSource('trace', { type: 'geojson', data: data }); 
+                map.loadImage(
+                    'https://raw.githubusercontent.com/sherlkk/DVG/main/sfunee.png',
+                    (error, image) => {
+                        if (error) throw error;
+
+                        // Add the image to the map style.
+                        map.addImage('fune', image);
+                        const move = {
+                            'type': 'FeatureCollection',
+                            'features': [
+                                {
+                                    'type': 'Feature',
+                                    'properties': {},
+                                    'geometry': {
+                                        'type': 'Point',
+                                        'coordinates': [ 118.800474076522789, 32.059281932576795 ]
+                                    }
+                                }
+                            ]
+                        };
+
+                        // Add a data source containing one point feature.
+                        map.addSource('move', { type: 'geojson', data: move }); 
+
+                        // Add a layer to use the image to represent the data.
+                        map.addLayer({
+                            'id': 'move',
+                            'type': 'symbol',
+                            'source': 'move', // reference the data source
+                            'layout': {
+                                'icon-image': 'fune', // reference the image
+                                'icon-size': 0.3,
+                                'icon-allow-overlap': true,               
+                                'icon-ignore-placement': true
+                            }
+                        });
+                        let i = 0;
+                        const timer = setInterval(() => {
+                            if (i < coordinates.length) {
+                                move.features[0].geometry.coordinates = coordinates[[i]];
+                                map.getSource('move').setData(move);
+                                i++;
+                                } 
+                                else {
+                                window.clearInterval(timer);
+                                }
+                            }, speed);
+                    }          
+                    );
+                });
+
+                // The second and third one
+
+                document.getElementById('hhhsecond').addEventListener('click',() => {
+                map.removeLayer('move')
+                map.removeSource('trace')
+                })
+
+                document.getElementById('hhhsecond').addEventListener('click', async () => {
+                map.removeLayer('move')
+                map.removeSource('move')
+
+                const response = await fetch(         
+                'https://raw.githubusercontent.com/sherlkk/DVG/main/zhst.geojson'             
+                );
+                        
+                const data = await response.json();                         
+                const coordinates = data.features[0].geometry.coordinates[0];                            
+                data.features[0].geometry.coordinates[0] = [coordinates[[0]]];    
+
+                // add it to the map               
+                map.addSource('trace', { type: 'geojson', data: data }); 
+                map.loadImage(
+                    'https://raw.githubusercontent.com/sherlkk/DVG/main/sfunee.png',
+                    (error, image) => {
+                        if (error) throw error;
+
+                        // Add the image to the map style.
+                        map.addImage('fune', image);
+                        const move = {
+                            'type': 'FeatureCollection',
+                            'features': [
+                                {
+                                    'type': 'Feature',
+                                    'properties': {},
+                                    'geometry': {
+                                        'type': 'Point',
+                                        'coordinates': [ 118.800474076522789, 32.059281932576795 ]
+                                    }
+                                }
+                            ]
+                        };
+
+                        // Add a data source containing one point feature.
+                        map.addSource('move', { type: 'geojson', data: move }); 
+
+                        // Add a layer to use the image to represent the data.
+                        map.addLayer({
+                            'id': 'move',
+                            'type': 'symbol',
+                            'source': 'move', // reference the data source
+                            'layout': {
+                                'icon-image': 'fune', // reference the image
+                                'icon-size': 0.3,
+                                'icon-allow-overlap': true,               
+                                'icon-ignore-placement': true
+                            }
+                        });
+                        let i = 0;
+                        const timer = setInterval(() => {
+                            if (i < coordinates.length) {
+                                move.features[0].geometry.coordinates = coordinates[[i]];
+                                map.getSource('move').setData(move);
+                                i++;
+                                } 
+                                else {
+                                window.clearInterval(timer);
+                                }
+                            }, speed);
+                    }          
+                    );
+                });
+
+                // The fourth one
+
+                document.getElementById('hhhfourth').addEventListener('click',() => {
+                map.removeLayer('move')
+                map.removeSource('trace')
+                })
+
+                document.getElementById('hhhfourth').addEventListener('click', async () => {
+                map.removeLayer('move')
+                map.removeSource('move')
+
+                const response = await fetch(         
+                'https://raw.githubusercontent.com/sherlkk/DVG/main/zhfour.geojson'             
+                );
+                        
+                const data = await response.json();                           
+                const coordinates = data.features[0].geometry.coordinates[0];                            
+                data.features[0].geometry.coordinates[0] = [coordinates[[0]]];    
+
+                // add it to the map               
+                map.addSource('trace', { type: 'geojson', data: data }); 
+                map.loadImage(
+                    'https://raw.githubusercontent.com/sherlkk/DVG/main/sfunee.png',
+                    (error, image) => {
+                        if (error) throw error;
+
+                        // Add the image to the map style.
+                        map.addImage('fune', image);
+                        const move = {
+                            'type': 'FeatureCollection',
+                            'features': [
+                                {
+                                    'type': 'Feature',
+                                    'properties': {},
+                                    'geometry': {
+                                        'type': 'Point',
+                                        'coordinates': [ 118.800474076522789, 32.059281932576795 ]
+                                    }
+                                }
+                            ]
+                        };
+
+                        // Add a data source containing one point feature.
+                        map.addSource('move', { type: 'geojson', data: move }); 
+
+                        // Add a layer to use the image to represent the data.
+                        map.addLayer({
+                            'id': 'move',
+                            'type': 'symbol',
+                            'source': 'move', // reference the data source
+                            'layout': {
+                                'icon-image': 'fune', // reference the image
+                                'icon-size': 0.3,
+                                'icon-allow-overlap': true,               
+                                'icon-ignore-placement': true
+                            }
+                        });
+                        let i = 0;
+                        const timer = setInterval(() => {
+                            if (i < coordinates.length) {
+                                move.features[0].geometry.coordinates = coordinates[[i]];
+                                map.getSource('move').setData(move);
+                                i++;
+                                } 
+                                else {
+                                window.clearInterval(timer);
+                                }
+                            }, speed);
+                    }          
+                    );
+                });
+
+                // The fifth and sixth one
+                document.getElementById('hhhfifth').addEventListener('click',() => {
+                map.removeLayer('move')
+                map.removeSource('trace')
+                })
+
+                document.getElementById('hhhfifth').addEventListener('click', async () => {
+                map.removeLayer('move')
+                map.removeSource('move')
+
+                const response = await fetch(         
+                'https://raw.githubusercontent.com/sherlkk/DVG/main/zhfive.geojson'             
+                );
+                        
+                const data = await response.json();                           
+                const coordinates = data.features[0].geometry.coordinates[0];                           
+                data.features[0].geometry.coordinates[0] = [coordinates[[0]]];    
+
+                // add it to the map               
+                map.addSource('trace', { type: 'geojson', data: data }); 
+                map.loadImage(
+                    'https://raw.githubusercontent.com/sherlkk/DVG/main/sfunee.png',
+                    (error, image) => {
+                        if (error) throw error;
+
+                        // Add the image to the map style.
+                        map.addImage('fune', image);
+                        const move = {
+                            'type': 'FeatureCollection',
+                            'features': [
+                                {
+                                    'type': 'Feature',
+                                    'properties': {},
+                                    'geometry': {
+                                        'type': 'Point',
+                                        'coordinates': [ 118.800474076522789, 32.059281932576795 ]
+                                    }
+                                }
+                            ]
+                        };
+
+                        // Add a data source containing one point feature.
+                        map.addSource('move', { type: 'geojson', data: move }); 
+
+                        // Add a layer to use the image to represent the data.
+                        map.addLayer({
+                            'id': 'move',
+                            'type': 'symbol',
+                            'source': 'move', // reference the data source
+                            'layout': {
+                                'icon-image': 'fune', // reference the image
+                                'icon-size': 0.3,
+                                'icon-allow-overlap': true,               
+                                'icon-ignore-placement': true
+                            }
+                        });
+                        let i = 0;
+                        const timer = setInterval(() => {
+                            if (i < coordinates.length) {
+                                move.features[0].geometry.coordinates = coordinates[[i]];
+                                map.getSource('move').setData(move);
+                                i++;
+                                } 
+                                else {
+                                window.clearInterval(timer);
+                                }
+                            }, speed);
+                    }          
+                    );
+                });
+
+                // The last one
+
+                document.getElementById('full').addEventListener('click',() => {
+                map.removeLayer('move')
+                map.removeSource('trace')
+                })
+
+                document.getElementById('full').addEventListener('click', async () => {
+                map.removeLayer('move')
+                map.removeSource('move')
+
+                const response = await fetch(         
+                'https://raw.githubusercontent.com/sherlkk/DVG/main/zhfull.geojson'             
+                );
+                        
+                const data = await response.json();                       
+                const coordinates = data.features[0].geometry.coordinates[0];                            
+                data.features[0].geometry.coordinates[0] = [coordinates[[0]]];    
+
+                // add it to the map               
+                map.addSource('trace', { type: 'geojson', data: data }); 
+                map.loadImage(
+                    'https://raw.githubusercontent.com/sherlkk/DVG/main/sfunee.png',
+                    (error, image) => {
+                        if (error) throw error;
+
+                        // Add the image to the map style.
+                        map.addImage('fune', image);
+                        const move = {
+                            'type': 'FeatureCollection',
+                            'features': [
+                                {
+                                    'type': 'Feature',
+                                    'properties': {},
+                                    'geometry': {
+                                        'type': 'Point',
+                                        'coordinates': [ 118.800474076522789, 32.059281932576795 ]
+                                    }
+                                }
+                            ]
+                        };
+
+                        // Add a data source containing one point feature.
+                        map.addSource('move', { type: 'geojson', data: move }); 
+
+                        // Add a layer to use the image to represent the data.
+                        map.addLayer({
+                            'id': 'move',
+                            'type': 'symbol',
+                            'source': 'move', // reference the data source
+                            'layout': {
+                                'icon-image': 'fune', // reference the image
+                                'icon-size': 0.3,
+                                'icon-allow-overlap': true,               
+                                'icon-ignore-placement': true
+                            }
+                        });
+                        let i = 0;
+                        const timer = setInterval(() => {
+                            if (i < coordinates.length) {
+                                move.features[0].geometry.coordinates = coordinates[[i]];
+                                map.getSource('move').setData(move);
+                                i++;
+                                } 
+                                else {
+                                window.clearInterval(timer);
+                                }
+                            }, speed);
+                    }          
+                    );
+                });
+            });
+
+            document.getElementById('interactive').addEventListener('click', function() {
+								  if (document.getElementById("interactive").innerHTML == 'Open the interaction') {
+									  document.getElementById("interactive").innerHTML = 'Close the interaction';
+									  document.getElementById("map").style.pointerEvents = "auto";
+								  }
+
+								  else {
+									  document.getElementById("interactive").innerHTML = 'Open the interaction';
+                                      document.getElementById("map").style.pointerEvents = "none";
+								  }   
+								});
+
+
+</script>
+
+</body>
+</html>
