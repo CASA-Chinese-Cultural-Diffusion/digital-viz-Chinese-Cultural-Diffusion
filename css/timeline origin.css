@@ -1,0 +1,507 @@
+@font-face {
+  font-family: "Kangxi Dict";
+  src: url("../font/康熙字典体.ttf");
+}
+
+body {
+  /* background-color: rgba(49, 82, 91, 0.7); */
+  background-image: url('../figure/45degreee_fabric.webp');
+  overflow-x: hidden;
+  font-family: "Montserrat", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* navigation bar */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#open-nav {
+  position: fixed;
+  top: 120px;
+  right: 30px;
+  z-index: 9;
+}
+
+.navMenu {
+  position: fixed;
+  top: -50px;
+  left: 800px;
+  width: 120vw;
+  height: 100px;
+  text-align: center;
+  background-color: #203050;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  transition: 1s;
+  visibility: visible;
+}
+
+.navMenu a {
+  color: #f6f4e6;
+  text-decoration: none;
+  font-size: 1.2em;
+  font-weight: 500;
+  display: inline-block;
+  width: 150px;
+  padding: 6px;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.navMenu a:hover {
+  color: #fddb3a;
+}
+
+.navMenu .dot {
+  width: 6px;
+  height: 6px;
+  background: #fddb3a;
+  border-radius: 50%;
+  opacity: 0;
+  -webkit-transform: translateX(50px);
+  transform: translateX(50px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.navMenu a:nth-child(1):hover ~ .dot {
+  -webkit-transform: translateX(400px);
+  transform: translateX(400px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(2):hover ~ .dot {
+  -webkit-transform: translateX(550px);
+  transform: translateX(550px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(3):hover ~ .dot {
+  -webkit-transform: translateX(710px);
+  transform: translateX(710px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(4):hover ~ .dot {
+  -webkit-transform: translateX(865px);
+  transform: translateX(865px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(5):hover ~ .dot {
+  -webkit-transform: translateX(1020px);
+  transform: translateX(1020px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(6):hover ~ .dot {
+  -webkit-transform: translateX(1170px);
+  transform: translateX(1170px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(7):hover ~ .dot {
+  -webkit-transform: translateX(1340px);
+  transform: translateX(1340px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(8):hover ~ .dot {
+  -webkit-transform: translateX(1490px);
+  transform: translateX(1490px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(9):hover ~ .dot {
+  -webkit-transform: translateX(1640px);
+  transform: translateX(1640px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+
+
+.cover {
+  margin-top: 0;
+  height: 100vh;
+  width: 100vw;
+  background: url("../html/cover/notitle.jpg") no-repeat center center fixed; /* 设置封面图片 */
+
+  background-size: 100%; /* Resize the background image to cover the entire container */
+}
+
+
+#about_us {
+  margin-top: 0;
+  height: 100vh;
+  width: 100vw;
+  background: url("../html/cover/notitle.jpg") no-repeat center center fixed; 
+
+  background-size: 100%; /* Resize the background image to cover the entire container */
+}
+
+.mask {
+
+  /* 改变蒙版颜色 */
+  background-color: rgba(49, 82, 91, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 101vw;
+  height: 100vh;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+#end_text {
+  position: absolute;
+  background-color: white;
+}
+
+.cover_pic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 101vw;
+  height: 102vh;
+}
+
+.button {
+  font-family: 'Lato', sans-serif;
+  background-color: #31525B;
+  border: 1px solid white;
+  border-radius: 10px;
+  color: white;
+  padding: 12px;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.scroll-btn {
+  background-color: rgba(249,219,24,1);
+  border: none;
+  color: #31525B;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 18px;
+  z-index: 3;
+}
+
+.scroll-btn:hover {
+  background-color: #fff;
+  color: #31525B;
+  border: none;
+}
+
+
+
+img {
+  max-width: 100%;
+}
+
+.ag-format-container {
+  width: 1200px;
+  margin: 0 auto;
+
+  position: relative;
+}
+
+.ag-timeline-block {
+  padding: 100px 0;
+}
+.ag-timeline_title-box {
+  padding: 0 0 30px;
+
+  text-align: center;
+}
+.ag-timeline_tagline {
+  font-size: 40px;
+  color: rgb(84, 89, 95);
+}
+.ag-timeline_title {
+  
+  background-image: linear-gradient(to right, #75878A,#758A99, #424C50);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+
+  background-size: cover;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  font-size: 65px;
+  
+  font-family: 'Josefin Sans', sans-serif;
+  
+  
+}
+
+/* 每个格子的高度 */
+.ag-timeline_item {
+  margin: 0 0 300px; 
+  position: relative;
+}
+
+
+
+.ag-timeline_item {
+  text-align: right;
+}
+
+.ag-timeline {
+  display: inline-block;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+
+  position: relative;
+}
+
+
+.ag-timeline_line {
+  width: 5px;
+  background-color: #393935;
+
+  position: absolute;
+  top: 0;
+  left: 10px;
+  bottom: 0;
+
+  overflow: hidden;
+
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.ag-timeline_line-progress {
+  width: 100%;
+  height: 10%;
+  background-color: #A0B8B8;
+}
+
+.ag-timeline-card_box {
+  padding: 0 0 0 0;
+  position: relative;
+  top: 20px;
+  left: 0%;
+  right: 5%;
+}
+
+.ag-section {
+  width: 100%;
+}
+
+.ag-timeline-card_point-box {
+  display: inline-block;
+  margin: 0 -30px 0 30px;
+  position: absolute;
+  left: 0px;
+}
+
+.ag-timeline-card_point {
+  height: 50px;
+  line-height: 50px;
+  width: 50px;
+  border: 3px solid #203050;
+  background-color: #203050;
+  position: absolute;
+  left: 5px;
+
+  text-align: center;
+  font-family: 'Kangxi Dict';
+  font-size: 36px;
+  color: #FFF;
+
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  position: inherit;
+  left: 0px;
+}
+
+.ag-timeline-card_point_eng {
+  height: 50px;
+  line-height: 50px;
+  width: 50px;
+  position: absolute;
+  top: 30px;
+  left: 5px;
+
+  text-align: center;
+  font-family: 'Kangxi Dict';
+  font-size: 18px;
+  color: #FFF;
+
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  position: inherit;
+  left: 0px;
+}
+
+/* 时间轴标题圆圈变色 */
+.js-ag-active .ag-timeline-card_point {
+  color: #fff;
+  background-color: #A0B8B8;
+}
+.ag-timeline-card_meta-box {
+  display: inline-block;
+  position: absolute;
+  left: 60px;
+}
+.ag-timeline-card_meta {
+  margin: 10px 40px 0;
+
+  font-family: 'Tapestry', cursive;
+  font-weight: bold;
+  font-size: 28px;
+  color: #203050;
+}
+.ag-timeline-card_item {
+  display: inline-block;
+  top: 90px;
+  left: 20px;
+  width: 50vw;
+  height: 50vh;
+  margin: 0 0 0;
+  background-color: #282828;
+
+  opacity: 0;
+
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+
+  -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
+  -moz-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
+  -o-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
+  box-shadow: 0 0 0 0 rgba(0,0,0,.5);
+
+  -webkit-transition: -webkit-transform .5s, opacity .5s;
+  -moz-transition: -moz-transform .5s, opacity .5s;
+  -o-transition: -o-transform .5s, opacity .5s;
+  transition: transform .5s, opacity .5s;
+
+  position: relative;
+}
+
+.ag-timeline_item .ag-timeline-card_item {
+  -webkit-transform: translateX(200%);
+  -moz-transform: translateX(200%);
+  -ms-transform: translateX(200%);
+  -o-transform: translateX(200%);
+  transform: translateX(200%);
+}
+
+.js-ag-active.ag-timeline_item .ag-timeline-card_item {
+  opacity: 1;
+
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  -o-transform: translateX(0);
+  transform: translateX(0);
+}
+.ag-timeline-card_arrow {
+  height: 18px;
+  width: 18px;
+  margin-top: 20px;
+  background-color: #282828;
+
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.submap {
+  position: relative;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.minimap {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.ag-timeline_item .ag-timeline-card_arrow {
+  margin-left: -10px;
+
+  right: auto;
+  left: 0;
+}
+.ag-timeline-card_img {
+  width: 100%;
+}
+.ag-timeline-card_info {
+  padding: 20px 30px;
+  position: absolute;
+  left: -25px;
+}
+
+.ag-timeline-card_inner {
+  position: absolute;
+  left: -500px;
+  /* border: 30px white; */
+  bottom: -700px;
+  right: 640px;
+}
+
+.ag-timeline-card_title {
+  display: none;
+  margin: 10px 0 0;
+
+  font-family: 'ESL Legend', sans-serif;
+  font-weight: bold;
+  font-size: 28px;
+  color: #FF0;
+}
+.desc {
+  line-height: 1.45;
+
+  font-size: 16px;
+  color: #FFF;
+}

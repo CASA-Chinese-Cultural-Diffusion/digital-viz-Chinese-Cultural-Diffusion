@@ -1,0 +1,190 @@
+.btn-pluss {
+  overflow: hidden;
+  position: fixed;
+  display: block;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 22px;
+  top: 100px;
+  right: 50px;
+  width: 30px;
+  margin: 0 auto;
+  background-color: white;
+  transition: width 0.3s 0.5s ease, border-radius 1.1s ease;
+  z-index: 4;
+}
+.btn-pluss a {
+  display: block;
+  position: relative;
+  color: #4a5467;
+  text-decoration: none;
+  overflow: hidden;
+  padding: 5px;
+  border-radius: 5px;
+  z-index: 4;
+
+}
+.btn-pluss a:hover {
+  text-decoration: inherit;
+  color: white;
+  background-color: #4a5467;
+  transition: background-color 0.5s ease;
+}
+.btn-pluss:after {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+  line-height: 20px;
+  text-align: center;
+  font-size: 1.1rem;
+  background-color: #4a5467;
+  color: white;
+  transform: translateY(-50%) translateX(-50%);
+  transition: all 0.3s 0.5s ease;
+  cursor: pointer;
+  cursor: hand;
+}
+.btn-pluss ul {
+  opacity: 0;
+}
+.btn-pluss ul {
+  margin-top: 15px;
+  opacity: 0;
+  width: 100%;
+  margin-left: 0px;
+  transition: all 0.5s ease;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.btn-pluss ul li {
+  background-color: #e4e4e4;
+  margin-top: 5px;
+  border-radius: 5px;
+  width: 100%;
+  height: 0px;
+  overflow: hidden;
+  transition: height 1s ease;
+}
+
+.tooltip {
+  position: fixed;
+  padding: 5px;
+  border-radius: 5px;
+  width: auto;
+  top: 60px;
+  right: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin: 0 auto;
+  margin-bottom: 15px;
+  -webkit-animation-duration: 3s;
+          animation-duration: 3s;
+  -webkit-animation-name: jump;
+          animation-name: jump;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  background-color: #fff;
+  color: #4a5467;
+  transition: all 1s ease;
+  pointer-events: none;
+  z-index: 4;
+
+}
+.tooltip::after {
+  content: "";
+  position: absolute;
+  transform: rotate(45deg);
+  display: block;
+  height: 10px;
+  width: 10px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background-color: inherit;
+}
+.tooltip::before {
+  content: "";
+  color: white;
+}
+
+.btn-pluss-wrapper {
+  width: 0px;
+  height: 0px;
+}
+
+.btn-pluss-wrapper:hover .tooltip {
+  -webkit-animation-duration: 0s;
+          animation-duration: 0s;
+  transition: all 1s ease;
+  color: white;
+  width: 90px;
+  top: 60px;
+  right: 80px;
+}
+.btn-pluss-wrapper:hover .tooltip::before {
+  content: "Choose!";
+  display: block;
+  color: #4a5467;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  transform: translateY(-50%);
+  transition: all 0.5s 0.3s ease;
+}
+.btn-pluss-wrapper:hover .btn-pluss {
+  width: 150px;
+  border-radius: 15px;
+  padding-bottom: 5px;
+  transition: width 0.3s ease, border-radius 0.3s ease, padding-bottom 0.3s ease;
+}
+.btn-pluss-wrapper:hover .btn-pluss::after {
+  transition: all 0.3s ease;
+  left: 50%;
+  top: 10px;
+  transform: translateY(-5px) translateX(-50%);
+}
+.btn-pluss-wrapper:hover .btn-pluss ul {
+  opacity: 1;
+  margin-top: 30px;
+  transition: all 1s ease;
+  z-index: 5;
+}
+.btn-pluss-wrapper:hover .btn-pluss li {
+  height: 35px;
+  transition: height 1s ease;
+}
+.btn-pluss-wrapper:hover .btn-pluss li:hover {
+  border-bottom: 1px solid #d2c9c9;
+}
+
+@-webkit-keyframes jump {
+  0% {
+    transform: translateY(3px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(3px);
+  }
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(3px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(3px);
+  }
+}
