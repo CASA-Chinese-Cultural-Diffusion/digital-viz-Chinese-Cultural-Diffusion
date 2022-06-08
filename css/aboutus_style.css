@@ -14,10 +14,26 @@
 .logo {
   margin: 0 auto;
   text-align: center;
-  align-items: center;
-  height: 26vh;
+  /* align-items: center; */
+  height: 25vh;
   /* opacity: 0.5; */
 }
+
+
+.logo p{
+  margin: 0 auto;
+  text-align: center;
+  /* align-items: center; */
+  height: 26vh;
+  color:rgba(200, 190, 190, 0.7);
+  font-family: "Roboto", sans-serif;
+  font-size: 20;
+  ;
+  
+  /* opacity: 0.5; */
+}
+
+
 
 .at-grid {
   display: flex;
