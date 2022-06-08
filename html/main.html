@@ -2,7 +2,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Chinese among the world</title>
+  <title>Chinese cultural diffusion</title>
   <link rel="stylesheet" href="../css/timeline.css" />
   <!-- <link rel="stylesheet" href="./style.css"> -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css" rel="stylesheet">
@@ -15,7 +15,8 @@
   <link rel="stylesheet" href="../css/nav_style.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900'><link rel="stylesheet" href="./style.css">
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900'>
+  <!-- <link rel="stylesheet" href="./style.css"> -->
   
 </head>
 
@@ -25,7 +26,8 @@
     <h2 class="tooltip">Time travel!</h2>
     <div href="#" class="btn-pluss">
      <ul>
-      <li><a href="#changan_submap">Chang'an</a></li>
+      <li><a href="#">Start</a></li>
+      <li><a href="#changan_anchor">Chang'an</a></li>
       <li><a href="#silk">Silk road</a></li>
       <li><a href="#zhenghe">Zhenghe's voyage</a></li>
       <li><a href="#emigration">Emigation waves</a></li>
@@ -62,15 +64,20 @@
 
   	<!-- covering -->
     <link rel="stylesheet" href="../css/horizontal_line.css">
-	<div id="horizontal-line">
+	  <div id="horizontal-line">
     <p id="between-intro"> <b>A retrospective journey of Chinese cultural diffusion</b></p>
     <p id="between-intro-3"> <b>From Chang'an to the world</b></p>
     <p id="between-intro-4"> <b>Backtracking across the millennia</b></p>
-    <p id="between-intro-5"> <b>Our story starts in Chang'an, the most prosperous metropolis of 5th century</b></p>
+    <p id="between-intro-5"> <b>Our story starts in Chang'an, the most prosperous metropolis of 7th century</b></p>
 
-      <p id="between-intro-2">Click the button to start our journey</p>
+    <p id="between-intro-2">Click the button to start our journey</p>
     <div class="changan_button">
-      <img src="../figure/changan_button.png" id="changan_button" width="3%" height="3%" onclick="moveto()" alt="">
+      <!-- <a href="#changan_submap"> -->
+        <a href="#changan_anchor">
+        <img src="../figure/changan_button.png" id="changan_button" width="3%" height="3%" alt="">
+      </a>
+        <!-- <img src="../figure/changan_button.png" id="changan_button" width="3%" height="3%" onclick="moveto()" alt=""> -->
+
     </div>
       
     </div>
@@ -85,6 +92,7 @@
     <!-- map -->
     <div class="ag-timeline-card_item" id="changan_card_item">
       <!-- <img src="../GIF/changan.gif" class="submap" alt=""> -->
+      <div id="changan_anchor"></div>
       <iframe src="./changan0525/changan.html" frameborder="0" id="changan_submap" class="submap"></iframe>
     </div>
 
@@ -118,15 +126,16 @@
               <p>A road and a story as old as time,</p>
               <p>Asia and Europe crossing a line,</p>
               <p>bridging divides between people and culture,</p>
-              <p>crisscrossed with danger, predators and vultures (Dodwalker,2020).</p>
+              <p>crisscrossed with danger, predators and vultures.</p>
+              <p>(Dodwalker,2020)</p>
             </div>
 
             <!-- map -->
             <div class="ag-timeline-card_item" id="silk_card_item">
-              <a href="../html/new_silk/final.html" target="_blank">
-                <img src="../GIF/silkroad.gif" class="submap" alt="">
+              <a href="../html/silk/silk.html" target="_blank">
+                <img src="../GIF/silkroad.gif" class="submap" alt="" id="silk_submap">
               </a>
-              <!-- <iframe src="./new_silk/final.html" frameborder="0" class="submap"></iframe> -->
+              <!-- <iframe src="./silk/silk.html" frameborder="0" class="submap"></iframe> -->
               <!-- insert map if needed -->
               <!-- <iframe src="./changan/minimap.html" frameborder="1" scrolling="no" class="minimap"></iframe> -->
             </div>
@@ -154,12 +163,13 @@
               <p>Zheng He sailed far seas,</p>
               <p>with his great treasure fleet.</p>
               <p>The beaches he landed on,</p>
-              <p>written history did not register (He, n.d.).</p>
+              <p>written history did not register.</p>
+              <p>(He, n.d.)</p>
             </div>
 
             <!-- map -->
             <div class="ag-timeline-card_item" id="zhenghe_card_item">
-              <a href="./new_zhenghe/zhenghe.html" target="_blank">
+              <a href="./zhenghe/zhenghe.html" target="_blank">
                 <img src="../GIF/zhenghe.gif" class="submap" id="zhenghe_submap" alt="">
               </a>
               <!-- <iframe src="new_zhenghe/zhenghe.html" frameborder="0" class="submap" id="zhenghe"></iframe> -->
@@ -194,7 +204,8 @@
               <p>So we do.</p>
               <p>Four noodle shops on East </p>
               <p>Broadway release their belches collectively.</p>
-              <p>They breed in me a hankering for family life (Jenny, 2022).</p>
+              <p>They breed in me a hankering for family life.</p>
+              <p>(Jenny, 2022)</p>
 
             </div>
 
@@ -294,14 +305,11 @@
       <iframe src="Chinatown/chinatown.html" frameborder="0" class="submap" id="chinatown"></iframe>
 
           <!-- block -->
-        <!-- <div class="ag-timeline-card_box">
-          <div class="js-timeline-card_point-box ag-timeline-card_point-box"></div>
-        </div> -->
         <div id="xian_desc">
           <p>In the end, let's go back to the original starting point, Chang'an.</p>
         </div>
         <!-- map -->
-        <iframe src="Xi_an/summary page.html" frameborder="0" class="submap" id="xian"></iframe>
+        <iframe src="Xi_an/summary page.html" frameborder="1" class="submap" id="xian"></iframe>
 
           <!-- block over -->
 
@@ -313,7 +321,7 @@
       <div class="container">
         <div class="at-section">
           <!-- <p class="at-section__title"><strong>Acknowledgement</strong></p> -->
-          <p class="at-section__title"><b>CASA Group 4</b></p>
+          <p class="at-section__title"><b>Our Team</b></p>
         </div>
         <div class="at-grid" data-column="4">
           <div class="at-column">
@@ -321,41 +329,13 @@
               <div class="at-user__avatar"><img src="../figure/about_us/ce_hou.jpg"/></div>
               <div class="at-user__name">Ce Hou</div>
               <div class="at-user__title">Technical Director</div>
-              <!-- <ul class="at-social">
-                <li class="at-social__item"><a href="">
-                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M14 9h3l-.375 3H14v9h-3.89v-9H8V9h2.11V6.984c0-1.312.327-2.304.984-2.976C11.75 3.336 12.844 3 14.375 3H17v3h-1.594c-.594 0-.976.094-1.148.281-.172.188-.258.5-.258.938V9z" fill-rule="evenodd"></path>
-                    </svg></a></li>
-                <li class="at-social__item"><a href="">
-                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M20.875 7.5v.563c0 3.28-1.18 6.257-3.54 8.93C14.978 19.663 11.845 21 7.938 21c-2.5 0-4.812-.687-6.937-2.063.5.063.86.094 1.078.094 2.094 0 3.969-.656 5.625-1.968a4.563 4.563 0 0 1-2.625-.915 4.294 4.294 0 0 1-1.594-2.226c.375.062.657.094.844.094.313 0 .719-.063 1.219-.188-1.031-.219-1.899-.742-2.602-1.57a4.32 4.32 0 0 1-1.054-2.883c.687.328 1.375.516 2.062.516C2.61 9.016 1.938 7.75 1.938 6.094c0-.782.203-1.531.609-2.25 2.406 2.969 5.515 4.547 9.328 4.734-.063-.219-.094-.562-.094-1.031 0-1.281.438-2.36 1.313-3.234C13.969 3.437 15.047 3 16.328 3s2.375.484 3.281 1.453c.938-.156 1.907-.531 2.907-1.125-.313 1.094-.985 1.938-2.016 2.531.969-.093 1.844-.328 2.625-.703-.563.875-1.312 1.656-2.25 2.344z" fill-rule="evenodd"></path>
-                    </svg></a></li>
-                <li class="at-social__item"><a href="">
-                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M19.547 3c.406 0 .75.133 1.031.398.281.266.422.602.422 1.008v15.047c0 .406-.14.766-.422 1.078a1.335 1.335 0 0 1-1.031.469h-15c-.406 0-.766-.156-1.078-.469C3.156 20.22 3 19.86 3 19.453V4.406c0-.406.148-.742.445-1.008C3.742 3.133 4.11 3 4.547 3h15zM8.578 18V9.984H6V18h2.578zM7.36 8.766c.407 0 .743-.133 1.008-.399a1.31 1.31 0 0 0 .399-.96c0-.407-.125-.743-.375-1.009C8.14 6.133 7.813 6 7.406 6c-.406 0-.742.133-1.008.398C6.133 6.664 6 7 6 7.406c0 .375.125.696.375.961.25.266.578.399.984.399zM18 18v-4.688c0-1.156-.273-2.03-.82-2.624-.547-.594-1.258-.891-2.133-.891-.938 0-1.719.437-2.344 1.312V9.984h-2.578V18h2.578v-4.547c0-.312.031-.531.094-.656.25-.625.687-.938 1.312-.938.875 0 1.313.578 1.313 1.735V18H18z" fill-rule="evenodd"></path>
-                    </svg></a></li>
-              </ul> -->
             </div>
           </div>
           <div class="at-column">
             <div class="at-user">
-              <div class="at-user__avatar"><img src="../figure/about_us/rongrong_xue.jpg"/></div>
+              <div class="at-user__avatar"><img src="../figure/about_us/rongrong_xue2.jpg"/></div>
               <div class="at-user__name">Rongrong Xue</div>
-              <div class="at-user__title">Visual Designer</div>
-              <!-- <ul class="at-social">
-                <li class="at-social__item"><a href="">
-                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M14 9h3l-.375 3H14v9h-3.89v-9H8V9h2.11V6.984c0-1.312.327-2.304.984-2.976C11.75 3.336 12.844 3 14.375 3H17v3h-1.594c-.594 0-.976.094-1.148.281-.172.188-.258.5-.258.938V9z" fill-rule="evenodd"></path>
-                    </svg></a></li>
-                <li class="at-social__item"><a href="">
-                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M20.875 7.5v.563c0 3.28-1.18 6.257-3.54 8.93C14.978 19.663 11.845 21 7.938 21c-2.5 0-4.812-.687-6.937-2.063.5.063.86.094 1.078.094 2.094 0 3.969-.656 5.625-1.968a4.563 4.563 0 0 1-2.625-.915 4.294 4.294 0 0 1-1.594-2.226c.375.062.657.094.844.094.313 0 .719-.063 1.219-.188-1.031-.219-1.899-.742-2.602-1.57a4.32 4.32 0 0 1-1.054-2.883c.687.328 1.375.516 2.062.516C2.61 9.016 1.938 7.75 1.938 6.094c0-.782.203-1.531.609-2.25 2.406 2.969 5.515 4.547 9.328 4.734-.063-.219-.094-.562-.094-1.031 0-1.281.438-2.36 1.313-3.234C13.969 3.437 15.047 3 16.328 3s2.375.484 3.281 1.453c.938-.156 1.907-.531 2.907-1.125-.313 1.094-.985 1.938-2.016 2.531.969-.093 1.844-.328 2.625-.703-.563.875-1.312 1.656-2.25 2.344z" fill-rule="evenodd"></path>
-                    </svg></a></li>
-                <li class="at-social__item"><a href="">
-                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M19.547 3c.406 0 .75.133 1.031.398.281.266.422.602.422 1.008v15.047c0 .406-.14.766-.422 1.078a1.335 1.335 0 0 1-1.031.469h-15c-.406 0-.766-.156-1.078-.469C3.156 20.22 3 19.86 3 19.453V4.406c0-.406.148-.742.445-1.008C3.742 3.133 4.11 3 4.547 3h15zM8.578 18V9.984H6V18h2.578zM7.36 8.766c.407 0 .743-.133 1.008-.399a1.31 1.31 0 0 0 .399-.96c0-.407-.125-.743-.375-1.009C8.14 6.133 7.813 6 7.406 6c-.406 0-.742.133-1.008.398C6.133 6.664 6 7 6 7.406c0 .375.125.696.375.961.25.266.578.399.984.399zM18 18v-4.688c0-1.156-.273-2.03-.82-2.624-.547-.594-1.258-.891-2.133-.891-.938 0-1.719.437-2.344 1.312V9.984h-2.578V18h2.578v-4.547c0-.312.031-.531.094-.656.25-.625.687-.938 1.312-.938.875 0 1.313.578 1.313 1.735V18H18z" fill-rule="evenodd"></path>
-                    </svg></a></li>
-              </ul> -->
+              <div class="at-user__title">Art Director</div>
             </div>
           </div>
 
@@ -364,41 +344,13 @@
               <div class="at-user__avatar"><img src="../figure/about_us/yuning_jiang.jpg"/></div>
               <div class="at-user__name">Yuning Jiang</div>
               <div class="at-user__title">Creative Director</div>
-              <!-- <ul class="at-social">
-                <li class="at-social__item"><a href="">
-                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M14 9h3l-.375 3H14v9h-3.89v-9H8V9h2.11V6.984c0-1.312.327-2.304.984-2.976C11.75 3.336 12.844 3 14.375 3H17v3h-1.594c-.594 0-.976.094-1.148.281-.172.188-.258.5-.258.938V9z" fill-rule="evenodd"></path>
-                    </svg></a></li>
-                <li class="at-social__item"><a href="">
-                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M20.875 7.5v.563c0 3.28-1.18 6.257-3.54 8.93C14.978 19.663 11.845 21 7.938 21c-2.5 0-4.812-.687-6.937-2.063.5.063.86.094 1.078.094 2.094 0 3.969-.656 5.625-1.968a4.563 4.563 0 0 1-2.625-.915 4.294 4.294 0 0 1-1.594-2.226c.375.062.657.094.844.094.313 0 .719-.063 1.219-.188-1.031-.219-1.899-.742-2.602-1.57a4.32 4.32 0 0 1-1.054-2.883c.687.328 1.375.516 2.062.516C2.61 9.016 1.938 7.75 1.938 6.094c0-.782.203-1.531.609-2.25 2.406 2.969 5.515 4.547 9.328 4.734-.063-.219-.094-.562-.094-1.031 0-1.281.438-2.36 1.313-3.234C13.969 3.437 15.047 3 16.328 3s2.375.484 3.281 1.453c.938-.156 1.907-.531 2.907-1.125-.313 1.094-.985 1.938-2.016 2.531.969-.093 1.844-.328 2.625-.703-.563.875-1.312 1.656-2.25 2.344z" fill-rule="evenodd"></path>
-                    </svg></a></li>
-                <li class="at-social__item"><a href="">
-                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M19.547 3c.406 0 .75.133 1.031.398.281.266.422.602.422 1.008v15.047c0 .406-.14.766-.422 1.078a1.335 1.335 0 0 1-1.031.469h-15c-.406 0-.766-.156-1.078-.469C3.156 20.22 3 19.86 3 19.453V4.406c0-.406.148-.742.445-1.008C3.742 3.133 4.11 3 4.547 3h15zM8.578 18V9.984H6V18h2.578zM7.36 8.766c.407 0 .743-.133 1.008-.399a1.31 1.31 0 0 0 .399-.96c0-.407-.125-.743-.375-1.009C8.14 6.133 7.813 6 7.406 6c-.406 0-.742.133-1.008.398C6.133 6.664 6 7 6 7.406c0 .375.125.696.375.961.25.266.578.399.984.399zM18 18v-4.688c0-1.156-.273-2.03-.82-2.624-.547-.594-1.258-.891-2.133-.891-.938 0-1.719.437-2.344 1.312V9.984h-2.578V18h2.578v-4.547c0-.312.031-.531.094-.656.25-.625.687-.938 1.312-.938.875 0 1.313.578 1.313 1.735V18H18z" fill-rule="evenodd"></path>
-                    </svg></a></li>
-              </ul> -->
             </div>
           </div>
           <div class="at-column">
             <div class="at-user">
               <div class="at-user__avatar"><img src="../figure/about_us/zhonghao_li.png"/></div>
               <div class="at-user__name">Zhonghao Li</div>
-              <div class="at-user__title">Visual Designer</div>
-              <!-- <ul class="at-social">
-                <li class="at-social__item"><a href="">
-                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M14 9h3l-.375 3H14v9h-3.89v-9H8V9h2.11V6.984c0-1.312.327-2.304.984-2.976C11.75 3.336 12.844 3 14.375 3H17v3h-1.594c-.594 0-.976.094-1.148.281-.172.188-.258.5-.258.938V9z" fill-rule="evenodd"></path>
-                    </svg></a></li>
-                <li class="at-social__item"><a href="">
-                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M20.875 7.5v.563c0 3.28-1.18 6.257-3.54 8.93C14.978 19.663 11.845 21 7.938 21c-2.5 0-4.812-.687-6.937-2.063.5.063.86.094 1.078.094 2.094 0 3.969-.656 5.625-1.968a4.563 4.563 0 0 1-2.625-.915 4.294 4.294 0 0 1-1.594-2.226c.375.062.657.094.844.094.313 0 .719-.063 1.219-.188-1.031-.219-1.899-.742-2.602-1.57a4.32 4.32 0 0 1-1.054-2.883c.687.328 1.375.516 2.062.516C2.61 9.016 1.938 7.75 1.938 6.094c0-.782.203-1.531.609-2.25 2.406 2.969 5.515 4.547 9.328 4.734-.063-.219-.094-.562-.094-1.031 0-1.281.438-2.36 1.313-3.234C13.969 3.437 15.047 3 16.328 3s2.375.484 3.281 1.453c.938-.156 1.907-.531 2.907-1.125-.313 1.094-.985 1.938-2.016 2.531.969-.093 1.844-.328 2.625-.703-.563.875-1.312 1.656-2.25 2.344z" fill-rule="evenodd"></path>
-                    </svg></a></li>
-                <li class="at-social__item"><a href="">
-                    <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M19.547 3c.406 0 .75.133 1.031.398.281.266.422.602.422 1.008v15.047c0 .406-.14.766-.422 1.078a1.335 1.335 0 0 1-1.031.469h-15c-.406 0-.766-.156-1.078-.469C3.156 20.22 3 19.86 3 19.453V4.406c0-.406.148-.742.445-1.008C3.742 3.133 4.11 3 4.547 3h15zM8.578 18V9.984H6V18h2.578zM7.36 8.766c.407 0 .743-.133 1.008-.399a1.31 1.31 0 0 0 .399-.96c0-.407-.125-.743-.375-1.009C8.14 6.133 7.813 6 7.406 6c-.406 0-.742.133-1.008.398C6.133 6.664 6 7 6 7.406c0 .375.125.696.375.961.25.266.578.399.984.399zM18 18v-4.688c0-1.156-.273-2.03-.82-2.624-.547-.594-1.258-.891-2.133-.891-.938 0-1.719.437-2.344 1.312V9.984h-2.578V18h2.578v-4.547c0-.312.031-.531.094-.656.25-.625.687-.938 1.312-.938.875 0 1.313.578 1.313 1.735V18H18z" fill-rule="evenodd"></path>
-                    </svg></a></li>
-              </ul> -->
+              <div class="at-user__title">Visual Director</div>
             </div>
           </div>
     
@@ -410,18 +362,31 @@
       <div class="acknow">
         <p class="acknow_title"><strong>Acknowledgements</strong></p>
         <p>We would like to thank Dr. Duncan Smith and Dr. Valerio Signorelli for their support and advice throughout this project. We would also like to thank Han Yu, our friend who kindly provided the Chang'an urban layout references. Finally, we would like to thank our team for every effort we have made.</p>
-    </div>
+      </div>
+
+      <div class="logo">
+        <a href="https://www.ucl.ac.uk/bartlett/casa/" target="_blank">
+          <img src="../figure/casa_logo.png" width="66px" alt="">
+        </a>
+      </div>
+
     <!-- references -->
     <div class="ref">
       <p class="ref_title" id="references"><b>References</b></p>
-      <p class="sub_ref"><b>Cover page reference</b></p>
+      <!-- <p class="sub_ref"><b>Cover page References</b></p>
       <ul>
         <li style="list-style-type: circle">	HANLY, C., (2020). London's Chinatown keeps its spirits up by getting chefs and restaurants to share recipes. [online] hot-dinners.com. Available at: <https://www.hot-dinners.com/202004229449/Gastroblog/Latest-news/london-chinatown-lockdown-recipes-campaign> [Accessed 11 May 2022].	</li>
         <li style="list-style-type: circle">	Hoffman, R., (2019). Yokohama Chinatown Street Food Guide | byFood. [online] Byfood.com. Available at: <https://www.byfood.com/blog/yokohama/yokohama-chinatown-street-food-guide> [Accessed 19 May 2022].	</li>
         <li style="list-style-type: circle">	Visit Manchester. (n.d.) Chinatown. [online] Available at: <https://www.visitmanchester.com/things-to-see-and-do/chinatown-p275031> [Accessed 10 May 2022].	</li>
         <li style="list-style-type: circle">	Prabhune, M., 2013. Kobe Chinatown Streets by Night - Kobe, Hyogo. [online] JapanTravel. Available at: <https://en.japantravel.com/hyogo/chinatown-streets-by-night-in-kobe/4380> [Accessed 8 May 2022].	</li>
         <li style="list-style-type: circle">	Lemmin-Woolfrey, U., 2(021). These Are the 15 Best Chinatowns Around the World. [online] Fodors Travel Guide. Available at: <https://www.fodors.com/news/photos/these-are-the-15-best-chinatowns-around-the-world> [Accessed 12 May 2022].	</li>
-      </ul>
+      </ul> -->
+
+      <p class="sub_ref"><b>Introduction references</b></p>
+      <ul>
+        <li style="list-style-type: circle">	cultural diffusion (no date) Oxford Reference. doi:10.1093/oi/authority.20110803095652819.	</li>
+        <li style="list-style-type: circle">	6A Cultural Diffusion (no date) A-LEVEL GEOGRAPHY REVISION: EDEXCEL. Available at: https://geographyrevisionalevel.weebly.com/6a-cultural-diffusion.html (Accessed: 26 May 2022).	</li>
+     </ul>
 
       <p class="sub_ref"><b>Chang'an References:</b></p>
       <ul>
@@ -613,7 +578,7 @@
 
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-  <script  src="/js/timeline.js"></script>
+  <script  src="../js/timeline.js"></script>
   <link rel="stylesheet" href="../css/aboutus_style.css">
 </body>
 </html>

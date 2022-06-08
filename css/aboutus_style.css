@@ -1,16 +1,23 @@
 .at-section__title {
   /* margin: 0 0 70px; */
-  padding-top: 50px;
+  padding-top: 36px;
   padding-bottom: 30px;
 
   color: rgba(255, 255, 255, 0.7);
-  font-family: "Manrope";
-  font-size: 50px;
+  /* font-family: "Manrope"; */
+  font-size: 40px;
   /* font-weight: 300;
   line-height: 2.625rem; */
   text-align: center;
 }
 
+.logo {
+  margin: 0 auto;
+  text-align: center;
+  align-items: center;
+  height: 26vh;
+  /* opacity: 0.5; */
+}
 
 .at-grid {
   display: flex;
@@ -157,19 +164,19 @@
   display: block;
 }
 .at-social__item svg {
-  fill: #515F65;
+  fill: #515f65;
   display: block;
   height: 18px;
   transition: fill 0.2s ease;
 }
 .at-social__item svg:hover {
-  fill: #788D96;
+  fill: #788d96;
 }
 
 .container {
   max-width: 150vh;
   width: 100%;
-  margin:0 auto;
+  margin: 0 auto;
   /* padding: 0 20px; */
   padding-top: 0px;
   box-sizing: border-box;

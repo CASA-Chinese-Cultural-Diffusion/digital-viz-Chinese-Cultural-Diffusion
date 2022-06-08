@@ -5,7 +5,7 @@
 
 body {
   /* background-color: rgba(49, 82, 91, 0.7); */
-  background-image: url('../figure/background0527.png');
+  background-image: url("../figure/background0527.png");
   overflow-x: hidden;
   font-family: "Montserrat", sans-serif;
 }
@@ -14,7 +14,6 @@ html {
   scroll-behavior: smooth;
 }
 
-
 /* navigation bar */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 * {
@@ -22,6 +21,11 @@ html {
   padding: 0;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+}
+
+#changan_anchor {
+  position: absolute;
+  left: 0px;
 }
 
 .cover {
@@ -33,49 +37,48 @@ html {
   background-size: 100%; /* Resize the background image to cover the entire container */
 }
 
-
 #about_us {
+  margin-top: -5px;
+  margin-bottom: 0px;
   padding-top: 10vh;
-  height: 200vh;
-  width: 100vw;
-  background: url("../figure/lalacopy.jpg") no-repeat center center fixed; 
+  height: 201vh;
+  width: 101vw;
+  background: url("../figure/lalacopy.jpg") no-repeat center center fixed;
   border-style: none;
   overflow: hidden;
-  background-size: 100%; /* Resize the background image to cover the entire container */
+  background-size: 102%; /* Resize the background image to cover the entire container */
 }
 
-
-
 .acknow p {
-  width: 20vw;
+  width: 16vw;
   margin: 0 auto;
 }
 
 .ref {
   color: rgba(255, 255, 255, 0.7);
   width: 100%;
-  font-size: 20px;
-  line-height:150%;
+  font-size: 18px;
+  line-height: 150%;
   padding-left: 50px;
   padding-top: 1vh;
   overflow-y: scroll;
+  overflow-x: hidden;
   height: 80vh;
-  font: 'Manrope';
+  font: "Manrope";
 }
 
 .ref .sub_ref {
   /* padding-left: px; */
   padding-top: 20px;
-  font-size: 35px;
+  font-size: 24px;
   padding-bottom: 20px;
 }
 
 .ref .ref_title {
   position: relative;
-  font-size: 50px;
+  font-size: 32px;
   padding-bottom: 20px;
 }
-
 
 .ref ul {
   padding-left: 70px;
@@ -85,41 +88,37 @@ html {
 .acknow {
   color: rgba(255, 255, 255, 0.7);
   width: 100%;
-  font-size: 20px;
-  line-height:150%;
-  padding-left: 50px;
+  font-size: 22px;
+  line-height: 150%;
+  /* padding-left: 50px; */
   padding-top: 0vh;
-  height: 50vh;
-
+  height: 25vh;
+  /* margin-bottom: 30vh; */
 }
 
 .acknow .acknow_title {
   position: relative;
   color: rgba(255, 255, 255, 0.7);
   width: 100%;
-  font-size: 50px;
+  font-size: 36px;
   text-align: center;
-  font-style:normal;
+  font-style: normal;
   padding-bottom: 20px;
-
 }
 
-.acknow b {
-  font: 'Manrope';
-}
+
 
 .acknow p {
   color: rgba(255, 255, 255, 0.7);
   width: 70%;
-  font-size: 20px;
-  line-height:150%;
+  font-size: 22px;
+  line-height: 150%;
   text-align: center;
-  font-style:italic;
+  font-style: italic;
   /* overflow-y: scroll; */
 }
 
 .mask {
-
   /* 改变蒙版颜色 */
   background-color: rgba(49, 82, 91, 0.7);
   position: absolute;
@@ -146,8 +145,8 @@ html {
   text-align: right;
   float: right;
   margin-left: 62vw;
-  font: 'Manrope';
-  font-size: 22px;
+  font: "Manrope";
+  font-size: 20px;
   line-height: 200%;
   color: rgba(255, 255, 255, 0.705);
 }
@@ -155,6 +154,10 @@ html {
 #silk_desc p {
   /* width: 50px; */
   text-align: center;
+}
+
+#silk_submap {
+  border-radius: 5px;
 }
 
 #zhenghe_desc {
@@ -165,8 +168,8 @@ html {
   text-align: right;
   float: right;
   margin-left: 12vw;
-  font: 'Manrope';
-  font-size: 22px;
+  font: "Manrope";
+  font-size: 20px;
   line-height: 200%;
   color: rgba(255, 255, 255, 0.705);
 }
@@ -178,7 +181,7 @@ html {
 
 #zhenghe_desc .ref {
   margin-top: 40px;
-  font-size: 10px;
+  font-size: 16px;
 }
 
 #emi_desc {
@@ -190,8 +193,8 @@ html {
   text-align: right;
   float: right;
   margin-left: 62vw;
-  font: 'Manrope';
-  font-size: 22px;
+  font: "Manrope";
+  font-size: 20px;
   line-height: 200%;
   color: rgba(255, 255, 255, 0.705);
 }
@@ -210,8 +213,8 @@ html {
 }
 
 .button {
-  font-family: 'Lato', sans-serif;
-  background-color: #31525B;
+  font-family: "Lato", sans-serif;
+  background-color: #31525b;
   border: 1px solid white;
   border-radius: 10px;
   color: white;
@@ -223,7 +226,6 @@ html {
   margin: 4px 2px;
   cursor: pointer;
 }
-
 
 img {
   max-width: 100%;
@@ -249,8 +251,7 @@ img {
   color: rgb(84, 89, 95);
 }
 .ag-timeline_title {
-  
-  background-image: linear-gradient(to right, #75878A,#758A99, #424C50);
+  background-image: linear-gradient(to right, #75878a, #758a99, #424c50);
   background-repeat: no-repeat;
   background-position: 50% 50%;
 
@@ -260,19 +261,15 @@ img {
   color: transparent;
 
   font-size: 65px;
-  
-  font-family: 'Josefin Sans', sans-serif;
-  
-  
+
+  font-family: "Josefin Sans", sans-serif;
 }
 
 /* height of every blocks */
 .ag-timeline_item {
-  margin: 0 0 150px; 
+  margin: 0 0 150px;
   position: relative;
 }
-
-
 
 .ag-timeline_item {
   text-align: right;
@@ -286,7 +283,6 @@ img {
 
   position: relative;
 }
-
 
 .ag-timeline_line {
   width: 7px;
@@ -341,7 +337,7 @@ img {
   left: 5px;
 
   text-align: center;
-  font-family: 'Kangxi Dict';
+  font-family: "Kangxi Dict";
   font-size: 36px;
   color: #f2e6ce;
 
@@ -361,7 +357,7 @@ img {
   left: 5px;
 
   text-align: center;
-  font-family: 'Kangxi Dict';
+  font-family: "Kangxi Dict";
   font-size: 15px;
   color: #f2e6ce;
 
@@ -390,7 +386,7 @@ img {
 .ag-timeline-card_meta {
   margin: 20px 80px 0;
 
-  font-family: 'Times New Roman', cursive;
+  font-family: "Times New Roman", cursive;
   font-weight: bold;
   font-size: 34px;
   color: #f2e6ceeb;
@@ -412,15 +408,15 @@ img {
   -moz-border-radius: 6px;
   border-radius: 6px;
 
-  -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
-  -moz-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
-  -o-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
-  box-shadow: 0 0 0 0 rgba(0,0,0,.5);
+  -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
 
-  -webkit-transition: -webkit-transform .5s, opacity .5s;
-  -moz-transition: -moz-transform .5s, opacity .5s;
-  -o-transition: -o-transform .5s, opacity .5s;
-  transition: transform .5s, opacity .5s;
+  -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+  -moz-transition: -moz-transform 0.5s, opacity 0.5s;
+  -o-transition: -o-transform 0.5s, opacity 0.5s;
+  transition: transform 0.5s, opacity 0.5s;
 
   position: relative;
 }
@@ -442,15 +438,15 @@ img {
   -moz-border-radius: 6px;
   border-radius: 6px;
 
-  -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
-  -moz-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
-  -o-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
-  box-shadow: 0 0 0 0 rgba(0,0,0,.5);
+  -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
 
-  -webkit-transition: -webkit-transform .5s, opacity .5s;
-  -moz-transition: -moz-transform .5s, opacity .5s;
-  -o-transition: -o-transform .5s, opacity .5s;
-  transition: transform .5s, opacity .5s;
+  -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+  -moz-transition: -moz-transform 0.5s, opacity 0.5s;
+  -o-transition: -o-transform 0.5s, opacity 0.5s;
+  transition: transform 0.5s, opacity 0.5s;
 
   position: relative;
 }
@@ -462,11 +458,10 @@ img {
   /* bottom: 5vh; */
   margin-top: 20vh;
   margin-bottom: 17vh;
-  font: 'Manrope';
-  font-size: 24px;
+  font: "Manrope";
+  font-size: 20px;
   line-height: 240%;
   color: rgba(255, 255, 255, 0.705);
-
 }
 
 #chinatown_desc {
@@ -475,14 +470,13 @@ img {
   top: 5vh;
   /* width: 80vw; */
   /* bottom: 5vh; */
-  font: 'Manrope';
-  font-size: 24px;
+  font: "Manrope";
+  font-size: 20px;
   line-height: 240%;
   color: rgba(255, 255, 255, 0.705);
   margin-bottom: 5vh;
   margin-top: 20vh;
   margin-bottom: 20vh;
-
 }
 
 #chinatown_desc p {
@@ -497,8 +491,8 @@ img {
   position: relative;
   text-align: center;
   top: -16vh;
-  font: 'Manrope';
-  font-size: 24px;
+  font: "Manrope";
+  font-size: 20px;
   line-height: 240%;
   color: rgba(255, 255, 255, 0.705);
 }
@@ -507,7 +501,7 @@ img {
   display: flex;
   justify-content: center;
   /* background-color: #000f26a2; */
-  height: 20vh;
+  height: 30vh;
   text-align: center;
   align-items: center;
 }
@@ -515,10 +509,9 @@ img {
 #xian_desc p {
   /* margin: 10vh auto; */
   text-align: center;
-  font-size: 24px;
+  font-size: 26px;
   line-height: 240%;
   color: rgba(255, 255, 255, 0.705);
-
 }
 
 .ag-timeline_item #changan_card_item {
@@ -555,15 +548,15 @@ img {
   -moz-border-radius: 6px;
   border-radius: 6px;
 
-  -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
-  -moz-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
-  -o-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
-  box-shadow: 0 0 0 0 rgba(0,0,0,.5);
+  -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
 
-  -webkit-transition: -webkit-transform .5s, opacity .5s;
-  -moz-transition: -moz-transform .5s, opacity .5s;
-  -o-transition: -o-transform .5s, opacity .5s;
-  transition: transform .5s, opacity .5s;
+  -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+  -moz-transition: -moz-transform 0.5s, opacity 0.5s;
+  -o-transition: -o-transform 0.5s, opacity 0.5s;
+  transition: transform 0.5s, opacity 0.5s;
 
   position: relative;
 }
@@ -586,8 +579,6 @@ img {
   transform: translateX(0);
 }
 
-
-
 #zhenghe_submap {
   position: relative;
   width: 160%;
@@ -595,7 +586,6 @@ img {
   left: 5vw;
   right: -15vw;
   border-radius: 5px;
-
 }
 
 #horizontal-line {
@@ -610,8 +600,8 @@ img {
 #between-intro {
   position: relative;
   text-align: center;
-  font-family: 'Microsoft YaHei';
-  font-size: 30px;
+  font-family: "Times";
+  font-size: 33px;
   width: 100vw;
   top: 30vh;
   color: rgba(255, 255, 255, 0.7);
@@ -621,8 +611,8 @@ img {
 #between-intro-3 {
   position: relative;
   text-align: justify;
-  font-family: 'Microsoft YaHei';
-  font-size: 28px;
+  font-family: "Times";
+  font-size: 25px;
   width: 1000px;
   top: 36vh;
   left: 60vh;
@@ -633,11 +623,11 @@ img {
 #between-intro-4 {
   position: relative;
   text-align: justify;
-  font-family: 'Microsoft YaHei';
-  font-size: 28px;
+  font-family: "Times";
+  font-size: 25px;
   width: 800px;
   top: 38vh;
-  left: 70vh;
+  left: 80vh;
 
   /* height: 90px; */
   color: rgba(255, 255, 255, 0.7);
@@ -646,10 +636,10 @@ img {
 #between-intro-5 {
   position: relative;
   text-align: center;
-  font-family: 'Microsoft YaHei';
-  font-size: 28px;
+  font-family: "Times";
+  font-size: 30px;
   width: 80vw;
-  top: 52vh;
+  top: 53vh;
   margin: 0 auto;
 
   /* height: 90px; */
@@ -659,7 +649,7 @@ img {
 #between-intro-2 {
   position: relative;
   text-align: center;
-  font-family: 'Microsoft YaHei';
+  font-family: "Times";
   font-size: 20px;
   top: 57vh;
   color: rgba(255, 255, 255, 0.7);
@@ -699,8 +689,7 @@ img {
 #xian {
   width: 100vw;
   height: 100vh;
-  border-style: none
-
+  border-style: none;
 }
 
 #zhenghe_card_item {
@@ -720,15 +709,15 @@ img {
   -moz-border-radius: 6px;
   border-radius: 6px;
 
-  -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
-  -moz-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
-  -o-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
-  box-shadow: 0 0 0 0 rgba(0,0,0,.5);
+  -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
 
-  -webkit-transition: -webkit-transform .5s, opacity .5s;
-  -moz-transition: -moz-transform .5s, opacity .5s;
-  -o-transition: -o-transform .5s, opacity .5s;
-  transition: transform .5s, opacity .5s;
+  -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+  -moz-transition: -moz-transform 0.5s, opacity 0.5s;
+  -o-transition: -o-transform 0.5s, opacity 0.5s;
+  transition: transform 0.5s, opacity 0.5s;
 
   position: relative;
 }
@@ -767,15 +756,15 @@ img {
   -moz-border-radius: 6px;
   border-radius: 6px;
 
-  -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
-  -moz-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
-  -o-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
-  box-shadow: 0 0 0 0 rgba(0,0,0,.5);
+  -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
 
-  -webkit-transition: -webkit-transform .5s, opacity .5s;
-  -moz-transition: -moz-transform .5s, opacity .5s;
-  -o-transition: -o-transform .5s, opacity .5s;
-  transition: transform .5s, opacity .5s;
+  -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+  -moz-transition: -moz-transform 0.5s, opacity 0.5s;
+  -o-transition: -o-transform 0.5s, opacity 0.5s;
+  transition: transform 0.5s, opacity 0.5s;
 
   position: relative;
 }
@@ -814,15 +803,15 @@ img {
   -moz-border-radius: 6px;
   border-radius: 6px;
 
-  -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
-  -moz-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
-  -o-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
-  box-shadow: 0 0 0 0 rgba(0,0,0,.5);
+  -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
 
-  -webkit-transition: -webkit-transform .5s, opacity .5s;
-  -moz-transition: -moz-transform .5s, opacity .5s;
-  -o-transition: -o-transform .5s, opacity .5s;
-  transition: transform .5s, opacity .5s;
+  -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+  -moz-transition: -moz-transform 0.5s, opacity 0.5s;
+  -o-transition: -o-transform 0.5s, opacity 0.5s;
+  transition: transform 0.5s, opacity 0.5s;
 
   position: relative;
 }
@@ -861,15 +850,15 @@ img {
   -moz-border-radius: 6px;
   border-radius: 6px;
 
-  -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
-  -moz-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
-  -o-box-shadow: 0 0 0 0 rgba(0,0,0,.5);
-  box-shadow: 0 0 0 0 rgba(0,0,0,.5);
+  -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
 
-  -webkit-transition: -webkit-transform .5s, opacity .5s;
-  -moz-transition: -moz-transform .5s, opacity .5s;
-  -o-transition: -o-transform .5s, opacity .5s;
-  transition: transform .5s, opacity .5s;
+  -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+  -moz-transition: -moz-transform 0.5s, opacity 0.5s;
+  -o-transition: -o-transform 0.5s, opacity 0.5s;
+  transition: transform 0.5s, opacity 0.5s;
 
   position: relative;
 }
@@ -907,7 +896,7 @@ img {
   border-radius: 5px;
 }
 
-#changan_block  {
+#changan_block {
   left: -65px;
   margin-bottom: 40vh;
 }
@@ -919,8 +908,6 @@ img {
   width: 100vw;
   height: 100vh;
 }
-
-
 
 .ag-timeline_item .ag-timeline-card_item {
   -webkit-transform: translateX(200%);
@@ -958,8 +945,6 @@ img {
   transform: rotate(45deg);
 }
 
-
-
 img {
   max-width: 160%;
 }
@@ -996,14 +981,14 @@ img {
   display: none;
   margin: 10px 0 0;
 
-  font-family: 'ESL Legend', sans-serif;
+  font-family: "ESL Legend", sans-serif;
   font-weight: bold;
   font-size: 28px;
-  color: #FF0;
+  color: #ff0;
 }
 .desc {
   line-height: 1.45;
 
   font-size: 16px;
-  color: #FFF;
+  color: #fff;
 }

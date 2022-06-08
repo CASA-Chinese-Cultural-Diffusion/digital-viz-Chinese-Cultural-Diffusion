@@ -10,7 +10,7 @@
 
 <body>
     <div class="fade"></div>
-    <button id="switch" onclick="switch_desc()">Static</button>
+    <button id="switch" onclick="switch_desc()">STATIC</button>
     
     <!-- background image -->
     <div class="tl-bg" style="background-image: url(https://github.com/joeylizh/Group4Project/blob/main/images/%E8%A5%BF%E5%AE%89%E5%A4%A7%E5%94%90%E4%B8%8D%E5%A4%9C%E5%9F%8E.png?raw=true)"></div>
@@ -55,15 +55,15 @@
     <!-- the button -->
     <script>
         function switch_desc() {
-            if (document.getElementById('switch').innerHTML == 'Static') {
+            if (document.getElementById('switch').innerHTML == 'STATIC') {
 
                 document.getElementById('normal_word').style.visibility = 'visible'
                 document.getElementById('crawl_word').style.visibility = 'hidden'
-                document.getElementById('switch').innerHTML = 'Normal'
+                document.getElementById('switch').innerHTML = 'NORMAL'
             } else {
                 document.getElementById('normal_word').style.visibility = 'hidden'
                 document.getElementById('crawl_word').style.visibility = 'visible'
-                document.getElementById('switch').innerHTML = 'Static'
+                document.getElementById('switch').innerHTML = 'STATIC'
             }
         }
     </script>
